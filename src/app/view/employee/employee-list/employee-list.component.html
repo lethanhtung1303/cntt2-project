@@ -1,0 +1,216 @@
+<div class="row align-items-center my-3">
+  <div class="col">
+    <h2 class="page-title">Danh sách nhân viên</h2>
+  </div>
+  <div class="col-auto">
+    <button
+      type="button"
+      class="btn btn-primary"
+      routerLink="add"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+    >
+      <span class="fe fe-plus fe-16 mr-2"></span>Thêm mới
+    </button>
+  </div>
+</div>
+<div class="row">
+  <!-- Striped rows -->
+  <div class="col-md-12">
+    <div class="card shadow">
+      <div class="card-body">
+        <p-table
+          #dt2
+          [value]="employees"
+          dataKey="ID"
+          [rows]="5"
+          [showCurrentPageReport]="true"
+          [rowsPerPageOptions]="[5, 10, 25, 50]"
+          [loading]="loading"
+          [paginator]="true"
+          currentPageReportTemplate="{first} - {last} of {totalRecords}"
+          [globalFilterFields]="[
+            'EMPLOYEECODE',
+            'GENDER',
+            'POSITION.POSITIONNAMEVN',
+            'PHONE'
+          ]"
+          [tableStyle]="{ 'min-width': '85rem' }"
+          [(selection)]="selectedEmployees"
+        >
+          <ng-template pTemplate="caption">
+            <div class="flex">
+              <button
+                pButton
+                label="Clear"
+                size="small"
+                class="p-button-outlined mr-2"
+                icon="pi pi-filter-slash"
+                (click)="clear(dt2)"
+              ></button>
+              <button
+                pButton
+                pRipple
+                label="Delete"
+                size="small"
+                icon="pi pi-trash"
+                class="p-button-danger"
+                (click)="deleteSelectedEmployees()"
+                [disabled]="!selectedEmployees || !selectedEmployees.length"
+              ></button>
+
+              <button
+                type="button"
+                pButton
+                pRipple
+                icon="pi pi-file-excel"
+                size="small"
+                (click)="exportExcel()"
+                class="p-button-success ml-auto"
+                pTooltip="XLS"
+                tooltipPosition="bottom"
+              ></button>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th>
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+              </th>
+              <th pSortableColumn="EMPLOYEECODE">
+                Nhân viên <p-sortIcon field="EMPLOYEECODE"></p-sortIcon>
+              </th>
+              <th pSortableColumn="GENDER">
+                Giới tính <p-sortIcon field="GENDER"></p-sortIcon>
+              </th>
+              <th pSortableColumn="POSITION.POSITIONNAMEVN">
+                Vị trí làm việc
+                <p-sortIcon field="POSITION.POSITIONNAMEVN"></p-sortIcon>
+              </th>
+              <th pSortableColumn="PHONE">
+                Thông tin liên hệ <p-sortIcon field="PHONE"></p-sortIcon>
+              </th>
+              <th>#</th>
+            </tr>
+            <tr>
+              <th></th>
+              <th>
+                <p-columnFilter
+                  type="text"
+                  field="EMPLOYEECODE"
+                ></p-columnFilter>
+              </th>
+              <th>
+                <p-columnFilter type="boolean" field="GENDER"></p-columnFilter>
+              </th>
+              <th>
+                <p-columnFilter
+                  type="text"
+                  field="POSITION.POSITIONNAMEVN"
+                ></p-columnFilter>
+              </th>
+              <th>
+                <p-columnFilter type="text" field="PHONE"></p-columnFilter>
+              </th>
+              <th></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-employee>
+            <tr>
+              <td>
+                <p-tableCheckbox [value]="employee"></p-tableCheckbox>
+              </td>
+              <td>
+                <div>
+                  <i class="fa fa-user fe-12" style="color: darkgray"></i>
+                  {{ employee.FIRSTNAME }} {{ employee.FULLNAME }}
+                </div>
+                <div>
+                  <i
+                    class="fa fa-info-circle fe-12"
+                    style="color: darkgray"
+                  ></i>
+                  {{ employee.EMPLOYEECODE }}
+                </div>
+              </td>
+              <td>
+                <div
+                  *ngIf="
+                    employee.GENDER == true;
+                    then thenBlock;
+                    else elseBlock
+                  "
+                ></div>
+                <ng-template #thenBlock>
+                  <i class="fa fa-male fe-12" style="color: blue"></i>
+                  <span> Nam </span></ng-template
+                >
+                <ng-template #elseBlock
+                  ><i class="fa fa-female fe-12" style="color: red"></i>
+                  <span>Nữ</span></ng-template
+                >
+              </td>
+              <td>
+                <div>
+                  <i class="fa fa-sitemap fe-12" style="color: darkgray"></i>
+                  {{ employee.DEPARTMENT.NAMEDEPARTMENTVN }}
+                  ltung
+                </div>
+                <div>
+                  <i
+                    class="fa fa-newspaper-o fe-12"
+                    style="color: darkgray"
+                  ></i>
+                  {{ employee.POSITION.POSITIONNAMEVN }}
+                </div>
+              </td>
+              <td>
+                <div>
+                  <i
+                    class="fa fa-birthday-cake fe-12"
+                    style="color: darkgray"
+                  ></i>
+                  {{ employee.BIRTHDAY | date : "dd/MM/YYYY, HH:mm:ss" }}
+                </div>
+                <div>
+                  <ng-template [ngIf]="employee.PHONE != ''"
+                    ><i class="fa fa-phone fe-12" style="color: darkgray"></i>
+                    {{ employee.PHONE }}</ng-template
+                  >
+                </div>
+                <div>
+                  <ng-template [ngIf]="employee.EMAIL != ''"
+                    ><i class="fa fa-inbox fe-12" style="color: darkgray"></i>
+                    {{ employee.EMAIL }}</ng-template
+                  >
+                </div>
+              </td>
+              <td>
+                <button
+                  pButton
+                  pRipple
+                  icon="pi pi-pencil"
+                  class="p-button-rounded p-button-success mr-2"
+                  [routerLink]="[employee.ID]"
+                ></button>
+                <button
+                  pButton
+                  pRipple
+                  icon="pi pi-trash"
+                  class="p-button-rounded p-button-warning"
+                  (click)="confirmDelete(employee.ID)"
+                ></button>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="5">No customers found.</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+  <!-- Striped rows -->
+</div>

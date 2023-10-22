@@ -1,0 +1,421 @@
+<aside
+  class="sidebar-left border-right bg-white shadow"
+  id="leftSidebar"
+  data-simplebar
+>
+  <nav class="vertnav navbar navbar-light">
+    <!-- nav bar -->
+    <div class="w-100 mb-4 d-flex">
+      <a class="navbar-brand mx-auto mt-2 flex-fill text-center" routerLink="/">
+        <svg
+          version="1.1"
+          id="logo"
+          class="navbar-brand-img brand-sm"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          x="0px"
+          y="0px"
+          viewBox="0 0 120 120"
+          xml:space="preserve"
+        >
+          <g>
+            <polygon class="st0" points="78,105 15,105 24,87 87,87 	" />
+            <polygon class="st0" points="96,69 33,69 42,51 105,51 	" />
+            <polygon class="st0" points="78,33 15,33 24,15 87,15 	" />
+          </g>
+        </svg>
+      </a>
+    </div>
+    <ul class="navbar-nav flex-fill w-100 mb-2">
+      <li class="nav-item w-100">
+        <a
+          class="nav-link"
+          routerLink="/"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+        >
+          <i class="fe fe-home fe-16"></i>
+          <span class="ml-3 item-text">Trang chủ</span>
+        </a>
+      </li>
+    </ul>
+    <p class="text-muted nav-heading mt-4 mb-1">
+      <span>CHỨC NĂNG</span>
+    </p>
+    <ul class="navbar-nav flex-fill w-100 mb-2">
+      <li class="nav-item dropdown">
+        <a
+          href="#yemloyee"
+          data-toggle="collapse"
+          aria-expanded="false"
+          class="dropdown-toggle nav-link"
+        >
+          <i class="fe fe-users fe-16"></i>
+          <span class="ml-3 item-text">Nhân viên</span>
+        </a>
+        <ul class="collapse list-unstyled pl-4 w-100" id="yemloyee">
+          <li class="nav-item">
+            <a
+              class="nav-link pl-3"
+              routerLink="/employee"
+              routerLinkActive="active"
+              ariaCurrentWhenActive="page"
+              ><span class="ml-1 item-text">Nhân viên</span>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              href="#reward-discipline"
+              data-toggle="collapse"
+              aria-expanded="false"
+              class="dropdown-toggle nav-link"
+            >
+              <span class="text-nowrap item-text ml-08"
+                >Khen thưởng & Kỉ luật</span
+              >
+            </a>
+            <ul
+              class="collapse list-unstyled pl-4 w-100"
+              id="reward-discipline"
+            >
+              <a
+                class="nav-link pl-3"
+                routerLink="/reward"
+                routerLinkActive="active"
+                ariaCurrentWhenActive="page"
+                ><span class="ml-1">Khen thưởng</span></a
+              >
+              <a
+                class="nav-link pl-3"
+                routerLink="/discipline"
+                routerLinkActive="active"
+                ariaCurrentWhenActive="page"
+                ><span class="ml-1">Kỉ luật</span></a
+              >
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              href="#LeaveOvertime"
+              data-toggle="collapse"
+              aria-expanded="false"
+              class="dropdown-toggle nav-link"
+            >
+              <span class="text-nowrap item-text ml-08"
+                >Nghỉ phép - Tăng ca</span
+              >
+            </a>
+            <ul class="collapse list-unstyled pl-4 w-100" id="LeaveOvertime">
+              <a
+                class="nav-link pl-3"
+                routerLink="/nghiphep"
+                routerLinkActive="active"
+                ariaCurrentWhenActive="page"
+                ><span class="ml-1">Nghỉ phép</span></a
+              >
+              <a
+                class="nav-link pl-3"
+                routerLink="/tangca"
+                routerLinkActive="active"
+                ariaCurrentWhenActive="page"
+                ><span class="ml-1">Tăng ca</span></a
+              >
+              <a
+                class="nav-link pl-3"
+                routerLink="/phepnam"
+                routerLinkActive="active"
+                ariaCurrentWhenActive="page"
+                ><span class="ml-1">Phép năm</span></a
+              >
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              href="#Timekeeping"
+              data-toggle="collapse"
+              aria-expanded="false"
+              class="dropdown-toggle nav-link"
+            >
+              <span class="text-nowrap item-text ml-08">Chấm công</span>
+            </a>
+            <ul class="collapse list-unstyled pl-4 w-100" id="Timekeeping">
+              <a
+                class="nav-link pl-3"
+                routerLink="/bangchamcong"
+                routerLinkActive="active"
+                ariaCurrentWhenActive="page"
+                ><span class="ml-1">Bảng chấm công</span></a
+              >
+              <a
+                class="nav-link pl-3"
+                routerLink="/lichsuchamcong"
+                routerLinkActive="active"
+                ariaCurrentWhenActive="page"
+                ><span class="ml-1">Lịch sử chấm công</span></a
+              >
+              <a
+                class="nav-link pl-3"
+                routerLink="/dangkythe"
+                routerLinkActive="active"
+                ariaCurrentWhenActive="page"
+                ><span class="ml-1">Đăng ký thẻ</span></a
+              >
+              <a
+                class="nav-link pl-3"
+                routerLink="/sapcalamviec"
+                routerLinkActive="active"
+                ariaCurrentWhenActive="page"
+                ><span class="ml-1">Sắp ca làm việc</span></a
+              >
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav flex-fill w-100 mb-2">
+      <li class="nav-item dropdown">
+        <a
+          href="#salary"
+          data-toggle="collapse"
+          aria-expanded="false"
+          class="dropdown-toggle nav-link"
+        >
+          <i class="fe fe-dollar-sign fe-16"></i>
+          <span class="ml-3 item-text">Lương</span>
+        </a>
+        <ul class="collapse list-unstyled pl-4 w-100" id="salary">
+          <li class="nav-item">
+            <a
+              class="nav-link pl-3"
+              routerLink="/bangluong"
+              routerLinkActive="active"
+              ariaCurrentWhenActive="page"
+              ><span class="ml-1 item-text">Bảng lương</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link pl-3"
+              routerLink="/luongphucap"
+              routerLinkActive="active"
+              ariaCurrentWhenActive="page"
+              ><span class="ml-1 item-text">Lương & Phụ cấp</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav flex-fill w-100 mb-2">
+      <li class="nav-item dropdown">
+        <a
+          href="#contract"
+          data-toggle="collapse"
+          aria-expanded="false"
+          class="dropdown-toggle nav-link"
+        >
+          <i class="fe fe-file-text fe-16"></i>
+          <span class="ml-3 item-text">Hợp đồng</span>
+        </a>
+        <ul class="collapse list-unstyled pl-4 w-100" id="contract">
+          <li class="nav-item">
+            <a
+              class="nav-link pl-3"
+              routerLink="/bangluong"
+              routerLinkActive="active"
+              ariaCurrentWhenActive="page"
+              ><span class="ml-1 item-text">Hợp đồng</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <p class="text-muted nav-heading mt-4 mb-1">
+      <span>DANH MỤC</span>
+    </p>
+    <ul class="navbar-nav flex-fill w-100 mb-2">
+      <li class="nav-item dropdown">
+        <a
+          href="#categoryHR"
+          data-toggle="collapse"
+          aria-expanded="false"
+          class="dropdown-toggle nav-link"
+        >
+          <i class="fe fe-briefcase fe-16"></i>
+          <span class="ml-3 item-text">Danh mục nhân sự</span>
+        </a>
+        <ul class="collapse list-unstyled pl-4 w-100" id="categoryHR">
+          <li class="nav-item dropdown">
+            <a
+              href="#category"
+              data-toggle="collapse"
+              aria-expanded="false"
+              class="dropdown-toggle nav-link"
+            >
+              <span class="text-nowrap item-text ml-08">Danh mục</span>
+            </a>
+            <ul class="collapse list-unstyled pl-4 w-100" id="category">
+              <a
+                class="nav-link pl-3"
+                routerLink="/reward"
+                routerLinkActive="active"
+                ariaCurrentWhenActive="page"
+                ><span class="ml-1">Công ty</span></a
+              >
+              <a
+                class="nav-link pl-3"
+                routerLink="/reward"
+                routerLinkActive="active"
+                ariaCurrentWhenActive="page"
+                ><span class="ml-1">Phòng ban</span></a
+              >
+              <a
+                class="nav-link pl-3"
+                routerLink="/reward"
+                routerLinkActive="active"
+                ariaCurrentWhenActive="page"
+                ><span class="ml-1">Chức vụ</span></a
+              >
+              <a
+                class="nav-link pl-3"
+                routerLink="/reward"
+                routerLinkActive="active"
+                ariaCurrentWhenActive="page"
+                ><span class="ml-1">Học vấn</span></a
+              >
+              <a
+                class="nav-link pl-3"
+                routerLink="/reward"
+                routerLinkActive="active"
+                ariaCurrentWhenActive="page"
+                ><span class="ml-1">Quốc tịch</span></a
+              >
+              <a
+                class="nav-link pl-3"
+                routerLink="/reward"
+                routerLinkActive="active"
+                ariaCurrentWhenActive="page"
+                ><span class="ml-1">Dân tộc</span></a
+              >
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a
+              href="#leave"
+              data-toggle="collapse"
+              aria-expanded="false"
+              class="dropdown-toggle nav-link"
+            >
+              <span class="text-nowrap item-text ml-08">Nghỉ phép</span>
+            </a>
+            <ul class="collapse list-unstyled pl-4 w-100" id="leave">
+              <a
+                class="nav-link pl-3"
+                routerLink="/reward"
+                routerLinkActive="active"
+                ariaCurrentWhenActive="page"
+                ><span class="ml-1">Ngày nghỉ lễ</span></a
+              >
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a
+              href="#timekeeping"
+              data-toggle="collapse"
+              aria-expanded="false"
+              class="dropdown-toggle nav-link"
+            >
+              <span class="text-nowrap item-text ml-08">Chấm công</span>
+            </a>
+            <ul class="collapse list-unstyled pl-4 w-100" id="timekeeping">
+              <a
+                class="nav-link pl-3"
+                routerLink="/reward"
+                routerLinkActive="active"
+                ariaCurrentWhenActive="page"
+                ><span class="ml-1">Máy chấm công</span></a
+              >
+              <a
+                class="nav-link pl-3"
+                routerLink="/reward"
+                routerLinkActive="active"
+                ariaCurrentWhenActive="page"
+                ><span class="ml-1">Ca làm việc</span></a
+              >
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav flex-fill w-100 mb-2">
+      <li class="nav-item dropdown">
+        <a
+          href="#categoryContract"
+          data-toggle="collapse"
+          aria-expanded="false"
+          class="dropdown-toggle nav-link"
+        >
+          <i class="fe fe-dollar-sign fe-16"></i>
+          <span class="ml-3 item-text">Danh mục hợp đồng</span>
+        </a>
+        <ul class="collapse list-unstyled pl-4 w-100" id="categoryContract">
+          <li class="nav-item">
+            <a
+              class="nav-link pl-3"
+              routerLink="/reward"
+              routerLinkActive="active"
+              ariaCurrentWhenActive="page"
+              ><span class="ml-1">Loại hợp đồng</span></a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav flex-fill w-100 mb-2">
+      <li class="nav-item dropdown">
+        <a
+          href="#categorySalary"
+          data-toggle="collapse"
+          aria-expanded="false"
+          class="dropdown-toggle nav-link"
+        >
+          <i class="fe fe-file-text fe-16"></i>
+          <span class="ml-3 item-text">Danh mục lương</span>
+        </a>
+        <ul class="collapse list-unstyled pl-4 w-100" id="categorySalary">
+          <li class="nav-item">
+            <a
+              class="nav-link pl-3"
+              routerLink="/reward"
+              routerLinkActive="active"
+              ariaCurrentWhenActive="page"
+              ><span class="ml-1">Phụ cấp</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link pl-3"
+              routerLink="/reward"
+              routerLinkActive="active"
+              ariaCurrentWhenActive="page"
+              ><span class="ml-1">Công thức lương</span></a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <div class="btn-box w-100 mt-4 mb-1">
+      <a href="/logout" class="btn mb-2 btn-outline-secondary btn-lg btn-block">
+        <i class="fe fe-12 mx-2 fe-log-out"></i>
+        <span class="small">Logout</span>
+      </a>
+    </div>
+  </nav>
+</aside>
