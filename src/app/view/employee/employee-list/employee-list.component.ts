@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { EmployeeService } from '../../../service/employee.service';
-import { Employee } from '../../../domain/employee';
-import { Table } from 'primeng/table';
+import {Component, OnInit} from '@angular/core';
+import {EmployeeService} from '../../../service/employee.service';
+import {Employee} from '../../../domain/employee';
+import {Table} from 'primeng/table';
 import * as FileSaver from 'file-saver';
 
 @Component({
@@ -12,14 +12,15 @@ import * as FileSaver from 'file-saver';
 export class EmployeeListComponent implements OnInit {
   employees!: Employee[];
   selectedEmployees!: Employee[] | null;
-
   loading: boolean = true;
 
-  activityValues: number[] = [0, 100];
-  constructor(private employeeService: EmployeeService) {}
+  constructor(private employeeService: EmployeeService) {
+  }
 
   ngOnInit(): void {
-    this.employees = this.employeeService.getData();
+    this.employeeService.getEmployee().subscribe((data) => {
+      this.employees = data.results.employees;
+    });
 
     this.loading = false;
   }
@@ -43,7 +44,7 @@ export class EmployeeListComponent implements OnInit {
   exportExcel() {
     import('xlsx').then((xlsx) => {
       const worksheet = xlsx.utils.json_to_sheet(this.employees);
-      const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+      const workbook = {Sheets: {data: worksheet}, SheetNames: ['data']};
       const excelBuffer: any = xlsx.write(workbook, {
         bookType: 'xlsx',
         type: 'array',
@@ -62,13 +63,13 @@ export class EmployeeListComponent implements OnInit {
     FileSaver.saveAs(
       data,
       fileName +
-        '_' +
-        new Date()
-          .toISOString()
-          .slice(0, 19)
-          .replace(/[-T:]/g, '')
-          .replace('.', '') +
-        EXCEL_EXTENSION
+      '_' +
+      new Date()
+        .toISOString()
+        .slice(0, 19)
+        .replace(/[-T:]/g, '')
+        .replace('.', '') +
+      EXCEL_EXTENSION
     );
   }
 }

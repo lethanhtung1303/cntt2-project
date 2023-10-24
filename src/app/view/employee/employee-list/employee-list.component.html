@@ -4,14 +4,15 @@
   </div>
   <div class="col-auto">
     <button
-      type="button"
       class="btn btn-primary"
       routerLink="add"
       routerLinkActive="active"
-      ariaCurrentWhenActive="page"
+      type="button"
     >
       <span class="fe fe-plus fe-16 mr-2"></span>Thêm mới
     </button>
+
+
   </div>
 </div>
 <div class="row">
@@ -21,54 +22,54 @@
       <div class="card-body">
         <p-table
           #dt2
-          [value]="employees"
-          dataKey="ID"
-          [rows]="5"
-          [showCurrentPageReport]="true"
-          [rowsPerPageOptions]="[5, 10, 25, 50]"
+          [(selection)]="selectedEmployees"
+          [globalFilterFields]="[
+            'employeeCode',
+            'gender',
+            'position.positionNameVN',
+            'phone'
+          ]"
           [loading]="loading"
           [paginator]="true"
-          currentPageReportTemplate="{first} - {last} of {totalRecords}"
-          [globalFilterFields]="[
-            'EMPLOYEECODE',
-            'GENDER',
-            'POSITION.POSITIONNAMEVN',
-            'PHONE'
-          ]"
+          [rowsPerPageOptions]="[5, 10, 25, 50]"
+          [rows]="5"
+          [showCurrentPageReport]="true"
           [tableStyle]="{ 'min-width': '85rem' }"
-          [(selection)]="selectedEmployees"
+          [value]="employees"
+          currentPageReportTemplate="{first} - {last} of {totalRecords}"
+          dataKey="ID"
         >
           <ng-template pTemplate="caption">
             <div class="flex">
               <button
-                pButton
-                label="Clear"
-                size="small"
+                (click)="clear(dt2)"
                 class="p-button-outlined mr-2"
                 icon="pi pi-filter-slash"
-                (click)="clear(dt2)"
+                label="Clear"
+                pButton
+                size="small"
               ></button>
               <button
-                pButton
-                pRipple
-                label="Delete"
-                size="small"
-                icon="pi pi-trash"
-                class="p-button-danger"
                 (click)="deleteSelectedEmployees()"
                 [disabled]="!selectedEmployees || !selectedEmployees.length"
+                class="p-button-danger"
+                icon="pi pi-trash"
+                label="Delete"
+                pButton
+                pRipple
+                size="small"
               ></button>
 
               <button
-                type="button"
-                pButton
-                pRipple
-                icon="pi pi-file-excel"
-                size="small"
                 (click)="exportExcel()"
                 class="p-button-success ml-auto"
+                icon="pi pi-file-excel"
+                pButton
+                pRipple
                 pTooltip="XLS"
+                size="small"
                 tooltipPosition="bottom"
+                type="button"
               ></button>
             </div>
           </ng-template>
@@ -77,18 +78,21 @@
               <th>
                 <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
               </th>
-              <th pSortableColumn="EMPLOYEECODE">
-                Nhân viên <p-sortIcon field="EMPLOYEECODE"></p-sortIcon>
+              <th pSortableColumn="employeeCode">
+                Nhân viên
+                <p-sortIcon field="employeeCode"></p-sortIcon>
               </th>
-              <th pSortableColumn="GENDER">
-                Giới tính <p-sortIcon field="GENDER"></p-sortIcon>
+              <th pSortableColumn="gender">
+                Giới tính
+                <p-sortIcon field="gender"></p-sortIcon>
               </th>
-              <th pSortableColumn="POSITION.POSITIONNAMEVN">
+              <th pSortableColumn="position.positionNameVN">
                 Vị trí làm việc
-                <p-sortIcon field="POSITION.POSITIONNAMEVN"></p-sortIcon>
+                <p-sortIcon field="position.positionNameVN"></p-sortIcon>
               </th>
-              <th pSortableColumn="PHONE">
-                Thông tin liên hệ <p-sortIcon field="PHONE"></p-sortIcon>
+              <th pSortableColumn="phone">
+                Thông tin liên hệ
+                <p-sortIcon field="phone"></p-sortIcon>
               </th>
               <th>#</th>
             </tr>
@@ -96,26 +100,26 @@
               <th></th>
               <th>
                 <p-columnFilter
+                  field="employeeCode"
                   type="text"
-                  field="EMPLOYEECODE"
                 ></p-columnFilter>
               </th>
               <th>
-                <p-columnFilter type="boolean" field="GENDER"></p-columnFilter>
+                <p-columnFilter field="gender" type="boolean"></p-columnFilter>
               </th>
               <th>
                 <p-columnFilter
+                  field="position.positionNameVN"
                   type="text"
-                  field="POSITION.POSITIONNAMEVN"
                 ></p-columnFilter>
               </th>
               <th>
-                <p-columnFilter type="text" field="PHONE"></p-columnFilter>
+                <p-columnFilter field="phone" type="text"></p-columnFilter>
               </th>
               <th></th>
             </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-employee>
+          <ng-template let-employee pTemplate="body">
             <tr>
               <td>
                 <p-tableCheckbox [value]="employee"></p-tableCheckbox>
@@ -123,20 +127,20 @@
               <td>
                 <div>
                   <i class="fa fa-user fe-12" style="color: darkgray"></i>
-                  {{ employee.FIRSTNAME }} {{ employee.FULLNAME }}
+                  {{ employee.firstName }} {{ employee.fullName }}
                 </div>
                 <div>
                   <i
                     class="fa fa-info-circle fe-12"
                     style="color: darkgray"
                   ></i>
-                  {{ employee.EMPLOYEECODE }}
+                  {{ employee.employeeCode }}
                 </div>
               </td>
               <td>
                 <div
                   *ngIf="
-                    employee.GENDER == true;
+                    employee.gender == true;
                     then thenBlock;
                     else elseBlock
                   "
@@ -146,14 +150,14 @@
                   <span> Nam </span></ng-template
                 >
                 <ng-template #elseBlock
-                  ><i class="fa fa-female fe-12" style="color: red"></i>
+                ><i class="fa fa-female fe-12" style="color: red"></i>
                   <span>Nữ</span></ng-template
                 >
               </td>
               <td>
                 <div>
                   <i class="fa fa-sitemap fe-12" style="color: darkgray"></i>
-                  {{ employee.DEPARTMENT.NAMEDEPARTMENTVN }}
+                  {{ employee.department.nameDepartmentVN }}
                   ltung
                 </div>
                 <div>
@@ -161,7 +165,7 @@
                     class="fa fa-newspaper-o fe-12"
                     style="color: darkgray"
                   ></i>
-                  {{ employee.POSITION.POSITIONNAMEVN }}
+                  {{ employee.position.positionNameVN }}
                 </div>
               </td>
               <td>
@@ -170,35 +174,34 @@
                     class="fa fa-birthday-cake fe-12"
                     style="color: darkgray"
                   ></i>
-                  {{ employee.BIRTHDAY | date : "dd/MM/YYYY, HH:mm:ss" }}
+                  {{ employee.birthday | date : "dd/MM/YYYY" }}
                 </div>
                 <div>
-                  <ng-template [ngIf]="employee.PHONE != ''"
-                    ><i class="fa fa-phone fe-12" style="color: darkgray"></i>
-                    {{ employee.PHONE }}</ng-template
+                  <ng-template [ngIf]="employee.phone != ''"
+                  ><i class="fa fa-phone fe-12" style="color: darkgray"></i>
+                    {{ employee.phone }}</ng-template
                   >
                 </div>
                 <div>
-                  <ng-template [ngIf]="employee.EMAIL != ''"
-                    ><i class="fa fa-inbox fe-12" style="color: darkgray"></i>
-                    {{ employee.EMAIL }}</ng-template
+                  <ng-template [ngIf]="employee.email != ''"
+                  ><i class="fa fa-inbox fe-12" style="color: darkgray"></i>
+                    {{ employee.email }}</ng-template
                   >
                 </div>
               </td>
               <td>
                 <button
+                  [routerLink]="[employee.ID]"
+                  class="p-button-rounded p-button-success mr-2"
+                  icon="pi pi-pencil"
                   pButton
                   pRipple
-                  icon="pi pi-pencil"
-                  class="p-button-rounded p-button-success mr-2"
-                  [routerLink]="[employee.ID]"
                 ></button>
                 <button
-                  pButton
-                  pRipple
-                  icon="pi pi-trash"
-                  class="p-button-rounded p-button-warning"
                   (click)="confirmDelete(employee.ID)"
+                  class="p-button-rounded p-button-warning"
+                  icon="pi pi-trash"
+                  pButton
                 ></button>
               </td>
             </tr>
