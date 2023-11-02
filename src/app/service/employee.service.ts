@@ -21,7 +21,7 @@ export class EmployeeService {
 
   constructor(private httpClient: HttpClient) {
   }
-  
+
   getEmployee(): Observable<EmployeeResponse> {
     const headers = new HttpHeaders().append(
       'content-type',

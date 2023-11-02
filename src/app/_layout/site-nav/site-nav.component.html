@@ -3,29 +3,29 @@
   <ul class="nav">
     <li class="nav-item dropdown">
       <a
+        aria-expanded="false"
+        aria-haspopup="true"
         class="nav-link dropdown-toggle text-muted pr-0"
+        data-toggle="dropdown"
         href="#"
         id="navbarDropdownMenuLink"
         role="button"
-        data-toggle="dropdown"
-        aria-haspopup="true"
-        aria-expanded="false"
       >
         <span class="avatar avatar-sm mt-2">
           <img
-            src="assets/template/assets/avatars/face-1.jpg"
             alt="..."
             class="avatar-img rounded-circle"
+            src="assets/template/assets/avatars/face-1.jpg"
           />
         </span>
-        <span>&nbsp;&nbsp;Le Thanh Tung</span>
+        <span>&nbsp;&nbsp;{{userName}}</span>
       </a>
       <div
-        class="dropdown-menu dropdown-menu-right"
         aria-labelledby="navbarDropdownMenuLink"
+        class="dropdown-menu dropdown-menu-right"
       >
         <a class="dropdown-item" href="#">Đổi mật khẩu</a>
-        <a class="dropdown-item" href="#">Đăng xuất</a>
+        <a (click)="logout()" class="dropdown-item" href="">Đăng xuất</a>
       </div>
     </li>
   </ul>

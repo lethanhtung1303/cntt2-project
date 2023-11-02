@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-site-nav',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SiteNavComponent implements OnInit {
 
-  constructor() { }
+  userName: string | null = '';
 
-  ngOnInit(): void {
+  constructor(private router: Router) {
   }
 
+  ngOnInit(): void {
+    this.userName = sessionStorage.getItem('UserName') ?? null
+  }
+
+  logout() {
+    sessionStorage.clear();
+
+    this.router.navigate(['/login']).then(() => window.location.reload());
+
+  }
 }

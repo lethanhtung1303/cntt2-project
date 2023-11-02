@@ -8,7 +8,6 @@
       <svg
         class="navbar-brand-img brand-md"
         id="logo"
-        version="1.1"
         viewBox="0 0 120 120"
         x="0px"
         xmlns="http://www.w3.org/2000/svg"
@@ -23,30 +22,25 @@
     </a>
     <h1 class="h6 mb-3">Sign in</h1>
     <div class="form-group">
-      <label class="sr-only" for="inputEmail">Email address</label>
+      <label class="sr-only" for="inputUserName">Email address</label>
       <input
-        [class.is-invalid]="inputEmail.errors && (loginForm.touched || loginForm.dirty)"
-        [class.is-valid]="!inputEmail.errors && (loginForm.touched || loginForm.dirty)"
-        aria-describedby="emailHelp"
+        [class.is-invalid]="inputUserName.errors && (loginForm.touched || loginForm.dirty)"
+        [class.is-valid]="!inputUserName.errors && (loginForm.touched || loginForm.dirty)"
+        aria-describedby="userNameHelp"
         class="form-control form-control-lg"
-        email
-        formControlName="inputEmail"
-        id="inputEmail"
-        placeholder="Email address"
+        formControlName="inputUserName"
+        id="inputUserName"
+        placeholder="User name"
         required
       >
-      <div *ngIf="inputEmail.invalid && (inputEmail.dirty || inputEmail.touched)" class="invalid-feedback">
+      <div *ngIf="inputUserName.invalid && (inputUserName.dirty || inputUserName.touched)" class="invalid-feedback">
 
-        <div *ngIf="inputEmail.errors?.['required']">
-          Email address is required.
+        <div *ngIf="inputUserName.errors?.['required']">
+          UserName address is required.
         </div>
 
-        <div *ngIf="inputEmail.errors?.['minlength']">
-          Email address must be at least 3 characters long.
-        </div>
-
-        <div *ngIf="inputEmail.errors?.['email']">
-          Input is not an email format.
+        <div *ngIf="inputUserName.errors?.['minlength']">
+          UserName must be at least 3 characters long.
         </div>
 
       </div>
@@ -67,11 +61,11 @@
       <div *ngIf="inputPassword.invalid && (inputPassword.dirty || inputPassword.touched)" class="invalid-feedback">
 
         <div *ngIf="inputPassword.errors?.['required']">
-          Email address is required.
+          Password is required.
         </div>
 
         <div *ngIf="inputPassword.errors?.['minlength']">
-          Email address must be at least 6 characters long.
+          Password must be at least 6 characters long.
         </div>
 
         <div *ngIf="inputPassword.errors?.['forbiddenValue']">
