@@ -24,8 +24,8 @@
     <div class="form-group">
       <label class="sr-only" for="inputUserName">Email address</label>
       <input
-        [class.is-invalid]="inputUserName.errors && (loginForm.touched || loginForm.dirty)"
-        [class.is-valid]="!inputUserName.errors && (loginForm.touched || loginForm.dirty)"
+        [class.is-invalid]="(inputUserName.errors && (loginForm.touched || loginForm.dirty)) || this.globalErrorService.getGlobalError().errorCode"
+        [class.is-valid]="(!inputUserName.errors && (loginForm.touched || loginForm.dirty)) && !this.globalErrorService.getGlobalError().errorCode"
         aria-describedby="userNameHelp"
         class="form-control form-control-lg"
         formControlName="inputUserName"
@@ -48,8 +48,8 @@
     <div class="form-group">
       <label class="sr-only" for="inputPassword">Password</label>
       <input
-        [class.is-invalid]="inputPassword.errors && (loginForm.touched || loginForm.dirty)"
-        [class.is-valid]="!inputPassword.errors && (loginForm.touched || loginForm.dirty)"
+        [class.is-invalid]="(inputPassword.errors && (loginForm.touched || loginForm.dirty)) || this.globalErrorService.getGlobalError().errorCode"
+        [class.is-valid]="(!inputPassword.errors && (loginForm.touched || loginForm.dirty)) && !this.globalErrorService.getGlobalError().errorCode"
         aria-describedby="passwordHelp"
         class="form-control form-control-lg"
         formControlName="inputPassword"
@@ -73,6 +73,9 @@
         </div>
 
       </div>
+    </div>
+    <div *ngIf="this.globalErrorService.getGlobalError().errorCode" class="mx-auto text-center">
+      <h6 class="mb-3 text-danger">{{this.globalErrorService.getGlobalError().errMessage}}</h6>
     </div>
     <button [disabled]="loginForm.invalid" class="btn btn-lg btn-primary btn-block" type="submit">
       Let me in

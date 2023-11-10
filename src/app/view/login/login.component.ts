@@ -4,6 +4,7 @@ import {forbiddenValueValidator} from "../../helper/validators";
 import {LoginRequest} from "../../domain/authentication";
 import {AuthenticationService, UserResponse} from "../../service/authentication.service";
 import {Router} from "@angular/router";
+import {GlobalErrorService} from "../../service/global-error.service";
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   loginForm!: FormGroup;
 
-  constructor(private authentication: AuthenticationService, private router: Router) {
+  constructor(private authentication: AuthenticationService, private router: Router, public globalErrorService: GlobalErrorService) {
   }
 
   get inputUserName() {
@@ -55,25 +56,10 @@ export class LoginComponent implements OnInit {
       },
       error: (error) => {
         if (error.status == 400) {
-          console.log("BusinessException");
-          if (error.error.results[0].errorCd === 'ERROR_NOT_NULL_VALIDATION' || error.error.results[1].errorCd === 'ERROR_NOT_NULL_VALIDATION') {
-            console.log("Vui lòng nhập Tài khoản hoặc mật khẩu !");
-          }
-
-          if (error.error.results[0].errorCd === '40001') {
-            console.log("Tài khoản hoặc mật khẩu không đúng !");
-          }
-
-          if (error.error.results[0].errorCd === '40002') {
-            console.log("Tài khoản của bạn đã bị khóa , vui lòng liên hệ bộ phận quản lý !");
-          }
-
-          console.log(error.error.results[0].errorCd);
-          console.log(error.error.results[0].errorCd === 'ERROR_NOT_NULL_VALIDATION');
-          console.log(error.error.results[0].message);
+          this.globalErrorService.setGlobalError(error.error.results[0].message, error.error.results[0].errorCd)
         } else {
-          console.error("RuntimeException");
-          console.error(error);
+          let message: string = "Something went wrong here."
+          this.globalErrorService.setGlobalError(message, error.error.results[0].errorCd)
         }
       },
     });
