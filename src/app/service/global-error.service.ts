@@ -15,9 +15,14 @@ export class GlobalErrorService {
   constructor() {
   }
 
-  setGlobalError(message: string, errorCd: string) {
-    this.globalError.errMessage = message;
-    this.globalError.errorCode = errorCd;
+  clearError() {
+    this.globalError.errMessage = null;
+    this.globalError.errorCode = null;
+  }
+
+  setGlobalError(error: ErrorResponse) {
+    this.globalError.errMessage = error.errMessage;
+    this.globalError.errorCode = error.errorCode;
   }
 
   getGlobalError(): ErrorResponse {

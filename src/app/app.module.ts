@@ -102,15 +102,11 @@ import {SiteHeaderComponent} from './_layout/site-header/site-header.component';
 import {SiteLayoutComponent} from './_layout/site-layout/site-layout.component';
 import {SiteNavComponent} from './_layout/site-nav/site-nav.component';
 import {PageNotFoundComponent} from './view/page-not-found/page-not-found.component';
-import {EmployeeListComponent} from './view/employee/employee-list/employee-list.component';
-import {EmployeeDetailComponent} from './view/employee/employee-detail/employee-detail.component';
-import {RewardListComponent} from './view/reward/reward-list/reward-list.component';
-import {RewardDetailComponent} from './view/reward/reward-detail/reward-detail.component';
-import {AddEmployeeComponent} from './view/employee/add-employee/add-employee.component';
-import {AddRewardComponent} from './view/reward/add-reward/add-reward.component';
-import {AddDisciplineComponent} from './view/discipline/add-discipline/add-discipline.component';
-import {DisciplineListComponent} from './view/discipline/discipline-list/discipline-list.component';
-import {DisciplineDetailComponent} from './view/discipline/discipline-detail/discipline-detail.component'
+import {LecturersListComponent} from './view/Lecturers/lecturers-list/lecturers-list.component';
+import {
+  UniversityLecturerListComponent
+} from './view/InstructorStandards/University/university-lecturer-list/university-lecturer-list.component';
+import { MasterLecturerListComponent } from './view/InstructorStandards/MasterDegree/master-lecturer-list/master-lecturer-list.component';
 
 @NgModule({
   declarations: [
@@ -121,15 +117,9 @@ import {DisciplineDetailComponent} from './view/discipline/discipline-detail/dis
     SiteLayoutComponent,
     SiteNavComponent,
     PageNotFoundComponent,
-    EmployeeListComponent,
-    EmployeeDetailComponent,
-    RewardListComponent,
-    RewardDetailComponent,
-    AddEmployeeComponent,
-    AddRewardComponent,
-    AddDisciplineComponent,
-    DisciplineListComponent,
-    DisciplineDetailComponent,
+    LecturersListComponent,
+    UniversityLecturerListComponent,
+    MasterLecturerListComponent,
   ],
   imports: [
     BrowserModule,

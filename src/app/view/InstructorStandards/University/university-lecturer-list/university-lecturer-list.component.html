@@ -1,0 +1,174 @@
+<div class="row align-items-center my-3">
+  <div class="col">
+    <h2 class="page-title">Danh sách Giảng viên - Bậc Đại học</h2>
+  </div>
+</div>
+<div class="row">
+  <!-- Striped rows -->
+  <div class="col-md-12">
+    <div class="card shadow">
+      <div class="card-body">
+        <p-table
+          #dtLecturer
+          [globalFilterFields]="[
+            'trainingSystem.name',
+            'name',
+          ]"
+          [loading]="loading"
+          [tableStyle]="{ 'min-width': '85rem' }"
+          [value]="lecturers"
+          dataKey="id"
+          groupRowsBy="trainingSystem.id"
+          rowGroupMode="rowspan"
+          sortField="trainingSystem.id"
+          sortMode="single">
+          <ng-template pTemplate="caption">
+            <div class="flex  flex-row flex-wrap">
+              <p-dropdown
+                [(ngModel)]="selectedSemester"
+                [group]="true"
+                [options]="groupedSemesters"
+                class="select-semester mr-2"
+                placeholder="Select Semester">
+                <ng-template let-group pTemplate="group">
+                  <div class="flex align-items-center">
+                    <span>{{ group.label }}</span>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+              <button
+                (click)="clear(dtLecturer)"
+                class="p-button-outlined"
+                icon="pi pi-filter-slash"
+                label="Clear"
+                pButton
+                size="small"
+              ></button>
+
+              <div class="ml-auto">
+                <span class="p-input-icon-left mr-2">
+                  <i class="pi pi-search"></i>
+                  <input
+                    (input)="dtLecturer.filterGlobal($any($event.target).value, 'contains')"
+                    pInputText
+                    placeholder="Search keyword"
+                    type="text"/>
+                </span>
+                <button
+                  (click)="exportExcel()"
+                  class="p-button-success"
+                  icon="pi pi-file-excel"
+                  pButton
+                  pRipple
+                  pTooltip="XLS"
+                  size="small"
+                  tooltipPosition="bottom"
+                  type="button"
+                ></button>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th style="width:3rem">#</th>
+              <th>Hệ đào tạo</th>
+              <th>Giảng viên</th>
+              <th>Giảng viên lý thuyết</th>
+              <th>Giảng viên thực hành</th>
+              <th>Môn dạy tiếng Việt</th>
+              <th>Môn dạy tiếng Anh</th>
+            </tr>
+          </ng-template>
+          <ng-template
+            let-lecturers
+            let-rowIndex="rowIndex"
+            let-rowgroup="rowgroup"
+            let-rowspan="rowspan"
+            pTemplate="body">
+            <tr>
+              <td>{{rowIndex + 1}}</td>
+              <td *ngIf="rowgroup" [attr.rowspan]="rowspan">
+                <span class="font-bold ml-2">{{lecturers.trainingSystem.name}}</span>
+              </td>
+              <td>
+                <div>
+                  <i class="fa fa-user fe-14" style="color: darkgray; vertical-align: middle"></i>
+                  <span class="ml-1 vertical-align-middle"> {{lecturers.name}}</span>
+                </div>
+
+                <div>
+                  <i class="fa fa-envelope fe-14" style="color: darkgray; vertical-align: middle"></i>
+                  <span class="ml-1 vertical-align-middle"> {{lecturers.emailTdtu}}</span>
+                </div>
+              </td>
+              <td>
+                <i
+                  [ngClass]="{ 'text-green-500 pi-check-circle': lecturers.isTheory, 'text-red-500 pi-times-circle': !lecturers.isTheory }"
+                  class="pi"></i>
+              </td>
+              <td>
+                <i
+                  [ngClass]="{ 'text-green-500 pi-check-circle': lecturers.isPractice, 'text-red-500 pi-times-circle': !lecturers.isPractice }"
+                  class="pi"></i>
+              </td>
+
+              <td>
+                <i
+                  [ngClass]="{ 'text-green-500 pi-check-circle': lecturers.isTeachingVietnamese, 'text-red-500 pi-times-circle': !lecturers.isTeachingVietnamese }"
+                  class="pi"></i>
+              </td>
+
+              <td>
+                <i
+                  [ngClass]="{ 'text-green-500 pi-check-circle': lecturers.isTeachingEnglish, 'text-red-500 pi-times-circle': !lecturers.isTeachingEnglish }"
+                  class="pi"></i>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="5">No lecturers found.</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+  <!-- Striped rows -->
+</div>
+
+
+<!--<ul class="dropdown-menu inner" role="menu" style="max-height: 130px; overflow-y: auto;">-->
+<!--  <li class="selected" data-original-index="0"><a class="" data-tokens="null" style="" tabindex="0"><span class="text">Học kỳ 1/ 2023-2024  _  1st Semester/ 2023-2024</span><span-->
+<!--    class="glyphicon glyphicon-ok check-mark"></span></a></li>-->
+<!--  <li data-original-index="1"><a class="" data-tokens="null" style="" tabindex="0"><span class="text">Học kỳ hè/ 2022-2023  _  Summer Semester/ 2022-2023</span><span-->
+<!--    class="glyphicon glyphicon-ok check-mark"></span></a></li>-->
+<!--  <li data-original-index="2"><a class="" data-tokens="null" style="" tabindex="0"><span class="text">Học kỳ 2/ 2022-2023  _  2nd Semester/ 2022-2023</span><span-->
+<!--    class="glyphicon glyphicon-ok check-mark"></span></a></li>-->
+<!--  <li data-original-index="3"><a class="" data-tokens="null" style="" tabindex="0"><span class="text">Học kỳ 1/ 2022-2023  _  1st Semester/ 2022-2023</span><span-->
+<!--    class="glyphicon glyphicon-ok check-mark"></span></a></li>-->
+<!--  <li data-original-index="4"><a class="" data-tokens="null" style="" tabindex="0"><span class="text">Học kỳ 2/ 2021-2022  _  2nd Semester/ 2021-2022</span><span-->
+<!--    class="glyphicon glyphicon-ok check-mark"></span></a></li>-->
+<!--  <li data-original-index="5"><a class="" data-tokens="null" style="" tabindex="0"><span class="text">Học kỳ 1/ 2021-2022  _  1st Semester/ 2021-2022</span><span-->
+<!--    class="glyphicon glyphicon-ok check-mark"></span></a></li>-->
+<!--  <li data-original-index="6"><a class="" data-tokens="null" style="" tabindex="0"><span class="text">Học kỳ hè/ 2020-2021  _  Summer Semester/ 2020-2021</span><span-->
+<!--    class="glyphicon glyphicon-ok check-mark"></span></a></li>-->
+<!--  <li data-original-index="7"><a class="" data-tokens="null" style="" tabindex="0"><span class="text">Học kỳ 2/ 2020-2021  _  2nd Semester/ 2020-2021</span><span-->
+<!--    class="glyphicon glyphicon-ok check-mark"></span></a></li>-->
+<!--  <li data-original-index="8"><a class="" data-tokens="null" style="" tabindex="0"><span class="text">Học kỳ 1/ 2020-2021  _  1st Semester/ 2020-2021</span><span-->
+<!--    class="glyphicon glyphicon-ok check-mark"></span></a></li>-->
+<!--  <li data-original-index="9"><a class="" data-tokens="null" style="" tabindex="0"><span class="text">Học kỳ dự thính 1/ 2019-2020  _  1st Attendant Semester/ 2019-2020</span><span-->
+<!--    class="glyphicon glyphicon-ok check-mark"></span></a></li>-->
+<!--  <li data-original-index="10"><a class="" data-tokens="null" style="" tabindex="0"><span class="text">Học kỳ 3/ 2019-2020  _  Summer Semester/ 2019-2020</span><span-->
+<!--    class="glyphicon glyphicon-ok check-mark"></span></a></li>-->
+<!--  <li data-original-index="11"><a class="" data-tokens="null" style="" tabindex="0"><span class="text">Học kỳ 2/ 2019-2020  _  2nd Semester/ 2019-2020</span><span-->
+<!--    class="glyphicon glyphicon-ok check-mark"></span></a></li>-->
+<!--  <li data-original-index="12"><a class="" data-tokens="null" style="" tabindex="0"><span class="text">Học kỳ 1/ 2019-2020  _  1st Semester/ 2019-2020</span><span-->
+<!--    class="glyphicon glyphicon-ok check-mark"></span></a></li>-->
+<!--  <li data-original-index="13"><a class="" data-tokens="null" style="" tabindex="0"><span class="text">Học kỳ 3/ 2018-2019  _  Summer Semester/ 2018-2019</span><span-->
+<!--    class="glyphicon glyphicon-ok check-mark"></span></a></li>-->
+<!--  <li data-original-index="14"><a class="" data-tokens="null" style="" tabindex="0"><span class="text">Học kỳ 2/ 2018-2019  _  2nd Semester/ 2018-2019</span><span-->
+<!--    class="glyphicon glyphicon-ok check-mark"></span></a></li>-->
+<!--  <li data-original-index="15"><a class="" data-tokens="null" style="" tabindex="0"><span class="text">Học kỳ 1/ 2018-2019  _  1st Semester/ 2018-2019</span><span-->
+<!--    class="glyphicon glyphicon-ok check-mark"></span></a></li>-->
+<!--</ul>-->

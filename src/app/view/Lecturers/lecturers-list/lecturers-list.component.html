@@ -1,0 +1,237 @@
+<div class="row align-items-center my-3">
+  <div class="col">
+    <h2 class="page-title">Danh sách Giảng viên</h2>
+  </div>
+  <div class="col-auto">
+    <button
+      class="btn btn-primary"
+      routerLink="add"
+      routerLinkActive="active"
+      type="button"
+    >
+      <span class="fe fe-plus fe-16 mr-2"></span>Thêm mới
+    </button>
+
+
+  </div>
+</div>
+<div class="row">
+  <!-- Striped rows -->
+  <div class="col-md-12">
+    <div class="card shadow">
+      <div class="card-body">
+        <p-table
+          #dtLecturer
+          [(selection)]="selectedLecturers"
+          [globalFilterFields]="[
+            'fullName',
+            'gender',
+            'mainPosition',
+            'workplace'
+          ]"
+          [loading]="loading"
+          [paginator]="true"
+          [rowsPerPageOptions]="[5, 10, 25, 50]"
+          [rows]="5"
+          [showCurrentPageReport]="true"
+          [tableStyle]="{ 'min-width': '85rem' }"
+          [value]="lecturers"
+          currentPageReportTemplate="{first} - {last} of {totalRecords}"
+          dataKey="id"
+        >
+          <ng-template pTemplate="caption">
+            <div class="flex  flex-row flex-wrap">
+              <button
+                (click)="clear(dtLecturer)"
+                class="p-button-outlined mr-2"
+                icon="pi pi-filter-slash"
+                label="Clear"
+                pButton
+                size="small"
+              ></button>
+              <button
+                (click)="deleteSelectedLecturers()"
+                [disabled]="!selectedLecturers || !selectedLecturers.length"
+                class="p-button-danger"
+                icon="pi pi-trash"
+                label="Delete"
+                pButton
+                pRipple
+                size="small"
+              ></button>
+
+              <div class="ml-auto">
+                <span class="p-input-icon-left mr-2">
+                <i class="pi pi-search"></i>
+                <input
+                  (input)="dtLecturer.filterGlobal($any($event.target).value, 'contains')"
+                  pInputText
+                  placeholder="Search keyword"
+                  type="text"/>
+              </span>
+                <button
+                  (click)="exportExcel()"
+                  class="p-button-success"
+                  icon="pi pi-file-excel"
+                  pButton
+                  pRipple
+                  pTooltip="XLS"
+                  size="small"
+                  tooltipPosition="bottom"
+                  type="button"
+                ></button>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr class="text-nowrap">
+              <th>
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+              </th>
+              <th pSortableColumn="fullName">
+                Giảng viên
+                <p-sortIcon field="fullName"></p-sortIcon>
+              </th>
+              <th pSortableColumn="gender">
+                Giới tính
+                <p-sortIcon field="gender"></p-sortIcon>
+              </th>
+              <th pSortableColumn="mainPosition">
+                Vị trí làm việc
+                <p-sortIcon field="mainPosition"></p-sortIcon>
+              </th>
+              <th>
+                Thông tin liên hệ
+              </th>
+
+              <th>
+                Thông tin cá nhân
+              </th>
+
+              <th>
+                Thông tin cá lạc
+              </th>
+
+              <th pSortableColumn="workplace">
+                Nơi làm việc
+                <p-sortIcon field="workplace"></p-sortIcon>
+              </th>
+              <th>#</th>
+            </tr>
+          </ng-template>
+          <ng-template let-lecturer pTemplate="body">
+            <tr class="text-nowrap">
+              <td>
+                <p-tableCheckbox [value]="lecturer"></p-tableCheckbox>
+              </td>
+
+              <td>
+                <div>
+                  <img [alt]="lecturer.fullName"
+                       src="{{ lecturer.images }}"
+                       style="vertical-align: middle" width="32"/>
+                  <span class="ml-1 vertical-align-middle">
+                    {{ this.generateLevel(lecturer.trainingProcess) }} {{ lecturer.fullName }}
+                  </span>
+                </div>
+              </td>
+
+              <td>
+                <div *ngIf="lecturer.gender == true;then thenBlock;else elseBlock"></div>
+                <ng-template #thenBlock>
+                  <div>
+                    <i class="fa fa-male fe-14" style="color: blue; vertical-align: middle"></i>
+                    <span class="ml-1 vertical-align-middle">Nam</span>
+                  </div>
+                </ng-template>
+                <ng-template #elseBlock>
+                  <div>
+                    <i class="fa fa-female fe-14" style="color: red; vertical-align: middle"></i>
+                    <span class="ml-1 vertical-align-middle">Nữ</span>
+                  </div>
+                </ng-template>
+              </td>
+
+              <td>
+                <div>
+                  <i class="fa fa-sitemap fe-14" style="color: darkgray; vertical-align: middle"></i>
+                  <span class="ml-1 vertical-align-middle"> {{ lecturer.mainPosition }}</span>
+                </div>
+
+                <div *ngIf="lecturer.secondaryPosition != ''">
+                  <i class="fa fa-newspaper-o fe-14" style="color: darkgray; vertical-align: middle"></i>
+                  <span class="ml-1 vertical-align-middle"> {{ lecturer.secondaryPosition }}</span>
+                </div>
+              </td>
+
+              <td>
+                <div *ngIf="lecturer.emailTdtu != ''">
+                  <i class="fa fa-envelope fe-14" style="color: darkgray; vertical-align: middle"></i>
+                  <span class="ml-1 vertical-align-middle"> {{ lecturer.emailTdtu }}</span>
+                </div>
+
+                <div *ngIf="lecturer.email != ''">
+                  <i class="fa fa-inbox fe-14" style="color: darkgray; vertical-align: middle"></i>
+                  <span class="ml-1 vertical-align-middle"> {{ lecturer.email }}</span>
+                </div>
+              </td>
+
+              <td>
+                <div>
+                  <i class="fa fa-birthday-cake fe-14" style="color: darkgray; vertical-align: middle"></i>
+                  <span class="ml-1 vertical-align-middle"> {{ lecturer.birthday | date : "dd/MM/YYYY" }}</span>
+                </div>
+
+                <div *ngIf="lecturer.phone != ''">
+                  <i class="fa fa-phone fe-14" style="color: darkgray; vertical-align: middle"></i>
+                  <span class="ml-1 vertical-align-middle"> {{ lecturer.phone }}</span>
+                </div>
+              </td>
+
+              <td>
+                <div *ngIf="lecturer.placeOfBirth != ''">
+                  <i class="fa fa-location-arrow fe-14" style="color: darkgray; vertical-align: middle"></i>
+                  <span class="ml-1 vertical-align-middle"> {{ lecturer.placeOfBirth }}</span>
+                </div>
+
+                <div *ngIf="lecturer.addressTmp != ''">
+                  <i class="fa fa-map-marker fe-14" style="color: darkgray; vertical-align: middle"></i>
+                  <span class="ml-1 vertical-align-middle"> {{ lecturer.addressTmp }}</span>
+                </div>
+              </td>
+
+              <td>
+                <div>
+                  <i class="fa fa-building fe-14" style="color: darkgray; vertical-align: middle"></i>
+                  <span class="ml-1 vertical-align-middle"> {{ lecturer.workplace }}</span>
+                </div>
+              </td>
+
+              <td>
+                <button
+                  [routerLink]="[lecturer.id]"
+                  class="p-button-rounded p-button-success mr-2"
+                  icon="pi pi-pencil"
+                  pButton
+                  pRipple
+                ></button>
+                <button
+                  (click)="confirmDelete(lecturer.id)"
+                  class="p-button-rounded p-button-warning"
+                  icon="pi pi-trash"
+                  pButton
+                ></button>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="5">No customers found.</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+  <!-- Striped rows -->
+</div>

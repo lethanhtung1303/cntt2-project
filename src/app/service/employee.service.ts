@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from "rxjs";
+import {Observable, of} from "rxjs";
 import {Employee} from "../domain/employee";
 
 export interface EmployeeResponse {
@@ -22,17 +22,29 @@ export class EmployeeService {
   constructor(private httpClient: HttpClient) {
   }
 
+  getData(): EmployeeResponse {
+    return {
+      status: 200,
+      results: {
+        resultsTotalCount: 0,
+        employees: []
+      }
+    }
+  }
+
   getEmployee(): Observable<EmployeeResponse> {
     const headers = new HttpHeaders().append(
       'content-type',
       'application/json'
     );
 
-    return this.httpClient.get<EmployeeResponse>(
-      this.apiUrl + this.geEmployeeEndPoint,
-      {
-        headers: headers,
-      }
-    );
+    // return this.httpClient.get<EmployeeResponse>(
+    //   this.apiUrl + this.geEmployeeEndPoint,
+    //   {
+    //     headers: headers,
+    //   }
+    // );
+
+    return of(this.getData())
   }
 }

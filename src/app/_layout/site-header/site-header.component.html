@@ -26,8 +26,9 @@
     <ul *ngIf="userRoles?.includes('tdt_sys tdt_sys_hp_v')" class="navbar-nav flex-fill w-100 mb-2">
       <li class="nav-item w-100">
         <a
+          ariaCurrentWhenActive="page"
           class="nav-link"
-          routerLink="/"
+          routerLink="/home"
           routerLinkActive="active"
         >
           <i class="fe fe-home fe-16"></i>
@@ -42,6 +43,8 @@
        class="text-muted nav-heading mt-4 mb-1">
       <span>CHỨC NĂNG</span>
     </p>
+
+    <!--    Quản lý danh mục-->
     <ul *ngIf="userRoles?.includes('tdt_sys_hr_v')"
         class="navbar-nav flex-fill w-100 mb-2">
       <li class="nav-item dropdown">
@@ -49,353 +52,183 @@
           aria-expanded="false"
           class="dropdown-toggle nav-link"
           data-toggle="collapse"
-          href="#yemloyee"
-        >
-          <i class="fe fe-users fe-16"></i>
-          <span class="ml-3 item-text">Nhân viên</span>
-        </a>
-        <ul class="collapse list-unstyled pl-4 w-100" id="yemloyee">
-          <li class="nav-item">
-            <a
-              class="nav-link pl-3"
-              routerLink="/employee"
-              routerLinkActive="active"
-            ><span class="ml-1 item-text">Nhân viên</span>
-            </a>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a
-              aria-expanded="false"
-              class="dropdown-toggle nav-link"
-              data-toggle="collapse"
-              href="#reward-discipline"
-            >
-              <span class="text-nowrap item-text ml-08"
-              >Khen thưởng & Kỉ luật</span
-              >
-            </a>
-            <ul
-              class="collapse list-unstyled pl-4 w-100"
-              id="reward-discipline"
-            >
-              <a
-                class="nav-link pl-3"
-                routerLink="/reward"
-                routerLinkActive="active"
-              ><span class="ml-1">Khen thưởng</span></a
-              >
-              <a
-                class="nav-link pl-3"
-                routerLink="/discipline"
-                routerLinkActive="active"
-              ><span class="ml-1">Kỉ luật</span></a
-              >
-            </ul>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a
-              aria-expanded="false"
-              class="dropdown-toggle nav-link"
-              data-toggle="collapse"
-              href="#LeaveOvertime"
-            >
-              <span class="text-nowrap item-text ml-08"
-              >Nghỉ phép - Tăng ca</span
-              >
-            </a>
-            <ul class="collapse list-unstyled pl-4 w-100" id="LeaveOvertime">
-              <a
-                class="nav-link pl-3"
-                routerLink="/nghiphep"
-                routerLinkActive="active"
-              ><span class="ml-1">Nghỉ phép</span></a
-              >
-              <a
-                class="nav-link pl-3"
-                routerLink="/tangca"
-                routerLinkActive="active"
-              ><span class="ml-1">Tăng ca</span></a
-              >
-              <a
-                class="nav-link pl-3"
-                routerLink="/phepnam"
-                routerLinkActive="active"
-              ><span class="ml-1">Phép năm</span></a
-              >
-            </ul>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a
-              aria-expanded="false"
-              class="dropdown-toggle nav-link"
-              data-toggle="collapse"
-              href="#Timekeeping"
-            >
-              <span class="text-nowrap item-text ml-08">Chấm công</span>
-            </a>
-            <ul class="collapse list-unstyled pl-4 w-100" id="Timekeeping">
-              <a
-                class="nav-link pl-3"
-                routerLink="/bangchamcong"
-                routerLinkActive="active"
-              ><span class="ml-1">Bảng chấm công</span></a
-              >
-              <a
-                class="nav-link pl-3"
-                routerLink="/lichsuchamcong"
-                routerLinkActive="active"
-              ><span class="ml-1">Lịch sử chấm công</span></a
-              >
-              <a
-                class="nav-link pl-3"
-                routerLink="/dangkythe"
-                routerLinkActive="active"
-              ><span class="ml-1">Đăng ký thẻ</span></a
-              >
-              <a
-                class="nav-link pl-3"
-                routerLink="/sapcalamviec"
-                routerLinkActive="active"
-              ><span class="ml-1">Sắp ca làm việc</span></a
-              >
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
-
-    <ul *ngIf="userRoles?.includes('tdt_sys_s_v')"
-        class="navbar-nav flex-fill w-100 mb-2">
-      <li class="nav-item dropdown">
-        <a
-          aria-expanded="false"
-          class="dropdown-toggle nav-link"
-          data-toggle="collapse"
-          href="#salary"
-        >
-          <i class="fe fe-dollar-sign fe-16"></i>
-          <span class="ml-3 item-text">Lương</span>
-        </a>
-        <ul class="collapse list-unstyled pl-4 w-100" id="salary">
-          <li class="nav-item">
-            <a
-              class="nav-link pl-3"
-              routerLink="/bangluong"
-              routerLinkActive="active"
-            ><span class="ml-1 item-text">Bảng lương</span>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a
-              class="nav-link pl-3"
-              routerLink="/luongphucap"
-              routerLinkActive="active"
-            ><span class="ml-1 item-text">Lương & Phụ cấp</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-
-    <ul *ngIf="userRoles?.includes('tdt_sys_hr_v')"
-        class="navbar-nav flex-fill w-100 mb-2">
-      <li class="nav-item dropdown">
-        <a
-          aria-expanded="false"
-          class="dropdown-toggle nav-link"
-          data-toggle="collapse"
-          href="#contract"
-        >
-          <i class="fe fe-file-text fe-16"></i>
-          <span class="ml-3 item-text">Hợp đồng</span>
-        </a>
-        <ul class="collapse list-unstyled pl-4 w-100" id="contract">
-          <li class="nav-item">
-            <a
-              class="nav-link pl-3"
-              routerLink="/bangluong"
-              routerLinkActive="active"
-            ><span class="ml-1 item-text">Hợp đồng</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-
-    <p *ngIf="userRoles?.includes('tdt_sys_hrc_v')
-      || userRoles?.includes('tdt_sys_sc_v')
-      || userRoles?.includes('tdt_sys_cc_v')"
-       class="text-muted nav-heading mt-4 mb-1">
-      <span>DANH MỤC</span>
-    </p>
-    <ul *ngIf="userRoles?.includes('tdt_sys_hrc_v')"
-        class="navbar-nav flex-fill w-100 mb-2">
-      <li class="nav-item dropdown">
-        <a
-          aria-expanded="false"
-          class="dropdown-toggle nav-link"
-          data-toggle="collapse"
-          href="#categoryHR"
+          href="#manage-directory-information"
         >
           <i class="fe fe-briefcase fe-16"></i>
-          <span class="ml-3 item-text">Danh mục nhân sự</span>
+          <span class="ml-3 item-text">Quản lý danh mục</span>
         </a>
-        <ul class="collapse list-unstyled pl-4 w-100" id="categoryHR">
-          <li class="nav-item dropdown">
+
+        <ul class="collapse list-unstyled pl-4 w-100" id="manage-directory-information">
+          <li class="nav-item">
             <a
-              aria-expanded="false"
-              class="dropdown-toggle nav-link"
-              data-toggle="collapse"
-              href="#category"
+              ariaCurrentWhenActive="page"
+              class="nav-link pl-3"
+              routerLink="lecturers"
+              routerLinkActive="active"
+            ><span class="ml-1">Giảng viên</span></a
             >
-              <span class="text-nowrap item-text ml-08">Danh mục</span>
-            </a>
-            <ul class="collapse list-unstyled pl-4 w-100" id="category">
-              <a
-                class="nav-link pl-3"
-                routerLink="/reward"
-                routerLinkActive="active"
-              ><span class="ml-1">Công ty</span></a
-              >
-              <a
-                class="nav-link pl-3"
-                routerLink="/reward"
-                routerLinkActive="active"
-              ><span class="ml-1">Phòng ban</span></a
-              >
-              <a
-                class="nav-link pl-3"
-                routerLink="/reward"
-                routerLinkActive="active"
-              ><span class="ml-1">Chức vụ</span></a
-              >
-              <a
-                class="nav-link pl-3"
-                routerLink="/reward"
-                routerLinkActive="active"
-              ><span class="ml-1">Học vấn</span></a
-              >
-              <a
-                class="nav-link pl-3"
-                routerLink="/reward"
-                routerLinkActive="active"
-              ><span class="ml-1">Quốc tịch</span></a
-              >
-              <a
-                class="nav-link pl-3"
-                routerLink="/reward"
-                routerLinkActive="active"
-              ><span class="ml-1">Dân tộc</span></a
-              >
-            </ul>
           </li>
 
-          <li class="nav-item dropdown">
-            <a
-              aria-expanded="false"
-              class="dropdown-toggle nav-link"
-              data-toggle="collapse"
-              href="#leave"
-            >
-              <span class="text-nowrap item-text ml-08">Nghỉ phép</span>
-            </a>
-            <ul class="collapse list-unstyled pl-4 w-100" id="leave">
-              <a
-                class="nav-link pl-3"
-                routerLink="/reward"
-                routerLinkActive="active"
-              ><span class="ml-1">Ngày nghỉ lễ</span></a
-              >
-            </ul>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a
-              aria-expanded="false"
-              class="dropdown-toggle nav-link"
-              data-toggle="collapse"
-              href="#hrcTimekeeping"
-            >
-              <span class="text-nowrap item-text ml-08">Chấm công</span>
-            </a>
-            <ul class="collapse list-unstyled pl-4 w-100" id="hrcTimekeeping">
-              <a
-                class="nav-link pl-3"
-                routerLink="/reward"
-                routerLinkActive="active"
-              ><span class="ml-1">Máy chấm công</span></a
-              >
-              <a
-                class="nav-link pl-3"
-                routerLink="/reward"
-                routerLinkActive="active"
-              ><span class="ml-1">Ca làm việc</span></a
-              >
-            </ul>
-          </li>
-        </ul>
-      </li>
-    </ul>
-
-    <ul *ngIf="userRoles?.includes('tdt_sys_sc_v')"
-        class="navbar-nav flex-fill w-100 mb-2">
-      <li class="nav-item dropdown">
-        <a
-          aria-expanded="false"
-          class="dropdown-toggle nav-link"
-          data-toggle="collapse"
-          href="#categoryContract"
-        >
-          <i class="fe fe-dollar-sign fe-16"></i>
-          <span class="ml-3 item-text">Danh mục hợp đồng</span>
-        </a>
-        <ul class="collapse list-unstyled pl-4 w-100" id="categoryContract">
           <li class="nav-item">
             <a
               class="nav-link pl-3"
-              routerLink="/reward"
+              routerLink="subject"
               routerLinkActive="active"
-            ><span class="ml-1">Loại hợp đồng</span></a
+            ><span class="ml-1">Môn học</span></a
             >
           </li>
         </ul>
       </li>
     </ul>
 
-    <ul *ngIf="userRoles?.includes('tdt_sys_cc_v')"
+    <!--    Tiêu chuẩn giảng viên-->
+    <ul *ngIf="userRoles?.includes('tdt_sys_hr_v')"
         class="navbar-nav flex-fill w-100 mb-2">
       <li class="nav-item dropdown">
         <a
           aria-expanded="false"
           class="dropdown-toggle nav-link"
           data-toggle="collapse"
-          href="#categorySalary"
+          href="#instructor-standards"
         >
-          <i class="fe fe-file-text fe-16"></i>
-          <span class="ml-3 item-text">Danh mục lương</span>
+          <i class="fe fe-pen-tool fe-16"></i>
+          <span class="ml-3 item-text">Tiêu chuẩn giảng viên</span>
         </a>
-        <ul class="collapse list-unstyled pl-4 w-100" id="categorySalary">
+
+        <ul class="collapse list-unstyled pl-4 w-100" id="instructor-standards">
           <li class="nav-item">
             <a
               class="nav-link pl-3"
-              routerLink="/reward"
+              routerLink="university-lecturer"
               routerLinkActive="active"
-            ><span class="ml-1">Phụ cấp</span></a
+            ><span class="ml-1">Bậc đại học</span></a
             >
           </li>
+
           <li class="nav-item">
             <a
               class="nav-link pl-3"
-              routerLink="/reward"
+              routerLink="master-lecturer"
               routerLinkActive="active"
-            ><span class="ml-1">Công thức lương</span></a
+            ><span class="ml-1">Bậc thạc sĩ</span></a
             >
           </li>
         </ul>
+      </li>
+    </ul>
+
+    <!--    Định mức giờ giảng-->
+    <ul *ngIf="userRoles?.includes('tdt_sys_hr_v')"
+        class="navbar-nav flex-fill w-100 mb-2">
+      <li class="nav-item w-100">
+        <a
+          class="nav-link"
+          routerLink="norms-lecture-hours"
+          routerLinkActive="active"
+        >
+          <i class="fe fe-pocket fe-16"></i>
+          <span class="ml-3 item-text">Định mức giờ giảng</span>
+        </a>
+      </li>
+    </ul>
+
+    <!--    Thống kê số tiết-->
+    <ul *ngIf="userRoles?.includes('tdt_sys_hr_v')"
+        class="navbar-nav flex-fill w-100 mb-2">
+      <li class="nav-item w-100">
+        <a
+          class="nav-link"
+          routerLink="statistics-number-periods"
+          routerLinkActive="active"
+        >
+          <i class="fe fe-pen-tool fe-16"></i>
+          <span class="ml-3 item-text">Thống kê số tiết</span>
+        </a>
+      </li>
+    </ul>
+
+    <!--    Thống kê giờ giảng-->
+    <ul *ngIf="userRoles?.includes('tdt_sys_hr_v')"
+        class="navbar-nav flex-fill w-100 mb-2">
+      <li class="nav-item dropdown">
+        <a
+          aria-expanded="false"
+          class="dropdown-toggle nav-link"
+          data-toggle="collapse"
+          href="#statistics-lecture-hours"
+        >
+          <i class="fe fe-clock fe-16"></i>
+          <span class="ml-3 item-text">Thống kê giờ giảng</span>
+        </a>
+        <ul class="collapse list-unstyled pl-4 w-100" id="statistics-lecture-hours">
+          <li class="nav-item">
+            <a
+              class="nav-link pl-3"
+              routerLink="guest-lecturers"
+              routerLinkActive="active"
+            ><span class="ml-1">Giáo viên thỉnh giảng</span></a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link pl-3"
+              routerLink="faculty-members"
+              routerLinkActive="active"
+            ><span class="ml-1">Giảng viên cơ hữu</span></a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <!--    Quản lý giảng dạy-->
+    <ul *ngIf="userRoles?.includes('tdt_sys_hr_v')"
+        class="navbar-nav flex-fill w-100 mb-2">
+      <li class="nav-item dropdown">
+        <a
+          aria-expanded="false"
+          class="dropdown-toggle nav-link"
+          data-toggle="collapse"
+          href="#teaching-management"
+        >
+          <i class="fe fe-calendar fe-16"></i>
+          <span class="ml-3 item-text">Quản lý giảng dạy</span>
+        </a>
+        <ul class="collapse list-unstyled pl-4 w-100" id="teaching-management">
+          <li class="nav-item">
+            <a
+              class="nav-link pl-3"
+              routerLink="satisfaction-score"
+              routerLinkActive="active"
+            ><span class="ml-1">Điểm hài lòng</span></a
+            >
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link pl-3"
+              routerLink="teaching-history"
+              routerLinkActive="active"
+            ><span class="ml-1">Lịch sử giảng dạy</span></a
+            >
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <!--    Phân công giờ giảng-->
+    <ul *ngIf="userRoles?.includes('tdt_sys_hr_v')"
+        class="navbar-nav flex-fill w-100 mb-2">
+      <li class="nav-item w-100">
+        <a
+          class="nav-link"
+          routerLink="assign-lecture-hours"
+          routerLinkActive="active"
+        >
+          <i class="fe fe-check-square fe-16"></i>
+          <span class="ml-3 item-text">Phân công giờ giảng</span>
+        </a>
       </li>
     </ul>
 

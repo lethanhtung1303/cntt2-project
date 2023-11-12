@@ -4,7 +4,7 @@ import {forbiddenValueValidator} from "../../helper/validators";
 import {LoginRequest} from "../../domain/authentication";
 import {AuthenticationService, UserResponse} from "../../service/authentication.service";
 import {Router} from "@angular/router";
-import {GlobalErrorService} from "../../service/global-error.service";
+import {ErrorResponse, GlobalErrorService} from "../../service/global-error.service";
 
 @Component({
   selector: 'app-login',
@@ -12,6 +12,8 @@ import {GlobalErrorService} from "../../service/global-error.service";
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+
+  err: ErrorResponse = {errMessage: null, errorCode: null}
 
   user: LoginRequest = {inputUserName: '', inputPassword: ''};
 
@@ -43,7 +45,13 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  onInputFocus() {
+    this.globalErrorService.clearError()
+  }
+
+
   onSubmit() {
+    this.globalErrorService.clearError()
     this.authentication.login(this.loginForm.value).subscribe({
       next: async (data: UserResponse) => {
         sessionStorage.setItem('UserID', data.results.user.userID ?? '');
@@ -56,10 +64,17 @@ export class LoginComponent implements OnInit {
       },
       error: (error) => {
         if (error.status == 400) {
-          this.globalErrorService.setGlobalError(error.error.results[0].message, error.error.results[0].errorCd)
+          this.err = {
+            errMessage: error.error.results[0].message,
+            errorCode: error.error.results[0].errorCd
+          }
+          this.globalErrorService.setGlobalError(this.err)
         } else {
-          let message: string = "Something went wrong here."
-          this.globalErrorService.setGlobalError(message, error.error.results[0].errorCd)
+          this.err = {
+            errMessage: "Something went wrong here.",
+            errorCode: error.error.results[0].errorCd
+          }
+          this.globalErrorService.setGlobalError(this.err)
         }
       },
     });

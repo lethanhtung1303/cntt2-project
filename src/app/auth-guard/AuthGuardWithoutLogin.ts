@@ -12,7 +12,7 @@ export class AuthGuardWithoutLogin implements CanActivate {
     if (this.checkUserPermissions()) {
       return true;
     } else {
-      this.router.navigate(['']).then(() => window.location.reload());
+      this.router.navigate(['home']).then(() => window.location.reload());
       return false;
     }
   }

@@ -24,6 +24,7 @@
     <div class="form-group">
       <label class="sr-only" for="inputUserName">Email address</label>
       <input
+        (focus)="onInputFocus()"
         [class.is-invalid]="(inputUserName.errors && (loginForm.touched || loginForm.dirty)) || this.globalErrorService.getGlobalError().errorCode"
         [class.is-valid]="(!inputUserName.errors && (loginForm.touched || loginForm.dirty)) && !this.globalErrorService.getGlobalError().errorCode"
         aria-describedby="userNameHelp"
@@ -48,6 +49,7 @@
     <div class="form-group">
       <label class="sr-only" for="inputPassword">Password</label>
       <input
+        (focus)="onInputFocus()"
         [class.is-invalid]="(inputPassword.errors && (loginForm.touched || loginForm.dirty)) || this.globalErrorService.getGlobalError().errorCode"
         [class.is-valid]="(!inputPassword.errors && (loginForm.touched || loginForm.dirty)) && !this.globalErrorService.getGlobalError().errorCode"
         aria-describedby="passwordHelp"
