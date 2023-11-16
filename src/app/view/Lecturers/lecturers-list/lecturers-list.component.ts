@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {LecturerService} from '../../../service/lecturer.service';
+import {Component, OnInit} from '@angular/core';
+import {LecturerResponse, LecturerService} from '../../../service/lecturer.service';
 import {Lecturer, TrainingProcess} from '../../../domain/lecturer';
 import {Table} from 'primeng/table';
 import * as FileSaver from 'file-saver';
@@ -9,7 +9,7 @@ import * as FileSaver from 'file-saver';
   templateUrl: './lecturers-list.component.html',
   styleUrls: ['./lecturers-list.component.css']
 })
-export class LecturersListComponent {
+export class LecturersListComponent implements OnInit {
   lecturers!: Lecturer[];
   selectedLecturers!: Lecturer[] | null;
   loading: boolean = true;
@@ -18,11 +18,15 @@ export class LecturersListComponent {
   }
 
   ngOnInit(): void {
-    this.employeeService.getLecturer().subscribe((data) => {
-      this.lecturers = data.results.lecturers;
+    this.employeeService.getLecturer().subscribe({
+      next: (data: LecturerResponse) => {
+        this.lecturers = data.results.lecturers;
+        this.loading = false;
+      },
+      error: (error) => {
+        console.log(error)
+      }
     });
-
-    this.loading = false;
   }
 
   generateLevel(trainingProcess: TrainingProcess[]): string {
@@ -50,12 +54,14 @@ export class LecturersListComponent {
   exportExcel() {
     import('xlsx').then((xlsx) => {
       const worksheet = xlsx.utils.json_to_sheet(this.lecturers);
-      const workbook = {Sheets: {data: worksheet}, SheetNames: ['data']};
+      const workbook = {Sheets: {data: worksheet}, SheetNames: ['lecturers']};
       const excelBuffer: any = xlsx.write(workbook, {
         bookType: 'xlsx',
         type: 'array',
       });
-      this.saveAsExcelFile(excelBuffer, 'employees');
+      this.saveAsExcelFile(excelBuffer, 'lecturers');
+    }).catch((error) => {
+      console.log(error)
     });
   }
 
