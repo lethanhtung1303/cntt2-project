@@ -1,0 +1,159 @@
+<form (ngSubmit)="onSubmit()" *ngIf="lecturerInfo" [formGroup]="lecturerUpdateForm">
+  <div class="row mt-5 align-items-center">
+    <div class="col-md-3 text-center">
+      <div class="avatar avatar-xl">
+        <img alt="{{lecturerInfo.firstName}} {{lecturerInfo.fullName}}" class="avatar-img rounded-circle"
+             src="{{lecturerInfo.images}}">
+      </div>
+    </div>
+    <div class="col">
+      <div class="row align-items-center">
+        <div class="col-md-3">
+          <div class="form-group mb-3">
+            <label for="lecturer-id">ID</label>
+            <input class="form-control form-control-lg" formControlName="lecturerId" id="lecturer-id"
+                   placeholder="Lecturer ID" required
+                   type="text">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group mb-3">
+            <label for="first-name">Họ</label>
+            <input class="form-control form-control-lg" formControlName="firstName" id="first-name"
+                   placeholder="First Name" required type="text">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group mb-3">
+            <label for="full-Name">Tên</label>
+            <input class="form-control form-control-lg" formControlName="fullName" id="full-Name"
+                   placeholder="Full Name"
+                   required type="text">
+          </div>
+        </div>
+      </div>
+      <div class="row align-items-center">
+        <div class="col-md-3">
+          <div class="form-group mb-3">
+            <label for="classification">Phân loại giản viên</label>
+            <select
+              class="form-control form-control-lg"
+              formControlName="classification"
+              id="classification"
+            >
+              <option value="0">Giảng viên thỉnh giảng</option>
+              <option value="1">Giảng viên cơ hữu</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group mb-3">
+            <label for="main-position">Vị trí chính</label>
+            <input class="form-control form-control-lg" formControlName="mainPosition" id="main-position"
+                   placeholder="Main Position"
+                   required type="text">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group mb-3">
+            <label for="secondary-position">Vị trí phụ</label>
+            <input class="form-control form-control-lg" formControlName="secondaryPosition" id="secondary-position"
+                   placeholder="Secondary Position"
+                   required type="text">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group mb-3">
+            <label for="birthday">Ngày sinh</label>
+            <input class="form-control form-control-lg" formControlName="birthday" id="birthday"
+                   placeholder="Birthday"
+                   required type="date">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group mb-3">
+            <label for="gender">Giới tính</label>
+            <select
+              class="form-control form-control-lg"
+              formControlName="gender"
+              id="gender"
+            >
+              <option value="true">Nam</option>
+              <option value="false">Nữ</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group mb-3">
+            <label for="place-of-birth">Nơi sinh</label>
+            <input class="form-control form-control-lg" formControlName="placeOfBirth" id="place-of-birth"
+                   placeholder="Place Of Birth"
+                   required type="text">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group mb-3">
+            <label for="address">Địa chỉ</label>
+            <input class="form-control form-control-lg" formControlName="address" id="address"
+                   placeholder="Address"
+                   required type="text">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group mb-3">
+            <label for="address-tmp">Tạm trú</label>
+            <input class="form-control form-control-lg" formControlName="addressTmp" id="address-tmp"
+                   placeholder="Address Tmp"
+                   required type="text">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group mb-3">
+            <label for="phone">Điện thoại</label>
+            <input class="form-control form-control-lg" formControlName="phone" id="phone"
+                   placeholder="Phone"
+                   required type="text">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group mb-3">
+            <label for="email">Email</label>
+            <input class="form-control form-control-lg" formControlName="email" id="email"
+                   placeholder="Email"
+                   required type="text">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group mb-3">
+            <label for="email-tdtu">Email TDTU</label>
+            <input class="form-control form-control-lg" formControlName="emailTdtu" id="email-tdtu"
+                   placeholder="Email TDTU"
+                   required type="text">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group mb-3">
+            <label for="workplace">Nơi làm việc</label>
+            <input class="form-control form-control-lg" formControlName="workplace" id="workplace"
+                   placeholder="Workplace"
+                   required type="text">
+          </div>
+        </div>
+      </div>
+      <button [disabled]="!lecturerUpdateForm.valid" class="btn btn-lg btn-primary btn-block" type="submit">Submit
+      </button>
+    </div>
+  </div>
+</form>

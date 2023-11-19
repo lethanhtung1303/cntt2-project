@@ -1,0 +1,47 @@
+<div class="row align-items-center my-3">
+  <div class="col">
+    <h2 class="page-title">
+      Thông tin chi tiết:
+      {{ this.generateLevel(lecturer?.trainingProcess) }} {{lecturer?.firstName }} {{lecturer?.fullName }}
+    </h2>
+  </div>
+</div>
+<div class="row">
+  <!-- Striped rows -->
+  <div class="col-md-12">
+    <div class="card shadow">
+      <div class="card-body">
+        <div class="my-4">
+          <ul class="nav nav-tabs mb-4" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a (click)="goInfo()" aria-controls="info" aria-selected="true" class="nav-link active" data-toggle="tab"
+                 href="#info"
+                 id="info-tab" role="tab">Info</a>
+            </li>
+            <li class="nav-item">
+              <a (click)="goTrainingProcess()" aria-controls="training-process" aria-selected="false" class="nav-link "
+                 data-toggle="tab"
+                 href="#training-process"
+                 id="training-process-tab" role="tab">Training Process</a>
+            </li>
+            <li class="nav-item">
+              <a (click)="goSatisfactionScore()" aria-controls="satisfaction-score" aria-selected="false"
+                 class="nav-link" data-toggle="tab"
+                 href="#satisfaction-score"
+                 id="satisfaction-score-tab" role="tab">Satisfaction Score</a>
+            </li>
+          </ul>
+          <app-lecturer-info *ngIf="currentTab === 'info'" [lecturerInfo]="lecturer"></app-lecturer-info>
+
+          <app-lecturer-training-process *ngIf="currentTab === 'training-process'"
+                                         [lecturerInfo]="lecturer"></app-lecturer-training-process>
+
+          <app-lecturer-satisfaction-score
+            *ngIf="currentTab === 'satisfaction-score'"></app-lecturer-satisfaction-score>
+        </div> <!-- /.card-body -->
+      </div>
+    </div>
+  </div>
+  <!-- Striped rows -->
+</div>
+

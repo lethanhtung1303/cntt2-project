@@ -27,7 +27,9 @@
             'fullName',
             'gender',
             'mainPosition',
-            'workplace'
+            'workplace',
+            'emailTdtu',
+            'email'
           ]"
           [loading]="loading"
           [paginator]="true"
@@ -209,6 +211,7 @@
 
               <td>
                 <button
+                  [queryParams]="{ tab:'info' }"
                   [routerLink]="[lecturer.id]"
                   class="p-button-rounded p-button-success mr-2"
                   icon="pi pi-pencil"

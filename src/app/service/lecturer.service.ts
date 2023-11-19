@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Lecturer} from "../domain/lecturer";
 import {Observable} from "rxjs";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 
 export interface LecturerResponse {
   status: number,
@@ -22,8 +22,23 @@ export class LecturerService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getLecturer(): Observable<LecturerResponse> {
-    const headers = new HttpHeaders().append(
+  getLecturerById(lecturerId: string): Observable<LecturerResponse> {
+    const queryParams: HttpParams = new HttpParams().append('lecturerIds', lecturerId);
+    const headers: HttpHeaders = new HttpHeaders().append(
+      'content-type',
+      'application/json'
+    );
+    return this.httpClient.get<LecturerResponse>(
+      this.apiUrl + this.loginEndPoint,
+      {
+        params: queryParams,
+        headers: headers,
+      }
+    );
+  }
+
+  getAllLecturer(): Observable<LecturerResponse> {
+    const headers: HttpHeaders = new HttpHeaders().append(
       'content-type',
       'application/json'
     );

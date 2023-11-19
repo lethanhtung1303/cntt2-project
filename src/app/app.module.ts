@@ -106,7 +106,18 @@ import {LecturersListComponent} from './view/Lecturers/lecturers-list/lecturers-
 import {
   UniversityLecturerListComponent
 } from './view/InstructorStandards/University/university-lecturer-list/university-lecturer-list.component';
-import { MasterLecturerListComponent } from './view/InstructorStandards/MasterDegree/master-lecturer-list/master-lecturer-list.component';
+import {
+  MasterLecturerListComponent
+} from './view/InstructorStandards/MasterDegree/master-lecturer-list/master-lecturer-list.component';
+import {LecturersDetailComponent} from './view/Lecturers/lecturers-detail/lecturers-detail.component';
+import {LecturerInfoComponent} from './view/Lecturers/lecturers-detail/tab/lecturer-info/lecturer-info.component';
+import {
+  LecturerTrainingProcessComponent
+} from './view/Lecturers/lecturers-detail/tab/lecturer-training-process/lecturer-training-process.component';
+import {
+  LecturerSatisfactionScoreComponent
+} from './view/Lecturers/lecturers-detail/tab/lecturer-satisfaction-score/lecturer-satisfaction-score.component';
+import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -120,6 +131,10 @@ import { MasterLecturerListComponent } from './view/InstructorStandards/MasterDe
     LecturersListComponent,
     UniversityLecturerListComponent,
     MasterLecturerListComponent,
+    LecturersDetailComponent,
+    LecturerInfoComponent,
+    LecturerTrainingProcessComponent,
+    LecturerSatisfactionScoreComponent,
   ],
   imports: [
     BrowserModule,
@@ -216,6 +231,7 @@ import { MasterLecturerListComponent } from './view/InstructorStandards/MasterDe
     TreeTableModule,
     AnimateModule,
     CardModule,
+    NgOptimizedImage,
   ],
   providers: [],
   bootstrap: [AppComponent],

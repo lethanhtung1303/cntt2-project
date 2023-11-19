@@ -14,11 +14,11 @@ export class LecturersListComponent implements OnInit {
   selectedLecturers!: Lecturer[] | null;
   loading: boolean = true;
 
-  constructor(private employeeService: LecturerService) {
+  constructor(private lecturerService: LecturerService) {
   }
 
   ngOnInit(): void {
-    this.employeeService.getLecturer().subscribe({
+    this.lecturerService.getAllLecturer().subscribe({
       next: (data: LecturerResponse) => {
         this.lecturers = data.results.lecturers;
         this.loading = false;

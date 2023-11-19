@@ -13,6 +13,7 @@ import {
 import {
   MasterLecturerListComponent
 } from "./view/InstructorStandards/MasterDegree/master-lecturer-list/master-lecturer-list.component";
+import {LecturersDetailComponent} from "./view/Lecturers/lecturers-detail/lecturers-detail.component";
 
 const routes: Routes = [
   {
@@ -24,7 +25,7 @@ const routes: Routes = [
 
       {path: 'lecturers', component: LecturersListComponent},
       {path: 'lecturers/add', component: LecturersListComponent},
-      {path: 'lecturers/:id', component: LecturersListComponent},
+      {path: 'lecturers/:id', component: LecturersDetailComponent},
 
       {path: 'university-lecturer', component: UniversityLecturerListComponent},
       {path: 'university-lecturer/add', component: UniversityLecturerListComponent},

@@ -1,3 +1,8 @@
+export interface ClassificationLecturer {
+  maLoai: number;
+  phanLoai: string;
+}
+
 export interface Certificate {
   id: number;
   loaiChungChi: string;
@@ -52,20 +57,35 @@ export interface SatisfactionScore {
 
 export interface Lecturer {
   id: number;
+  /** OK **/
   firstName: string;
+  /** OK **/
   fullName: string;
+  /** OK **/
   gender: boolean;
   images: string | null;
   birthday: string | null;
+  /** OK **/
   placeOfBirth: string | null;
+  /** OK **/
   address: string | null;
+  /** OK **/
   addressTmp: string | null;
+  /** OK **/
   phone: string | null;
+  /** OK **/
   email: string | null;
+  /** OK **/
   emailTdtu: string | null;
+  /** OK **/
   workplace: string | null;
+  /** OK **/
   mainPosition: string | null;
+  /** OK **/
   secondaryPosition: string | null;
+  /** OK **/
+  classificationLecturers: ClassificationLecturer;
+  /** OK **/
   certificate: Certificate[];
   trainingProcess: TrainingProcess[];
   satisfactionScore: SatisfactionScore[];
