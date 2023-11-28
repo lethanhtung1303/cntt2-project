@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import {Injectable} from '@angular/core';
+import {NavigationEnd, Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -20,5 +20,10 @@ export class PreviousRouteService {
 
   public getPreviousUrl() {
     return this.previousUrl;
+  }
+
+  public returnLogin() {
+    sessionStorage.clear();
+    this.router.navigate(['/login']).then(() => window.location.reload());
   }
 }

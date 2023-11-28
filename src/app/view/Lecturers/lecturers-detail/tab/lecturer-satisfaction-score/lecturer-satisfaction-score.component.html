@@ -1,1 +1,160 @@
-<p>lecturer-satisfaction-score works!</p>
+<div class="row align-items-center my-3">
+    <div class="col ml-3 p-0 ">
+        <p-dropdown
+                (onChange)="onChangeSemester()"
+                [(ngModel)]="selectedGroupedSemesters"
+                [group]="false"
+                [options]="groupedSemester">
+            <ng-template let-group pTemplate="group">
+                <div class="flex align-items-center">
+                    <span>{{ group.label }}</span>
+                </div>
+            </ng-template>
+        </p-dropdown>
+    </div>
+    <div class="col-auto">
+        <button
+                (click)="showDialog()"
+                class="btn btn-primary"
+                type="button"
+        >
+            <span class="fe fe-plus fe-16 mr-2"></span>Thêm mới
+        </button>
+        <p-dialog (onHide)="onCancel()" [(visible)]="visible" [draggable]="false" [modal]="true" [resizable]="false"
+                  [style]="{ width: '50vw' }"
+                  header="Thêm mới Điểm hài lòng">
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-12">
+                        <div class="card shadow mb-4">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <form (ngSubmit)="onSubmit()" [formGroup]="satisfactionScoreForm">
+                                            <div class="form-group mb-3">
+                                                <label for="selectedSubject">Môn học</label>
+                                                <select
+                                                        class="form-control form-control-lg"
+                                                        formControlName="selectedSubject"
+                                                        id="selectedSubject"
+                                                >
+                                                    <ng-container *ngFor="let item of subjects">
+                                                        <option [value]="item.maMon">
+                                                            ({{item.maMon}}) {{ item.tenMon }}
+                                                        </option>
+                                                    </ng-container>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group mb-3">
+                                                <label for="selectedSemester">Học kỳ</label>
+                                                <select
+                                                        class="form-control form-control-lg"
+                                                        formControlName="selectedSemester"
+                                                        id="selectedSemester"
+                                                >
+                                                    <ng-container *ngFor="let item of selectedSemester">
+                                                        <option [value]="item.value">
+                                                            {{ item.label }}
+                                                        </option>
+                                                    </ng-container>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group mb-3">
+                                                <label for="satisfactionScore">Điểm hài lòng</label>
+                                                <input class="form-control" formControlName="satisfactionScore"
+                                                       id="satisfactionScore" max="100" min="0" type="number">
+                                            </div>
+
+                                            <div class="flex justify-content-end flex-wrap ">
+                                                <button (click)="onCancel()" class="btn btn-outline-dark mr-2"
+                                                        type="button">Cancel
+                                                </button>
+                                                <button [disabled]="!satisfactionScoreForm.valid"
+                                                        class="btn btn-primary"
+                                                        type="submit">Save
+                                                </button>
+                                            </div>
+                                        </form>
+
+                                    </div> <!-- /.col -->
+                                </div>
+                            </div>
+                        </div> <!-- / .card -->
+                    </div> <!-- .col-12 -->
+                </div> <!-- .row -->
+            </div> <!-- .container-fluid -->
+        </p-dialog>
+    </div>
+
+</div>
+<div class="card">
+    <p-table [tableStyle]="{'min-width': '50rem'}" [value]="satisfactionScoreForSemester">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:3rem">#</th>
+                <th>Môn học</th>
+                <th>Học kỳ</th>
+                <th>Điểm hài lòng</th>
+                <th>#</th>
+            </tr>
+        </ng-template>
+        <ng-template let-ri="rowIndex" let-satisfactionScore pTemplate="body">
+            <tr>
+                <td>
+                    {{ri + 1}}
+                </td>
+                <td>
+                    {{satisfactionScore.subject.tenMon}}
+                </td>
+                <td>
+                    {{genSemesterLabel(satisfactionScore.hocKy)}}
+                </td>
+                <td>
+                    {{satisfactionScore.diemHaiLong }}
+                </td>
+                <td>
+                    <p-toast key="{{satisfactionScore.id}}"></p-toast>
+                    <p-confirmDialog #cd [style]="{ width: '50vw' }" key="{{satisfactionScore.id}}" position="top">
+                        <ng-template pTemplate="header">
+                            <h3>Chắc chắn xoá Điểm hài lòng của Môn:
+                                <p>
+                                    {{ satisfactionScore.subject.tenMon }}
+                                    Ở {{genSemesterLabel(satisfactionScore.hocKy)}}
+                                </p>
+                            </h3>
+
+                        </ng-template>
+                        <ng-template pTemplate="message">
+                            <p>Message Template</p>
+                        </ng-template>
+                        <ng-template pTemplate="footer">
+                            <button (click)="cd.reject()" icon="pi pi-times" label="No" pButton
+                                    type="button"></button>
+                            <button (click)="cd.accept()" class="p-button-danger"
+                                    icon="pi pi-check"
+                                    label="Yes" pButton
+                                    type="button"></button>
+                        </ng-template>
+                    </p-confirmDialog>
+                    <button
+                            (click)="confirmDelete(satisfactionScore.id)"
+                            class="p-button-rounded p-button-warning"
+                            icon="pi pi-trash"
+                            pButton
+                    ></button>
+                </td>
+
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td colspan="4">No Satisfaction Score found.</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<div *ngIf="satisfactionScoreForSemester.length > 0" class="card mt-2">
+    <p-chart [data]="data" [options]="options" type="bar"></p-chart>
+</div>

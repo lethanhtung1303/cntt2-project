@@ -14,69 +14,73 @@ import {
   MasterLecturerListComponent
 } from "./view/InstructorStandards/MasterDegree/master-lecturer-list/master-lecturer-list.component";
 import {LecturersDetailComponent} from "./view/Lecturers/lecturers-detail/lecturers-detail.component";
+import {
+  EditTrainingProcessComponent
+} from "./view/Lecturers/lecturers-detail/tab/lecturer-training-process/edit-training-process/edit-training-process.component";
 
 const routes: Routes = [
-  {
-    path: '',
-    component: SiteLayoutComponent,
-    canActivateChild: [AuthGuardWithLogin],
-    children: [
-      {path: 'home', component: HomeComponent},
+    {
+        path: '',
+        component: SiteLayoutComponent,
+        canActivateChild: [AuthGuardWithLogin],
+        children: [
+            {path: 'home', component: HomeComponent},
 
-      {path: 'lecturers', component: LecturersListComponent},
-      {path: 'lecturers/add', component: LecturersListComponent},
-      {path: 'lecturers/:id', component: LecturersDetailComponent},
+            {path: 'lecturers', component: LecturersListComponent},
+            {path: 'lecturers/add', component: LecturersListComponent},
+            {path: 'lecturers/:id', component: LecturersDetailComponent},
+            {path: 'lecturers/:id/training-process/:training-process-id/edit', component: EditTrainingProcessComponent},
 
-      {path: 'university-lecturer', component: UniversityLecturerListComponent},
-      {path: 'university-lecturer/add', component: UniversityLecturerListComponent},
-      {path: 'university-lecturer/:id', component: UniversityLecturerListComponent},
+            {path: 'university-lecturer', component: UniversityLecturerListComponent},
+            {path: 'university-lecturer/add', component: UniversityLecturerListComponent},
+            {path: 'university-lecturer/:id', component: UniversityLecturerListComponent},
 
-      {path: 'master-lecturer', component: MasterLecturerListComponent},
-      {path: 'master-lecturer/add', component: MasterLecturerListComponent},
-      {path: 'master-lecturer/:id', component: MasterLecturerListComponent},
+            {path: 'master-lecturer', component: MasterLecturerListComponent},
+            {path: 'master-lecturer/add', component: MasterLecturerListComponent},
+            {path: 'master-lecturer/:id', component: MasterLecturerListComponent},
 
-      {path: 'subject', component: LecturersListComponent},
-      {path: 'subject/add', component: LecturersListComponent},
-      {path: 'subject/:id', component: LecturersListComponent},
+            {path: 'subject', component: LecturersListComponent},
+            {path: 'subject/add', component: LecturersListComponent},
+            {path: 'subject/:id', component: LecturersListComponent},
 
-      {path: 'satisfaction-score', component: LecturersListComponent},
-      {path: 'satisfaction-score/add', component: LecturersListComponent},
-      {path: 'satisfaction-score/:id', component: LecturersListComponent},
+            {path: 'satisfaction-score', component: LecturersListComponent},
+            {path: 'satisfaction-score/add', component: LecturersListComponent},
+            {path: 'satisfaction-score/:id', component: LecturersListComponent},
 
-      {path: 'teaching-history', component: LecturersListComponent},
-      {path: 'teaching-history/add', component: LecturersListComponent},
-      {path: 'teaching-history/:id', component: LecturersListComponent},
+            {path: 'teaching-history', component: LecturersListComponent},
+            {path: 'teaching-history/add', component: LecturersListComponent},
+            {path: 'teaching-history/:id', component: LecturersListComponent},
 
-      {path: 'assign-lecture-hours', component: LecturersListComponent},
-      {path: 'assign-lecture-hours/add', component: LecturersListComponent},
-      {path: 'assign-lecture-hours/:id', component: LecturersListComponent},
+            {path: 'assign-lecture-hours', component: LecturersListComponent},
+            {path: 'assign-lecture-hours/add', component: LecturersListComponent},
+            {path: 'assign-lecture-hours/:id', component: LecturersListComponent},
 
-      {path: 'guest-lecturers', component: LecturersListComponent},
-      {path: 'guest-lecturers/add', component: LecturersListComponent},
-      {path: 'guest-lecturers/:id', component: LecturersListComponent},
+            {path: 'guest-lecturers', component: LecturersListComponent},
+            {path: 'guest-lecturers/add', component: LecturersListComponent},
+            {path: 'guest-lecturers/:id', component: LecturersListComponent},
 
-      {path: 'faculty-members', component: LecturersListComponent},
-      {path: 'faculty-members/add', component: LecturersListComponent},
-      {path: 'faculty-members/:id', component: LecturersListComponent},
+            {path: 'faculty-members', component: LecturersListComponent},
+            {path: 'faculty-members/add', component: LecturersListComponent},
+            {path: 'faculty-members/:id', component: LecturersListComponent},
 
-      {path: 'statistics-number-periods', component: LecturersListComponent},
-      {path: 'statistics-number-periods/add', component: LecturersListComponent},
-      {path: 'statistics-number-periods/:id', component: LecturersListComponent},
+            {path: 'statistics-number-periods', component: LecturersListComponent},
+            {path: 'statistics-number-periods/add', component: LecturersListComponent},
+            {path: 'statistics-number-periods/:id', component: LecturersListComponent},
 
-      {path: 'norms-lecture-hours', component: LecturersListComponent},
-      {path: 'norms-lecture-hours/add', component: LecturersListComponent},
-      {path: 'norms-lecture-hours/:id', component: LecturersListComponent},
+            {path: 'norms-lecture-hours', component: LecturersListComponent},
+            {path: 'norms-lecture-hours/add', component: LecturersListComponent},
+            {path: 'norms-lecture-hours/:id', component: LecturersListComponent},
 
-      {path: '', redirectTo: 'home', pathMatch: 'full'}, // redirect to `home-component`
-    ],
-  },
-  {path: 'login', component: LoginComponent, canActivate: [AuthGuardWithoutLogin],},
-  {path: '**', component: PageNotFoundComponent},
+            {path: '', redirectTo: 'home', pathMatch: 'full'}, // redirect to `home-component`
+        ],
+    },
+    {path: 'login', component: LoginComponent, canActivate: [AuthGuardWithoutLogin],},
+    {path: '**', component: PageNotFoundComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule],
 })
 export class AppRoutingModule {
 }

@@ -1,26 +1,22 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from "@angular/router";
+import {UserHelper} from "../../helper/user-helper";
 
 @Component({
-  selector: 'app-site-nav',
-  templateUrl: './site-nav.component.html',
-  styleUrls: ['./site-nav.component.css']
+    selector: 'app-site-nav',
+    templateUrl: './site-nav.component.html',
+    styleUrls: ['./site-nav.component.css']
 })
-export class SiteNavComponent implements OnInit {
+export class SiteNavComponent {
 
-  userName: string | null = '';
+    userName: string;
 
-  constructor(private router: Router) {
-  }
+    constructor(private router: Router, private userHelper: UserHelper) {
+        this.userName = userHelper.getUserLogin()
+    }
 
-  ngOnInit(): void {
-    this.userName = sessionStorage.getItem('UserName') ?? null
-  }
-
-  logout() {
-    sessionStorage.clear();
-
-    this.router.navigate(['/login']).then(() => window.location.reload());
-
-  }
+    logout() {
+        sessionStorage.clear();
+        this.router.navigate(['/login']).then(() => window.location.reload());
+    }
 }

@@ -1,101 +1,141 @@
 export interface ClassificationLecturer {
-  maLoai: number;
-  phanLoai: string;
+    maLoai: number;
+    phanLoai: string;
 }
 
 export interface Certificate {
-  id: number;
-  loaiChungChi: string;
-  diem: number;
+    id: number;
+    loaiChungChi: string;
+    diem: number;
 }
 
 export interface Language {
-  id: number;
-  tenNgonNgu: string;
+    id: number;
+    tenNgonNgu: string;
 }
 
 export interface Level {
-  id: number;
-  trinhDo: string;
-  kyHieu: string;
-  displayOrder: number;
+    id: number;
+    trinhDo: string;
+    kyHieu: string;
+    displayOrder: number;
+}
+
+export interface GraduationType {
+    id: number;
+    loaiTotNghiep: string;
 }
 
 export interface TrainingProcess {
-  id: number;
-  level: Level;
-  language: Language[];
-  truong: string;
-  nganh: string;
-  namTotNghiep: number;
-  deTaiTotNghiep: string | null;
-  nguoiHuongDan: string | null;
-  loaiTotNghiep: string | null;
+    id: number;
+    level: Level;
+    language: Language[];
+    truong: string;
+    nganh: string;
+    namTotNghiep: number;
+    deTaiTotNghiep: string | null;
+    nguoiHuongDan: string | null;
+    graduationType: GraduationType;
 }
 
 export interface SubjectGroup {
-  maNhom: string;
-  tenNhom: string;
+    maNhom: string;
+    tenNhom: string;
 }
 
-
 export interface Subject {
-  maMon: string;
-  subjectGroup: SubjectGroup;
-  tenMon: string;
-  soTietLyThuyet: number;
-  soTietThucHanh: number;
+    maMon: string;
+    subjectGroup: SubjectGroup;
+    tenMon: string;
+    soTietLyThuyet: number;
+    soTietThucHanh: number;
 }
 
 export interface SatisfactionScore {
-  id: number;
-  subject: Subject;
-  hocKy: number;
-  diemHaiLong: number;
+    id: number;
+    subject: Subject;
+    hocKy: number;
+    diemHaiLong: number;
 }
-
 
 export interface Lecturer {
-  id: number;
-  /** OK **/
-  firstName: string;
-  /** OK **/
-  fullName: string;
-  /** OK **/
-  gender: boolean;
-  images: string | null;
-  birthday: string | null;
-  /** OK **/
-  placeOfBirth: string | null;
-  /** OK **/
-  address: string | null;
-  /** OK **/
-  addressTmp: string | null;
-  /** OK **/
-  phone: string | null;
-  /** OK **/
-  email: string | null;
-  /** OK **/
-  emailTdtu: string | null;
-  /** OK **/
-  workplace: string | null;
-  /** OK **/
-  mainPosition: string | null;
-  /** OK **/
-  secondaryPosition: string | null;
-  /** OK **/
-  classificationLecturers: ClassificationLecturer;
-  /** OK **/
-  certificate: Certificate[];
-  trainingProcess: TrainingProcess[];
-  satisfactionScore: SatisfactionScore[];
-  isActive: boolean;
-  createdAt: string;
-  createdBy: string;
-  updatedAt: string | null;
-  updateBy: string | null;
-  deletedFlag: boolean;
-  deletedAt: string | null;
-  deletedBy: string | null;
+    id: number;
+    firstName: string;
+    fullName: string;
+    gender: boolean;
+    images: string | null;
+    birthday: string | null;
+    placeOfBirth: string | null;
+    address: string | null;
+    addressTmp: string | null;
+    phone: string | null;
+    email: string | null;
+    emailTdtu: string | null;
+    workplace: string | null;
+    mainPosition: string | null;
+    secondaryPosition: string | null;
+    classificationLecturers: ClassificationLecturer;
+    certificate: Certificate[];
+    trainingProcess: TrainingProcess[];
+    satisfactionScore: SatisfactionScore[];
+    isActive: boolean;
+    createdAt: string;
+    createdBy: string;
+    updatedAt: string | null;
+    updateBy: string | null;
+    deletedFlag: boolean;
+    deletedAt: string | null;
+    deletedBy: string | null;
 }
 
+export interface LecturerUpdateRequest {
+    lecturerId?: number;
+    lecturerUpdate?: LecturerUpdate;
+    updateBy?: string
+}
+
+export interface LecturerCreateRequest {
+    createBy?: string;
+    lecturerCreate?: LecturerCreate;
+}
+
+export interface LecturerCreate {
+    images: string;
+    firstName: string;
+    fullName: string;
+    classification: string;
+    mainPosition: string;
+    secondaryPosition: string | null;
+    birthday: string;
+    gender: string;
+    placeOfBirth: string;
+    address: string;
+    addressTmp: string;
+    phone: string;
+    email: string;
+    emailTdtu: string;
+    workplace: string;
+}
+
+export interface LecturerUpdate {
+    images: string;
+    firstName: string;
+    fullName: string;
+    classification: string;
+    mainPosition: string | null
+    secondaryPosition: string | null
+    birthday: string;
+    gender: string;
+    placeOfBirth: string;
+    address: string;
+    addressTmp: string;
+    phone: string;
+    email: string;
+    emailTdtu: string;
+    workplace: string;
+}
+
+export interface LecturerDeleteRequest {
+    lecturerIds: string;
+    deleteBy: string
+}
