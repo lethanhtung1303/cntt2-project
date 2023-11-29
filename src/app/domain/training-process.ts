@@ -31,3 +31,8 @@ export interface TrainingProcessUpdateRequest {
     trainingProcessUpdate?: TrainingProcessUpdate;
     updateBy?: string
 }
+
+export interface TrainingProcessDeleteRequest {
+    trainingProcessId: number;
+    deleteBy: string
+}

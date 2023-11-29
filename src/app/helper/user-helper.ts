@@ -8,9 +8,9 @@ export class UserHelper {
     private readonly userLogin: string = '';
 
     constructor(private router: Router) {
-        const user: string | null = sessionStorage.getItem('UserName')
+        const user: string | null = localStorage.getItem('UserName')
         if (user === null) {
-            sessionStorage.clear();
+            localStorage.clear();
             this.router.navigate(['/login']).then(() => window.location.reload());
         } else {
             this.userLogin = user

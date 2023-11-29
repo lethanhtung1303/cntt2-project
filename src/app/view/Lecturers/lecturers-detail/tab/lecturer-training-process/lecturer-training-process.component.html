@@ -183,12 +183,34 @@
                                         pRipple
                                 ></button>
                                 <button
-                                        (click)="goRemove()"
+                                        (click)="goRemove(process.id)"
                                         class="p-button-rounded p-button-warning"
                                         icon="pi pi-trash"
                                         pButton
                                         pRipple
                                 ></button>
+                                <p-toast key="{{process.id}}"></p-toast>
+                                <p-confirmDialog #cd [style]="{ width: '50vw' }" key="{{process.id}}" position="top">
+                                    <ng-template pTemplate="header">
+                                        <h3>Bạn có chắc chắn xoá Quá trình đào tạo tại trường:
+                                            <p>
+                                                {{process.truong}}
+                                            </p>
+                                        </h3>
+
+                                    </ng-template>
+                                    <ng-template pTemplate="message">
+                                        <p>Message Template</p>
+                                    </ng-template>
+                                    <ng-template pTemplate="footer">
+                                        <button (click)="cd.reject()" icon="pi pi-times" label="No" pButton
+                                                type="button"></button>
+                                        <button (click)="cd.accept()" class="p-button-danger"
+                                                icon="pi pi-check"
+                                                label="Yes" pButton
+                                                type="button"></button>
+                                    </ng-template>
+                                </p-confirmDialog>
                             </div>
                         </div>
                         <!-- / .row -->

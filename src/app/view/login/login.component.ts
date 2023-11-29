@@ -50,11 +50,11 @@ export class LoginComponent {
         this.globalErrorService.clearError()
         this.authentication.login(this.loginForm.value).subscribe({
             next: async (data: UserResponse) => {
-                sessionStorage.setItem('UserID', data.results.user.userID ?? '');
-                sessionStorage.setItem('UserName', data.results.user.userName ?? '');
-                sessionStorage.setItem('EmployeeID', data.results.user.employeeID ?? '');
-                sessionStorage.setItem('Password', data.results.user.password ?? '');
-                sessionStorage.setItem('userRoles', data.results.userRoles ?? '');
+                localStorage.setItem('UserID', data.results.user.userID ?? '');
+                localStorage.setItem('UserName', data.results.user.userName ?? '');
+                localStorage.setItem('EmployeeID', data.results.user.employeeID ?? '');
+                localStorage.setItem('Password', data.results.user.password ?? '');
+                localStorage.setItem('userRoles', data.results.userRoles ?? '');
 
                 this.router.navigate(['']).then(() => window.location.reload());
             },

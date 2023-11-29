@@ -1,6 +1,6 @@
 import {Component, Input, OnChanges} from '@angular/core';
 import {GraduationType, Language, Level, TrainingProcess} from "../../../../../domain/lecturer";
-import {MessageService} from "primeng/api";
+import {ConfirmationService, ConfirmEventType, MessageService} from "primeng/api";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Const} from "../../../../../constant/Const";
 import {UserHelper} from "../../../../../helper/user-helper";
@@ -12,7 +12,7 @@ import {ActivatedRoute, Router} from "@angular/router";
     selector: 'app-lecturer-training-process',
     templateUrl: './lecturer-training-process.component.html',
     styleUrls: ['./lecturer-training-process.component.css'],
-    providers: [MessageService]
+    providers: [MessageService, ConfirmationService]
 })
 export class LecturerTrainingProcessComponent implements OnChanges {
     @Input() lecturerId?: number;
@@ -50,7 +50,7 @@ export class LecturerTrainingProcessComponent implements OnChanges {
         ]),
     });
 
-    constructor(private router: Router, private activatedRoute: ActivatedRoute, private userHelper: UserHelper, private trainingProcessService: TrainingProcessService) {
+    constructor(private router: Router, private activatedRoute: ActivatedRoute, private userHelper: UserHelper, private trainingProcessService: TrainingProcessService, private messageService: MessageService, private confirmationService: ConfirmationService) {
         this.userLogin = userHelper.getUserLogin()
     }
 
@@ -83,7 +83,46 @@ export class LecturerTrainingProcessComponent implements OnChanges {
         return languages.sort((a, b) => a.id - b.id).map(language => language.tenNgonNgu).join(' - ');
     }
 
-    goRemove() {
+    goRemove(processId: number) {
+        this.confirmationService.confirm({
+            key: processId.toString(),
+            accept: () => {
+                console.log({
+                    processId: processId,
+                    deleteBy: this.userLogin
+                })
+                this.trainingProcessService.deleteProcess({
+                    trainingProcessId: processId,
+                    deleteBy: this.userLogin
+                }).subscribe({
+                    next: () => {
+                        this.messageService.add({key: processId.toString(), severity: 'error', summary: 'Đã xoá', detail: `Bạn đã xoá Điểm hài lòng: ${processId}`});
+                        this.router.navigate([], {
+                            relativeTo: this.activatedRoute,
+                            queryParams: {tab: 'training-process'},
+                            queryParamsHandling: 'merge',
+                        }).then(() => {
+                            setTimeout(() => {
+                                window.location.reload()
+                            }, 1000);
+                        });
+                    },
+                    error: (error) => {
+                        console.log(error)
+                    },
+                });
+            },
+            reject: (type: ConfirmEventType) => {
+                switch (type) {
+                    case ConfirmEventType.REJECT:
+                        this.messageService.add({key: processId.toString(), severity: 'info', summary: 'Đã huỷ', detail: 'You have cancelled'});
+                        break;
+                    case ConfirmEventType.CANCEL:
+                        this.messageService.add({key: processId.toString(), severity: 'info', summary: 'Đã huỷ', detail: 'You have cancelled'});
+                        break;
+                }
+            }
+        });
     }
 
     goEdit(process: TrainingProcess) {

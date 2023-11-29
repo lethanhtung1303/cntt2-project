@@ -16,7 +16,7 @@ export class SiteNavComponent {
     }
 
     logout() {
-        sessionStorage.clear();
+        localStorage.clear();
         this.router.navigate(['/login']).then(() => window.location.reload());
     }
 }
