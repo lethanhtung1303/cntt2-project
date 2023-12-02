@@ -7,7 +7,7 @@ import {ErrorResponse, GlobalErrorService} from "../../../service/global-error.s
 import {SubjectGroupResponse, SubjectResponse, SubjectService} from "../../../service/subject.service";
 import {Subject, SubjectCreate, SubjectCreateRequest, SubjectGroup} from "../../../domain/subject";
 import {Table} from "primeng/table";
-import {helperExportExcel} from "../../../helper/excel-helper";
+import {saveAsExcelFile} from "../../../helper/excel-helper";
 
 @Component({
   selector: 'app-subjects-list',
@@ -173,8 +173,31 @@ export class SubjectsListComponent {
   }
 
   exportExcel() {
-    console.log(this.subjects)
-    helperExportExcel(this.subjects, 'Subjects')
+    const exportData: {
+      maMon: string,
+      phanLoai: string,
+      tenMon: string,
+      soTiet: number,
+      tenNhom: string
+    }[] = this.subjects.map(subject => {
+      return {
+        maMon: subject.maMon,
+        phanLoai: subject.phanLoai,
+        tenMon: subject.tenMon,
+        soTiet: subject.soTiet,
+        tenNhom: subject.subjectGroup.tenNhom
+      };
+    });
+
+    import('xlsx').then((xlsx) => {
+      const worksheet = xlsx.utils.json_to_sheet(exportData);
+      const workbook = {Sheets: {data: worksheet}, SheetNames: ['data']};
+      const excelBuffer: any = xlsx.write(workbook, {
+        bookType: 'xlsx',
+        type: 'array',
+      });
+      saveAsExcelFile(excelBuffer, 'Subjects');
+    });
   }
 
   confirmDelete(subjectId: string) {

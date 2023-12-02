@@ -7,7 +7,7 @@ import {Router} from "@angular/router";
 import {UserHelper} from "../../../helper/user-helper";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ErrorResponse, GlobalErrorService} from "../../../service/global-error.service";
-import {helperExportExcel} from "../../../helper/excel-helper";
+import {saveAsExcelFile} from "../../../helper/excel-helper";
 
 @Component({
   selector: 'app-lecturers-list',
@@ -165,7 +165,15 @@ export class LecturersListComponent {
                                                                                     ...lecturerWithoutDetails
                                                                                   }) => lecturerWithoutDetails);
 
-    helperExportExcel(lecturersWithoutDetails, 'Lecturers')
+    import('xlsx').then((xlsx) => {
+      const worksheet = xlsx.utils.json_to_sheet(lecturersWithoutDetails);
+      const workbook = {Sheets: {data: worksheet}, SheetNames: ['data']};
+      const excelBuffer: any = xlsx.write(workbook, {
+        bookType: 'xlsx',
+        type: 'array',
+      });
+      saveAsExcelFile(excelBuffer, 'Lecturers');
+    });
   }
 
   confirmDelete(idLecturer: number) {
