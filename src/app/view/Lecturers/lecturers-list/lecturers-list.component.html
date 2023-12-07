@@ -1,294 +1,294 @@
 <div class="row align-items-center my-3">
-    <div class="col">
-        <h2 class="page-title">Danh sách Giảng viên</h2>
-    </div>
+  <div class="col">
+    <h2 class="page-title">Danh sách Giảng viên</h2>
+  </div>
+  <div class="col-auto">
     <div class="col-auto">
-        <div class="col-auto">
-            <button
-                    (click)="showDialog()"
-                    class="btn btn-primary"
-                    type="button"
-            >
-                <span class="fe fe-plus fe-16 mr-2"></span>Thêm mới
-            </button>
-            <p-dialog (onHide)="onCancel()" [(visible)]="visible" [draggable]="false" [modal]="true" [resizable]="false"
-                      [style]="{ width: '50vw' }"
-                      header="Thêm mới Giảng viên">
-                <form (ngSubmit)="onSubmit()" [formGroup]="lecturerCreateForm">
-                    <div class="card shadow mb-4">
-                        <div class="card-body">
-                            <div *ngIf="this.globalErrorService.getGlobalError().errorCode" class="mx-auto">
-                                <h6 class="text-danger">{{this.globalErrorService.getGlobalError().errMessage}}</h6>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group mb-3">
-                                        <label for="first-name">Họ</label>
-                                        <input [class.is-invalid]="firstName?.invalid && (firstName?.dirty || firstName?.touched)"
-                                               class="form-control form-control-lg" formControlName="firstName"
-                                               id="first-name"
-                                               placeholder="First Name" required type="text">
-                                        <div *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)"
-                                             class="invalid-feedback">
-                                            <div *ngIf="firstName?.errors?.['required']">
-                                                First Name is required.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group mb-3">
-                                        <label for="full-Name">Tên</label>
-                                        <input [class.is-invalid]="fullName?.invalid && (fullName?.dirty || fullName?.touched)"
-                                               class="form-control form-control-lg" formControlName="fullName"
-                                               id="full-Name"
-                                               placeholder="Full Name"
-                                               required type="text">
-                                        <div *ngIf="fullName?.invalid && (fullName?.dirty || fullName?.touched)"
-                                             class="invalid-feedback">
-                                            <div *ngIf="fullName?.errors?.['required']">
-                                                Full Name is required.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group mb-3">
-                                        <label for="classification">Phân loại giản viên</label>
-                                        <select
-                                                [class.is-invalid]="classification?.invalid && (classification?.dirty || classification?.touched)"
-                                                class="form-control form-control-lg"
-                                                formControlName="classification"
-                                                id="classification"
-                                        >
-                                            <option value=0>Giảng viên thỉnh giảng</option>
-                                            <option value=1>Giảng viên cơ hữu</option>
-                                        </select>
-                                        <div *ngIf="classification?.invalid && (classification?.dirty || classification?.touched)"
-                                             class="invalid-feedback">
-                                            <div *ngIf="classification?.errors?.['required']">
-                                                Classification is required.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group mb-3">
-                                        <label for="email-tdtu">Email TDTU</label>
-                                        <input [class.is-invalid]="emailTdtu?.invalid && (emailTdtu?.dirty || emailTdtu?.touched)"
-                                               class="form-control form-control-lg" formControlName="emailTdtu"
-                                               id="email-tdtu"
-                                               placeholder="Email TDTU"
-                                               required type="text">
-                                        <div *ngIf="emailTdtu?.invalid && (emailTdtu?.dirty || emailTdtu?.touched)"
-                                             class="invalid-feedback">
-                                            <div *ngIf="emailTdtu?.errors?.['required']">
-                                                Email TDTU is required.
-                                            </div>
-                                            <div *ngIf="emailTdtu?.errors?.['pattern']">
-                                                Email format is wrong.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group mb-3">
-                                        <label for="main-position">Vị trí chính</label>
-                                        <input [class.is-invalid]="mainPosition?.invalid && (mainPosition?.dirty || mainPosition?.touched)"
-                                               class="form-control form-control-lg" formControlName="mainPosition"
-                                               id="main-position"
-                                               placeholder="Main Position" type="text">
-                                        <div *ngIf="mainPosition?.invalid && (mainPosition?.dirty || mainPosition?.touched)"
-                                             class="invalid-feedback">
-                                            <div *ngIf="mainPosition?.errors?.['required']">
-                                                Main Position is required.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group mb-3">
-                                        <label for="secondary-position">Vị trí phụ</label>
-                                        <input
-                                                class="form-control form-control-lg" formControlName="secondaryPosition"
-                                                id="secondary-position"
-                                                placeholder="Secondary Position"
-                                                type="text">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group mb-3">
-                                        <label for="birthday">Ngày sinh</label>
-                                        <input [class.is-invalid]="birthday?.invalid && (birthday?.dirty || birthday?.touched)"
-                                               class="form-control form-control-lg" formControlName="birthday"
-                                               id="birthday"
-                                               placeholder="Birthday"
-                                               required type="date">
-                                        <div *ngIf="birthday?.invalid && (birthday?.dirty || birthday?.touched)"
-                                             class="invalid-feedback">
-                                            <div *ngIf="birthday?.errors?.['required']">
-                                                Birthday is required.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group mb-3">
-                                        <label for="gender">Giới tính</label>
-                                        <select [class.is-invalid]="gender?.invalid && (gender?.dirty || gender?.touched)"
-                                                class="form-control form-control-lg"
-                                                formControlName="gender"
-                                                id="gender"
-                                        >
-                                            <option value=true>Nam</option>
-                                            <option value=false>Nữ</option>
-                                        </select>
-                                        <div *ngIf="gender?.invalid && (gender?.dirty || gender?.touched)"
-                                             class="invalid-feedback">
-                                            <div *ngIf="gender?.errors?.['required']">
-                                                Gender is required.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group mb-3">
-                                        <label for="place-of-birth">Nơi sinh</label>
-                                        <input
-                                                [class.is-invalid]="placeOfBirth?.invalid && (placeOfBirth?.dirty || placeOfBirth?.touched)"
-                                                class="form-control form-control-lg" formControlName="placeOfBirth"
-                                                id="place-of-birth"
-                                                placeholder="Place Of Birth"
-                                                required type="text">
-                                        <div *ngIf="placeOfBirth?.invalid && (placeOfBirth?.dirty || placeOfBirth?.touched)"
-                                             class="invalid-feedback">
-                                            <div *ngIf="placeOfBirth?.errors?.['required']">
-                                                Place Of Birth is required.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group mb-3">
-                                        <label for="phone">Điện thoại</label>
-                                        <input [class.is-invalid]="phone?.invalid && (phone?.dirty || phone?.touched)"
-                                               class="form-control form-control-lg" formControlName="phone" id="phone"
-                                               placeholder="Phone"
-                                               required type="text">
-                                        <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)"
-                                             class="invalid-feedback">
-                                            <div *ngIf="phone?.errors?.['required']">
-                                                Phone is required.
-                                            </div>
-                                            <div *ngIf="phone?.errors?.['pattern']">
-                                                Phone format is wrong.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group mb-3">
-                                        <label for="workplace">Nơi làm việc</label>
-                                        <input [class.is-invalid]="workplace?.invalid && (workplace?.dirty || workplace?.touched)"
-                                               class="form-control form-control-lg" formControlName="workplace"
-                                               id="workplace"
-                                               placeholder="Workplace"
-                                               required type="text">
-                                        <div *ngIf="workplace?.invalid && (workplace?.dirty || workplace?.touched)"
-                                             class="invalid-feedback">
-                                            <div *ngIf="workplace?.errors?.['required']">
-                                                Workplace is required.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group mb-3">
-                                        <label for="email">Email</label>
-                                        <input [class.is-invalid]="email?.invalid && (email?.dirty || email?.touched)"
-                                               class="form-control form-control-lg" formControlName="email" id="email"
-                                               placeholder="Email"
-                                               required type="text">
-                                        <div *ngIf="email?.invalid && (email?.dirty || email?.touched)"
-                                             class="invalid-feedback">
-                                            <div *ngIf="email?.errors?.['required']">
-                                                Email is required.
-                                            </div>
-                                            <div *ngIf="email?.errors?.['pattern']">
-                                                Email format is wrong.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group mb-3">
-                                        <label for="address">Địa chỉ</label>
-                                        <input
-                                                [class.is-invalid]="address?.invalid && (address?.dirty || address?.touched)"
-                                                class="form-control form-control-lg" formControlName="address"
-                                                id="address"
-                                                placeholder="Address"
-                                                required type="text">
-                                        <div *ngIf="address?.invalid && (address?.dirty || address?.touched)"
-                                             class="invalid-feedback">
-                                            <div *ngIf="address?.errors?.['required']">
-                                                Address is required.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group mb-3">
-                                        <label for="address-tmp">Tạm trú</label>
-                                        <input [class.is-invalid]="addressTmp?.invalid && (addressTmp?.dirty || addressTmp?.touched)"
-                                               class="form-control form-control-lg" formControlName="addressTmp"
-                                               id="address-tmp"
-                                               placeholder="Address Tmp"
-                                               required type="text">
-                                        <div *ngIf="addressTmp?.invalid && (addressTmp?.dirty || addressTmp?.touched)"
-                                             class="invalid-feedback">
-                                            <div *ngIf="addressTmp?.errors?.['required']">
-                                                Address Tmp is required.
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex justify-content-end flex-wrap ">
-                                <button (click)="onCancel()" class="btn btn-outline-dark mr-2" type="button">Cancel
-                                </button>
-                                <button [disabled]="!lecturerCreateForm.valid" class="btn btn-primary"
-                                        type="submit">Save
-                                </button>
-                            </div>
-                        </div>
+      <button
+        (click)="showDialog()"
+        class="btn btn-primary"
+        type="button"
+      >
+        <span class="fe fe-plus fe-16 mr-2"></span>Thêm mới
+      </button>
+      <p-dialog (onHide)="onCancel()" [(visible)]="visible" [draggable]="false" [modal]="true" [resizable]="false"
+                [style]="{ width: '50vw' }"
+                header="Thêm mới Giảng viên">
+        <form (ngSubmit)="onSubmit()" [formGroup]="lecturerCreateForm">
+          <div class="card shadow mb-4">
+            <div class="card-body">
+              <div *ngIf="this.globalErrorService.getGlobalError().errorCode" class="mx-auto">
+                <h6 class="text-danger">{{this.globalErrorService.getGlobalError().errMessage}}</h6>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group mb-3">
+                    <label for="first-name">Họ</label>
+                    <input [class.is-invalid]="firstName?.invalid && (firstName?.dirty || firstName?.touched)"
+                           class="form-control form-control-lg" formControlName="firstName"
+                           id="first-name"
+                           placeholder="First Name" required type="text">
+                    <div *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)"
+                         class="invalid-feedback">
+                      <div *ngIf="firstName?.errors?.['required']">
+                        First Name is required.
+                      </div>
                     </div>
-                </form>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-3">
+                    <label for="full-Name">Tên</label>
+                    <input [class.is-invalid]="fullName?.invalid && (fullName?.dirty || fullName?.touched)"
+                           class="form-control form-control-lg" formControlName="fullName"
+                           id="full-Name"
+                           placeholder="Full Name"
+                           required type="text">
+                    <div *ngIf="fullName?.invalid && (fullName?.dirty || fullName?.touched)"
+                         class="invalid-feedback">
+                      <div *ngIf="fullName?.errors?.['required']">
+                        Full Name is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group mb-3">
+                    <label for="classification">Phân loại giản viên</label>
+                    <select
+                      [class.is-invalid]="classification?.invalid && (classification?.dirty || classification?.touched)"
+                      class="form-control form-control-lg"
+                      formControlName="classification"
+                      id="classification"
+                    >
+                      <option value=0>Giảng viên thỉnh giảng</option>
+                      <option value=1>Giảng viên cơ hữu</option>
+                    </select>
+                    <div *ngIf="classification?.invalid && (classification?.dirty || classification?.touched)"
+                         class="invalid-feedback">
+                      <div *ngIf="classification?.errors?.['required']">
+                        Classification is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-3">
+                    <label for="email-tdtu">Email TDTU</label>
+                    <input [class.is-invalid]="emailTdtu?.invalid && (emailTdtu?.dirty || emailTdtu?.touched)"
+                           class="form-control form-control-lg" formControlName="emailTdtu"
+                           id="email-tdtu"
+                           placeholder="Email TDTU"
+                           required type="text">
+                    <div *ngIf="emailTdtu?.invalid && (emailTdtu?.dirty || emailTdtu?.touched)"
+                         class="invalid-feedback">
+                      <div *ngIf="emailTdtu?.errors?.['required']">
+                        Email TDTU is required.
+                      </div>
+                      <div *ngIf="emailTdtu?.errors?.['pattern']">
+                        Email format is wrong.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group mb-3">
+                    <label for="main-position">Vị trí chính</label>
+                    <input [class.is-invalid]="mainPosition?.invalid && (mainPosition?.dirty || mainPosition?.touched)"
+                           class="form-control form-control-lg" formControlName="mainPosition"
+                           id="main-position"
+                           placeholder="Main Position" type="text">
+                    <div *ngIf="mainPosition?.invalid && (mainPosition?.dirty || mainPosition?.touched)"
+                         class="invalid-feedback">
+                      <div *ngIf="mainPosition?.errors?.['required']">
+                        Main Position is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-            </p-dialog>
-        </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-3">
+                    <label for="secondary-position">Vị trí phụ</label>
+                    <input
+                      class="form-control form-control-lg" formControlName="secondaryPosition"
+                      id="secondary-position"
+                      placeholder="Secondary Position"
+                      type="text">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group mb-3">
+                    <label for="birthday">Ngày sinh</label>
+                    <input [class.is-invalid]="birthday?.invalid && (birthday?.dirty || birthday?.touched)"
+                           class="form-control form-control-lg" formControlName="birthday"
+                           id="birthday"
+                           placeholder="Birthday"
+                           required type="date">
+                    <div *ngIf="birthday?.invalid && (birthday?.dirty || birthday?.touched)"
+                         class="invalid-feedback">
+                      <div *ngIf="birthday?.errors?.['required']">
+                        Birthday is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group mb-3">
+                    <label for="gender">Giới tính</label>
+                    <select [class.is-invalid]="gender?.invalid && (gender?.dirty || gender?.touched)"
+                            class="form-control form-control-lg"
+                            formControlName="gender"
+                            id="gender"
+                    >
+                      <option value=true>Nam</option>
+                      <option value=false>Nữ</option>
+                    </select>
+                    <div *ngIf="gender?.invalid && (gender?.dirty || gender?.touched)"
+                         class="invalid-feedback">
+                      <div *ngIf="gender?.errors?.['required']">
+                        Gender is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-3">
+                    <label for="place-of-birth">Nơi sinh</label>
+                    <input
+                      [class.is-invalid]="placeOfBirth?.invalid && (placeOfBirth?.dirty || placeOfBirth?.touched)"
+                      class="form-control form-control-lg" formControlName="placeOfBirth"
+                      id="place-of-birth"
+                      placeholder="Place Of Birth"
+                      required type="text">
+                    <div *ngIf="placeOfBirth?.invalid && (placeOfBirth?.dirty || placeOfBirth?.touched)"
+                         class="invalid-feedback">
+                      <div *ngIf="placeOfBirth?.errors?.['required']">
+                        Place Of Birth is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group mb-3">
+                    <label for="phone">Điện thoại</label>
+                    <input [class.is-invalid]="phone?.invalid && (phone?.dirty || phone?.touched)"
+                           class="form-control form-control-lg" formControlName="phone" id="phone"
+                           placeholder="Phone"
+                           required type="text">
+                    <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)"
+                         class="invalid-feedback">
+                      <div *ngIf="phone?.errors?.['required']">
+                        Phone is required.
+                      </div>
+                      <div *ngIf="phone?.errors?.['pattern']">
+                        Phone format is wrong.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group mb-3">
+                    <label for="workplace">Nơi làm việc</label>
+                    <input [class.is-invalid]="workplace?.invalid && (workplace?.dirty || workplace?.touched)"
+                           class="form-control form-control-lg" formControlName="workplace"
+                           id="workplace"
+                           placeholder="Workplace"
+                           required type="text">
+                    <div *ngIf="workplace?.invalid && (workplace?.dirty || workplace?.touched)"
+                         class="invalid-feedback">
+                      <div *ngIf="workplace?.errors?.['required']">
+                        Workplace is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-3">
+                    <label for="email">Email</label>
+                    <input [class.is-invalid]="email?.invalid && (email?.dirty || email?.touched)"
+                           class="form-control form-control-lg" formControlName="email" id="email"
+                           placeholder="Email"
+                           required type="text">
+                    <div *ngIf="email?.invalid && (email?.dirty || email?.touched)"
+                         class="invalid-feedback">
+                      <div *ngIf="email?.errors?.['required']">
+                        Email is required.
+                      </div>
+                      <div *ngIf="email?.errors?.['pattern']">
+                        Email format is wrong.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group mb-3">
+                    <label for="address">Địa chỉ</label>
+                    <input
+                      [class.is-invalid]="address?.invalid && (address?.dirty || address?.touched)"
+                      class="form-control form-control-lg" formControlName="address"
+                      id="address"
+                      placeholder="Address"
+                      required type="text">
+                    <div *ngIf="address?.invalid && (address?.dirty || address?.touched)"
+                         class="invalid-feedback">
+                      <div *ngIf="address?.errors?.['required']">
+                        Address is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-3">
+                    <label for="address-tmp">Tạm trú</label>
+                    <input [class.is-invalid]="addressTmp?.invalid && (addressTmp?.dirty || addressTmp?.touched)"
+                           class="form-control form-control-lg" formControlName="addressTmp"
+                           id="address-tmp"
+                           placeholder="Address Tmp"
+                           required type="text">
+                    <div *ngIf="addressTmp?.invalid && (addressTmp?.dirty || addressTmp?.touched)"
+                         class="invalid-feedback">
+                      <div *ngIf="addressTmp?.errors?.['required']">
+                        Address Tmp is required.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex justify-content-end flex-wrap ">
+                <button (click)="onCancel()" class="btn btn-outline-dark mr-2" type="button">Cancel
+                </button>
+                <button [disabled]="!lecturerCreateForm.valid" class="btn btn-primary"
+                        type="submit">Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </p-dialog>
     </div>
+  </div>
 </div>
 <div class="row">
-    <!-- Striped rows -->
-    <div class="col-md-12">
-        <div class="card shadow">
-            <div class="card-body">
-                <p-table
-                    #dtLecturer
-                    [(selection)]="selectedLecturers"
-                    [globalFilterFields]="[
+  <!-- Striped rows -->
+  <div class="col-md-12">
+    <div class="card shadow">
+      <div class="card-body">
+        <p-table
+          #dtLecturer
+          [(selection)]="selectedLecturers"
+          [globalFilterFields]="[
                                             'firstName',
                                             'fullName',
                                             'classificationLecturers.phanLoai',
@@ -299,280 +299,280 @@
                                             'addressTmp',
                                             'workplace'
                                           ]"
-                    [loading]="loading"
-                    [paginator]="true"
-                    [rowsPerPageOptions]="[5, 10, 25, 50]"
-                    [rows]="5"
-                    [showCurrentPageReport]="true"
-                    [tableStyle]="{ 'min-width': '85rem' }"
-                    [value]="lecturers"
-                    currentPageReportTemplate="{first} - {last} of {totalRecords}"
-                    dataKey="id"
-                >
-                    <ng-template pTemplate="caption">
-                        <div class="flex  flex-row flex-wrap">
-                            <button
-                                    (click)="clear(dtLecturer)"
-                                    class="p-button-outlined mr-2"
-                                    icon="pi pi-filter-slash"
-                                    label="Clear"
-                                    pButton
-                                    size="small"
-                            ></button>
-                            <button
-                                    (click)="deleteSelectedLecturers()"
-                                    [disabled]="!selectedLecturers || !selectedLecturers.length"
-                                    class="p-button-danger"
-                                    icon="pi pi-trash"
-                                    label="Delete"
-                                    pButton
-                                    pRipple
-                                    size="small"
-                            ></button>
+          [loading]="loading"
+          [paginator]="true"
+          [rowsPerPageOptions]="[5, 10, 25, 50]"
+          [rows]="5"
+          [showCurrentPageReport]="true"
+          [tableStyle]="{ 'min-width': '85rem' }"
+          [value]="lecturers"
+          currentPageReportTemplate="{first} - {last} of {totalRecords}"
+          dataKey="id"
+        >
+          <ng-template pTemplate="caption">
+            <div class="flex  flex-row flex-wrap">
+              <button
+                (click)="clear(dtLecturer)"
+                class="p-button-outlined mr-2"
+                icon="pi pi-filter-slash"
+                label="Clear"
+                pButton
+                size="small"
+              ></button>
+              <button
+                (click)="deleteSelectedLecturers()"
+                [disabled]="!selectedLecturers || !selectedLecturers.length"
+                class="p-button-danger"
+                icon="pi pi-trash"
+                label="Delete"
+                pButton
+                pRipple
+                size="small"
+              ></button>
 
-                            <p-toast key="deleteSelectedLecturers"></p-toast>
-                            <p-confirmDialog #cd [style]="{ width: '50vw' }" key="deleteSelectedLecturers"
-                                             position="top">
-                                <ng-template pTemplate="header">
-                                    <h3>Chắc chắn xoá TẤT CẢ Giảng viên đã chọn?</h3>
-                                </ng-template>
-                                <ng-template pTemplate="message">
-                                    <p>Message Template</p>
-                                </ng-template>
-                                <ng-template pTemplate="footer">
-                                    <button (click)="cd.reject()" icon="pi pi-times" label="No" pButton
-                                            type="button"></button>
-                                    <button (click)="cd.accept()" class="p-button-danger"
-                                            icon="pi pi-check"
-                                            label="Yes" pButton
-                                            type="button"></button>
-                                </ng-template>
-                            </p-confirmDialog>
+              <p-toast key="deleteSelectedLecturers"></p-toast>
+              <p-confirmDialog #cd [style]="{ width: '50vw' }" key="deleteSelectedLecturers"
+                               position="top">
+                <ng-template pTemplate="header">
+                  <h3>Chắc chắn xoá TẤT CẢ Giảng viên đã chọn?</h3>
+                </ng-template>
+                <ng-template pTemplate="message">
+                  <p>Message Template</p>
+                </ng-template>
+                <ng-template pTemplate="footer">
+                  <button (click)="cd.reject()" icon="pi pi-times" label="No" pButton
+                          type="button"></button>
+                  <button (click)="cd.accept()" class="p-button-danger"
+                          icon="pi pi-check"
+                          label="Yes" pButton
+                          type="button"></button>
+                </ng-template>
+              </p-confirmDialog>
 
-                            <div class="ml-auto">
+              <div class="ml-auto">
                 <span class="p-input-icon-left mr-2">
                 <i class="pi pi-search"></i>
                 <input
-                        (input)="dtLecturer.filterGlobal($any($event.target).value, 'contains')"
-                        pInputText
-                        placeholder="Search keyword"
-                        type="text"/>
+                  (input)="dtLecturer.filterGlobal($any($event.target).value, 'contains')"
+                  pInputText
+                  placeholder="Search keyword"
+                  type="text"/>
               </span>
-                                <button
-                                        (click)="exportExcel()"
-                                        class="p-button-success"
-                                        icon="pi pi-file-excel"
-                                        pButton
-                                        pRipple
-                                        pTooltip="XLS"
-                                        size="small"
-                                        tooltipPosition="bottom"
-                                        type="button"
-                                ></button>
-                            </div>
-                        </div>
-                    </ng-template>
-                    <ng-template pTemplate="header">
-                        <tr class="text-nowrap">
-                            <th>
-                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
-                            </th>
-                            <th pSortableColumn="fullName">
-                                Giảng viên
-                                <p-sortIcon field="fullName"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="gender">
-                                Giới tính
-                                <p-sortIcon field="gender"></p-sortIcon>
-                            </th>
-                            <th pSortableColumn="mainPosition">
-                                Vị trí làm việc
-                                <p-sortIcon field="mainPosition"></p-sortIcon>
-                            </th>
-                            <th>
-                                Thông tin liên hệ
-                            </th>
+                <button
+                  (click)="exportExcel()"
+                  class="p-button-success"
+                  icon="pi pi-file-excel"
+                  pButton
+                  pRipple
+                  pTooltip="XLS"
+                  size="small"
+                  tooltipPosition="bottom"
+                  type="button"
+                ></button>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr class="text-nowrap">
+              <th>
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+              </th>
+              <th pSortableColumn="fullName">
+                Giảng viên
+                <p-sortIcon field="fullName"></p-sortIcon>
+              </th>
+              <th pSortableColumn="gender">
+                Giới tính
+                <p-sortIcon field="gender"></p-sortIcon>
+              </th>
+              <th pSortableColumn="mainPosition">
+                Vị trí làm việc
+                <p-sortIcon field="mainPosition"></p-sortIcon>
+              </th>
+              <th>
+                Thông tin liên hệ
+              </th>
 
-                            <th>
-                                Thông tin cá nhân
-                            </th>
+              <th>
+                Thông tin cá nhân
+              </th>
 
-                            <th>
-                                Thông tin cá lạc
-                            </th>
+              <th>
+                Thông tin cá lạc
+              </th>
 
-                            <th pSortableColumn="workplace">
-                                Nơi làm việc
-                                <p-sortIcon field="workplace"></p-sortIcon>
-                            </th>
-                            <th>#</th>
-                        </tr>
-                    </ng-template>
-                    <ng-template let-lecturer pTemplate="body">
-                        <tr class="text-nowrap">
-                            <td>
-                                <p-tableCheckbox [value]="lecturer"></p-tableCheckbox>
-                            </td>
+              <th pSortableColumn="workplace">
+                Nơi làm việc
+                <p-sortIcon field="workplace"></p-sortIcon>
+              </th>
+              <th>#</th>
+            </tr>
+          </ng-template>
+          <ng-template let-lecturer pTemplate="body">
+            <tr class="text-nowrap">
+              <td>
+                <p-tableCheckbox [value]="lecturer"></p-tableCheckbox>
+              </td>
 
-                            <td>
+              <td>
 
-                                <div>
-                                    <img alt="..."
-                                         src="{{ lecturer.images }}"
-                                         style="vertical-align: middle" width="32"/>
-                                    <a [queryParams]="{tab: 'info'}" ariaCurrentWhenActive="page"
-                                       class="ml-1 vertical-align-middle" queryParamsHandling="merge"
-                                       routerLink="/lecturers/{{lecturer.id}}" routerLinkActive="active">
-                                        {{ this.generateLevel(lecturer.trainingProcess) }} {{ lecturer.firstName }}
-                                        {{lecturer.fullName }}
-                                    </a>
-                                </div>
+                <div>
+                  <img alt="..."
+                       src="{{ lecturer.images }}"
+                       style="vertical-align: middle" width="32"/>
+                  <a [queryParams]="{tab: 'info'}" ariaCurrentWhenActive="page"
+                     class="ml-1 vertical-align-middle" queryParamsHandling="merge"
+                     routerLink="/lecturers/{{lecturer.id}}" routerLinkActive="active">
+                    {{ this.generateLevel(lecturer.trainingProcess) }} {{ lecturer.firstName }}
+                    {{lecturer.fullName }}
+                  </a>
+                </div>
 
-                                <div class="ml-5">
-                                    <p *ngIf="lecturer.classificationLecturers.maLoai == 1; then
+                <div class="ml-5">
+                  <p *ngIf="lecturer.classificationLecturers.maLoai == 1; then
                                     thenClassificationBlock; else elseClassificationBlock"
-                                       class="small">
-                                    </p>
-                                </div>
+                     class="small">
+                  </p>
+                </div>
 
-                                <ng-template #thenClassificationBlock>
+                <ng-template #thenClassificationBlock>
                                    <span class="badge badge-pill badge-success">
                                         {{lecturer.classificationLecturers.phanLoai}}
                                     </span>
-                                </ng-template>
-                                <ng-template #elseClassificationBlock>
+                </ng-template>
+                <ng-template #elseClassificationBlock>
                                     <span class="badge badge-pill badge-warning">
                                         {{lecturer.classificationLecturers.phanLoai}}
                                     </span>
-                                </ng-template>
-                            </td>
+                </ng-template>
+              </td>
 
-                            <td>
-                                <div *ngIf="lecturer.gender == true;then thenBlock;else elseBlock"></div>
-                                <ng-template #thenBlock>
-                                    <div>
-                                        <i class="fa fa-male fe-14" style="color: blue; vertical-align: middle"></i>
-                                        <span class="ml-1 vertical-align-middle">Nam</span>
-                                    </div>
-                                </ng-template>
-                                <ng-template #elseBlock>
-                                    <div>
-                                        <i class="fa fa-female fe-14" style="color: red; vertical-align: middle"></i>
-                                        <span class="ml-1 vertical-align-middle">Nữ</span>
-                                    </div>
-                                </ng-template>
-                            </td>
+              <td>
+                <div *ngIf="lecturer.gender == true;then thenBlock;else elseBlock"></div>
+                <ng-template #thenBlock>
+                  <div>
+                    <i class="fa fa-male fe-14" style="color: blue; vertical-align: middle"></i>
+                    <span class="ml-1 vertical-align-middle">Nam</span>
+                  </div>
+                </ng-template>
+                <ng-template #elseBlock>
+                  <div>
+                    <i class="fa fa-female fe-14" style="color: red; vertical-align: middle"></i>
+                    <span class="ml-1 vertical-align-middle">Nữ</span>
+                  </div>
+                </ng-template>
+              </td>
 
-                            <td>
-                                <div>
-                                    <i class="fa fa-sitemap fe-14" style="color: darkgray; vertical-align: middle"></i>
-                                    <span class="ml-1 vertical-align-middle"> {{ lecturer.mainPosition }}</span>
-                                </div>
+              <td>
+                <div>
+                  <i class="fa fa-sitemap fe-14" style="color: darkgray; vertical-align: middle"></i>
+                  <span class="ml-1 vertical-align-middle"> {{ lecturer.mainPosition }}</span>
+                </div>
 
-                                <div *ngIf="lecturer.secondaryPosition && lecturer.secondaryPosition != ''">
-                                    <i class="fa fa-newspaper-o fe-14"
-                                       style="color: darkgray; vertical-align: middle"></i>
-                                    <span class="ml-1 vertical-align-middle"> {{ lecturer.secondaryPosition }}</span>
-                                </div>
-                            </td>
+                <div *ngIf="lecturer.secondaryPosition && lecturer.secondaryPosition != ''">
+                  <i class="fa fa-newspaper-o fe-14"
+                     style="color: darkgray; vertical-align: middle"></i>
+                  <span class="ml-1 vertical-align-middle"> {{ lecturer.secondaryPosition }}</span>
+                </div>
+              </td>
 
-                            <td>
-                                <div>
-                                    <i class="fa fa-envelope fe-14" style="color: darkgray; vertical-align: middle"></i>
-                                    <span class="ml-1 vertical-align-middle"> {{ lecturer.emailTdtu }}</span>
-                                </div>
+              <td>
+                <div>
+                  <i class="fa fa-envelope fe-14" style="color: darkgray; vertical-align: middle"></i>
+                  <span class="ml-1 vertical-align-middle"> {{ lecturer.emailTdtu }}</span>
+                </div>
 
-                                <div *ngIf="lecturer.email && lecturer.email != ''">
-                                    <i class="fa fa-inbox fe-14" style="color: darkgray; vertical-align: middle"></i>
-                                    <span class="ml-1 vertical-align-middle"> {{ lecturer.email }}</span>
-                                </div>
-                            </td>
+                <div *ngIf="lecturer.email && lecturer.email != ''">
+                  <i class="fa fa-inbox fe-14" style="color: darkgray; vertical-align: middle"></i>
+                  <span class="ml-1 vertical-align-middle"> {{ lecturer.email }}</span>
+                </div>
+              </td>
 
-                            <td>
-                                <div>
-                                    <i class="fa fa-birthday-cake fe-14"
-                                       style="color: darkgray; vertical-align: middle"></i>
-                                    <span class="ml-1 vertical-align-middle"> {{ lecturer.birthday | date : "dd/MM/YYYY" }}</span>
-                                </div>
+              <td>
+                <div>
+                  <i class="fa fa-birthday-cake fe-14"
+                     style="color: darkgray; vertical-align: middle"></i>
+                  <span class="ml-1 vertical-align-middle"> {{ lecturer.birthday | date : "dd/MM/YYYY" }}</span>
+                </div>
 
-                                <div *ngIf="lecturer.phone && lecturer.phone != ''">
-                                    <i class="fa fa-phone fe-14" style="color: darkgray; vertical-align: middle"></i>
-                                    <span class="ml-1 vertical-align-middle"> {{ lecturer.phone }}</span>
-                                </div>
-                            </td>
+                <div *ngIf="lecturer.phone && lecturer.phone != ''">
+                  <i class="fa fa-phone fe-14" style="color: darkgray; vertical-align: middle"></i>
+                  <span class="ml-1 vertical-align-middle"> {{ lecturer.phone }}</span>
+                </div>
+              </td>
 
-                            <td>
-                                <div *ngIf="lecturer.placeOfBirth && lecturer.placeOfBirth != ''">
-                                    <i class="fa fa-location-arrow fe-14"
-                                       style="color: darkgray; vertical-align: middle"></i>
-                                    <span class="ml-1 vertical-align-middle"> {{ lecturer.placeOfBirth }}</span>
-                                </div>
+              <td>
+                <div *ngIf="lecturer.placeOfBirth && lecturer.placeOfBirth != ''">
+                  <i class="fa fa-location-arrow fe-14"
+                     style="color: darkgray; vertical-align: middle"></i>
+                  <span class="ml-1 vertical-align-middle"> {{ lecturer.placeOfBirth }}</span>
+                </div>
 
-                                <div *ngIf="lecturer.addressTmp && lecturer.addressTmp != ''">
-                                    <i class="fa fa-map-marker fe-14"
-                                       style="color: darkgray; vertical-align: middle"></i>
-                                    <span class="ml-1 vertical-align-middle"> {{ lecturer.addressTmp }}</span>
-                                </div>
-                            </td>
+                <div *ngIf="lecturer.addressTmp && lecturer.addressTmp != ''">
+                  <i class="fa fa-map-marker fe-14"
+                     style="color: darkgray; vertical-align: middle"></i>
+                  <span class="ml-1 vertical-align-middle"> {{ lecturer.addressTmp }}</span>
+                </div>
+              </td>
 
-                            <td>
-                                <div>
-                                    <i class="fa fa-building fe-14" style="color: darkgray; vertical-align: middle"></i>
-                                    <span class="ml-1 vertical-align-middle"> {{ lecturer.workplace }}</span>
-                                </div>
-                            </td>
+              <td>
+                <div>
+                  <i class="fa fa-building fe-14" style="color: darkgray; vertical-align: middle"></i>
+                  <span class="ml-1 vertical-align-middle"> {{ lecturer.workplace }}</span>
+                </div>
+              </td>
 
-                            <td>
-                                <button
-                                        [queryParams]="{ tab:'info' }"
-                                        [routerLink]="[lecturer.id]"
-                                        class="p-button-rounded p-button-success mr-2"
-                                        icon="pi pi-pencil"
-                                        pButton
-                                        pRipple
-                                ></button>
+              <td>
+                <button
+                  [queryParams]="{ tab:'info' }"
+                  [routerLink]="[lecturer.id]"
+                  class="p-button-rounded p-button-success mr-2"
+                  icon="pi pi-pencil"
+                  pButton
+                  pRipple
+                ></button>
 
-                                <p-toast key="{{lecturer.id}}"></p-toast>
-                                <p-confirmDialog #cd [style]="{ width: '50vw' }" key="{{lecturer.id}}" position="top">
-                                    <ng-template pTemplate="header">
-                                        <h3>Chắc chắn xoá Giảng viên:
-                                            <p>
-                                                {{ this.generateLevel(lecturer?.trainingProcess) }}
-                                                {{lecturer?.firstName}} {{lecturer?.fullName }}
-                                            </p>
-                                        </h3>
+                <p-toast key="{{lecturer.id}}"></p-toast>
+                <p-confirmDialog #cd [style]="{ width: '50vw' }" key="{{lecturer.id}}" position="top">
+                  <ng-template pTemplate="header">
+                    <h3>Chắc chắn xoá Giảng viên:
+                      <p>
+                        {{ this.generateLevel(lecturer?.trainingProcess) }}
+                        {{lecturer?.firstName}} {{lecturer?.fullName }}
+                      </p>
+                    </h3>
 
-                                    </ng-template>
-                                    <ng-template pTemplate="message">
-                                        <p>Message Template</p>
-                                    </ng-template>
-                                    <ng-template pTemplate="footer">
-                                        <button (click)="cd.reject()" icon="pi pi-times" label="No" pButton
-                                                type="button"></button>
-                                        <button (click)="cd.accept()" class="p-button-danger"
-                                                icon="pi pi-check"
-                                                label="Yes" pButton
-                                                type="button"></button>
-                                    </ng-template>
-                                </p-confirmDialog>
+                  </ng-template>
+                  <ng-template pTemplate="message">
+                    <p>Message Template</p>
+                  </ng-template>
+                  <ng-template pTemplate="footer">
+                    <button (click)="cd.reject()" icon="pi pi-times" label="No" pButton
+                            type="button"></button>
+                    <button (click)="cd.accept()" class="p-button-danger"
+                            icon="pi pi-check"
+                            label="Yes" pButton
+                            type="button"></button>
+                  </ng-template>
+                </p-confirmDialog>
 
-                                <button
-                                        (click)="confirmDelete(lecturer.id)"
-                                        class="p-button-rounded p-button-warning"
-                                        icon="pi pi-trash"
-                                        pButton
-                                ></button>
-                            </td>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="emptymessage">
-                        <tr>
-                            <td colspan="9">No lecturers found.</td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-            </div>
-        </div>
+                <button
+                  (click)="confirmDelete(lecturer.id)"
+                  class="p-button-rounded p-button-warning"
+                  icon="pi pi-trash"
+                  pButton
+                ></button>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="9">No lecturers found.</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
     </div>
-    <!-- Striped rows -->
+  </div>
+  <!-- Striped rows -->
 </div>
