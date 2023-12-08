@@ -3,8 +3,8 @@ import {Table} from "primeng/table";
 import {SelectItemGroup} from 'primeng/api';
 import {SemesterResponse, SemesterService} from "../../../../service/semester.service";
 import {saveAsExcelFile} from "../../../../helper/excel-helper";
-import {LecturerStandard} from "../../../../domain/lecturer";
-import {LecturerStandardService, LecturerStandardsResponse} from "../../../../service/lecturer-standards.service";
+import {UniversityStandard} from "../../../../domain/lecturer";
+import {LecturerStandardService, UniversityStandardsResponse} from "../../../../service/lecturer-standards.service";
 
 
 @Component({
@@ -14,7 +14,7 @@ import {LecturerStandardService, LecturerStandardsResponse} from "../../../../se
 })
 export class UniversityLecturerListComponent {
 
-  lecturers: LecturerStandard[] = [];
+  lecturers: UniversityStandard[] = [];
   loading: boolean = true;
 
   groupedSemesters: SelectItemGroup[] = [];
@@ -37,9 +37,9 @@ export class UniversityLecturerListComponent {
   }
 
   getLecturerStandards(semester: number) {
-    this.lecturerStandardService.getLecturerStandards(semester).subscribe({
-      next: (data: LecturerStandardsResponse) => {
-        this.lecturers = data.results.lecturerStandards;
+    this.lecturerStandardService.getUniversityStandards(semester).subscribe({
+      next: (data: UniversityStandardsResponse) => {
+        this.lecturers = data.results.universityStandards;
         this.loading = false;
       },
       error: (error) => {
