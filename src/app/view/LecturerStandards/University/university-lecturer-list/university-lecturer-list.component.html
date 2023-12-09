@@ -1,0 +1,138 @@
+<div class="row align-items-center my-3">
+  <div class="col">
+    <h2 class="page-title">Danh sách Giảng viên - Bậc Đại học</h2>
+  </div>
+</div>
+<div class="row">
+  <!-- Striped rows -->
+  <div class="col-md-12">
+    <div class="card shadow">
+      <div class="card-body">
+        <p-table
+          #dtLecturer
+          [globalFilterFields]="[
+            'trainingSystem.name',
+            'name',
+          ]"
+          [loading]="loading"
+          [tableStyle]="{ 'min-width': '85rem' }"
+          [value]="lecturers"
+          dataKey="id"
+          groupRowsBy="trainingSystem.id"
+          rowGroupMode="rowspan"
+          sortField="trainingSystem.id"
+          sortMode="single">
+          <ng-template pTemplate="caption">
+            <div class="flex  flex-row flex-wrap">
+              <p-dropdown
+                [(ngModel)]="selectedSemester"
+                [group]="true"
+                [options]="groupedSemesters"
+                class="select-semester mr-2"
+                placeholder="Select Semester">
+                <ng-template let-group pTemplate="group">
+                  <div class="flex align-items-center">
+                    <span>{{ group.label }}</span>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+              <button
+                (click)="clear(dtLecturer)"
+                class="p-button-outlined"
+                icon="pi pi-filter-slash"
+                label="Clear"
+                pButton
+                size="small"
+              ></button>
+
+              <div class="ml-auto">
+                <span class="p-input-icon-left mr-2">
+                  <i class="pi pi-search"></i>
+                  <input
+                    (input)="dtLecturer.filterGlobal($any($event.target).value, 'contains')"
+                    pInputText
+                    placeholder="Search keyword"
+                    type="text"/>
+                </span>
+                <button
+                  (click)="exportExcel()"
+                  class="p-button-success"
+                  icon="pi pi-file-excel"
+                  pButton
+                  pRipple
+                  pTooltip="XLS"
+                  size="small"
+                  tooltipPosition="bottom"
+                  type="button"
+                ></button>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th style="width:3rem">#</th>
+              <th>Hệ đào tạo</th>
+              <th>Giảng viên</th>
+              <th class="text-center">Giảng viên lý thuyết</th>
+              <th class="text-center">Giảng viên thực hành</th>
+              <th class="text-center">Môn dạy tiếng Việt</th>
+              <th class="text-center">Môn dạy tiếng Anh</th>
+            </tr>
+          </ng-template>
+          <ng-template
+            let-lecturers
+            let-rowIndex="rowIndex"
+            let-rowgroup="rowgroup"
+            let-rowspan="rowspan"
+            pTemplate="body">
+            <tr>
+              <td>{{rowIndex + 1}}</td>
+              <td *ngIf="rowgroup" [attr.rowspan]="rowspan">
+                <span class="font-bold ml-2">{{lecturers.trainingSystem.name}}</span>
+              </td>
+              <td>
+                <div>
+                  <i class="fa fa-user fe-14" style="color: darkgray; vertical-align: middle"></i>
+                  <span class="ml-1 vertical-align-middle"> {{lecturers.name}}</span>
+                </div>
+
+                <div>
+                  <i class="fa fa-envelope fe-14" style="color: darkgray; vertical-align: middle"></i>
+                  <span class="ml-1 vertical-align-middle"> {{lecturers.emailTdtu}}</span>
+                </div>
+              </td>
+              <td class="text-center">
+                <i
+                  [ngClass]="{ 'text-green-500 pi-check-circle': lecturers.isTheory, 'text-red-500 pi-times-circle': !lecturers.isTheory }"
+                  class="pi"></i>
+              </td>
+              <td class="text-center">
+                <i
+                  [ngClass]="{ 'text-green-500 pi-check-circle': lecturers.isPractice, 'text-red-500 pi-times-circle': !lecturers.isPractice }"
+                  class="pi"></i>
+              </td>
+
+              <td class="text-center">
+                <i
+                  [ngClass]="{ 'text-green-500 pi-check-circle': lecturers.isTeachingVietnamese, 'text-red-500 pi-times-circle': !lecturers.isTeachingVietnamese }"
+                  class="pi"></i>
+              </td>
+
+              <td class="text-center">
+                <i
+                  [ngClass]="{ 'text-green-500 pi-check-circle': lecturers.isTeachingEnglish, 'text-red-500 pi-times-circle': !lecturers.isTeachingEnglish }"
+                  class="pi"></i>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="7">No lecturers found.</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+  <!-- Striped rows -->
+</div>

@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+.navbar-light .navbar-nav .nav-link.active {
+  background: #f8f9fa !important;
+  color: #1b68ff !important;
+}
+
+.select-semester > .p-dropdown.p-component {
+  min-width: 250px !important;
+}

@@ -1,0 +1,37 @@
+<nav class="topnav navbar navbar-light">
+  <span class="form-inline mr-auto text-muted"></span>
+  <ul class="nav">
+    <li class="nav-item" style="display: none;">
+      <a class="nav-link text-muted my-2" data-mode="light" href="#" id="modeSwitcher">
+        <i class="fe fe-sun fe-16"></i>
+      </a>
+    </li>
+    <li class="nav-item dropdown">
+      <a
+        aria-expanded="false"
+        aria-haspopup="true"
+        class="nav-link dropdown-toggle text-muted pr-0"
+        data-toggle="dropdown"
+        href="#"
+        id="navbarDropdownMenuLink"
+        role="button"
+      >
+        <span class="avatar avatar-sm mt-2">
+          <img
+            alt="..."
+            class="avatar-img rounded-circle"
+            src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/fc6b1238650505.598fa11a29a17.png"
+          />
+        </span>
+        <span>&nbsp;&nbsp;{{userName}}</span>
+      </a>
+      <div
+        aria-labelledby="navbarDropdownMenuLink"
+        class="dropdown-menu dropdown-menu-right"
+      >
+        <a class="dropdown-item" href="#">Đổi mật khẩu</a>
+        <a (click)="logout()" class="dropdown-item" href="">Đăng xuất</a>
+      </div>
+    </li>
+  </ul>
+</nav>

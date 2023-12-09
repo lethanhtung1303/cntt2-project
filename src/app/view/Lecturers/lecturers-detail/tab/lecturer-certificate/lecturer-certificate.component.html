@@ -1,0 +1,124 @@
+<div class="row align-items-center my-3">
+  <div class="col ml-3 p-0 "></div>
+  <div class="col-auto">
+    <button
+      (click)="showDialog()"
+      class="btn btn-primary"
+      type="button"
+    >
+      <span class="fe fe-plus fe-16 mr-2"></span>Thêm mới
+    </button>
+    <p-dialog (onHide)="onCancel()" [(visible)]="visible" [draggable]="false" [modal]="true" [resizable]="false"
+              [style]="{ width: '50vw' }"
+              header="Thêm mới Chứng chỉ">
+      <div class="container-fluid">
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <div class="card shadow mb-4">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <form (ngSubmit)="onSubmit()" [formGroup]="certificateForm">
+                      <div class="form-group mb-3">
+                        <label for="certificateType">Loại chứng chỉ</label>
+                        <select
+                          class="form-control form-control-lg"
+                          formControlName="certificateType"
+                          id="certificateType"
+                        >
+                          <ng-container *ngFor="let item of subjects">
+                            <option [value]="item.value">{{item.label}}</option>
+                          </ng-container>
+                        </select>
+                      </div>
+
+                      <div class="form-group mb-3">
+                        <label for="certificateScore">Điểm</label>
+                        <input class="form-control form-control-lg" formControlName="certificateScore"
+                               id="certificateScore" type="text">
+                      </div>
+
+                      <div class="flex justify-content-end flex-wrap ">
+                        <button (click)="onCancel()" class="btn btn-outline-dark mr-2"
+                                type="button">Cancel
+                        </button>
+                        <button [disabled]="!certificateForm.valid"
+                                class="btn btn-primary"
+                                type="submit">Save
+                        </button>
+                      </div>
+                    </form>
+
+                  </div> <!-- /.col -->
+                </div>
+              </div>
+            </div> <!-- / .card -->
+          </div> <!-- .col-12 -->
+        </div> <!-- .row -->
+      </div> <!-- .container-fluid -->
+    </p-dialog>
+  </div>
+
+</div>
+<div class="card">
+  <p-table [tableStyle]="{'min-width': '50rem'}" [value]="certificateList">
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="width:10%">#</th>
+        <th style="width:40%">Loại chứng chỉ</th>
+        <th style="width:30%">Điểm</th>
+        <th style="width:20%"></th>
+      </tr>
+    </ng-template>
+    <ng-template let-certificate let-ri="rowIndex" pTemplate="body">
+      <tr>
+        <td>
+          {{ri + 1}}
+        </td>
+        <td>
+          {{certificate.certificateType.tenLoai}}
+        </td>
+        <td>
+          {{certificate.diem }}
+        </td>
+        <td>
+          <p-toast key="{{certificate.id}}"></p-toast>
+          <p-confirmDialog #cd [style]="{ width: '50vw' }" key="{{certificate.id}}" position="top">
+            <ng-template pTemplate="header">
+              <h3>Bạn có chắc chắn xoá Chứng chỉ {{certificate.certificateType.tenLoai}}:
+                <p>
+                  {{certificate.diem }} Điểm
+                </p>
+              </h3>
+
+            </ng-template>
+            <ng-template pTemplate="message">
+              <p>Message Template</p>
+            </ng-template>
+            <ng-template pTemplate="footer">
+              <button (click)="cd.reject()" icon="pi pi-times" label="No" pButton
+                      type="button"></button>
+              <button (click)="cd.accept()" class="p-button-danger"
+                      icon="pi pi-check"
+                      label="Yes" pButton
+                      type="button"></button>
+            </ng-template>
+          </p-confirmDialog>
+          <div class="flex align-items-center justify-content-center gap-2">
+            <button
+              (click)="confirmDelete(certificate.id)"
+              class="p-button-rounded p-button-text p-button-danger"
+              icon="pi pi-trash" pButton
+              pRipple type="button"
+            ></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="4">No Certificate found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
