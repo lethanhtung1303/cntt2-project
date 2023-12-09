@@ -123,3 +123,22 @@ export interface LecturerDeleteRequest {
   lecturerIds: string;
   deleteBy: string
 }
+
+export interface UniversityStandard {
+  id?: number;
+  fullName?: string;
+  images?: string;
+  emailTdtu?: string;
+  isTeachingTheory?: boolean;
+  isTeachingPractice?: boolean;
+  isTeachingVietnamese?: boolean;
+  isTeachingEnglish?: boolean;
+  isEnglishInternational?: boolean;
+}
+
+export interface MasterStandards {
+  id?: number;
+  fullName?: string;
+  images?: string;
+  emailTdtu?: string;
+}

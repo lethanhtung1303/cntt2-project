@@ -176,7 +176,7 @@ export class LecturerSatisfactionScoreComponent implements OnInit {
       scales: {
         x: {
           min: 0,
-          max: 100,
+          max: 10,
           ticks: {
             color: textColorSecondary,
             font: {
