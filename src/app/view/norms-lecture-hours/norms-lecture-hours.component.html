@@ -1,0 +1,124 @@
+<div class="row align-items-center my-3">
+  <div class="col">
+    <h2 class="page-title">Định mức Giờ giảng của Giảng viên</h2>
+  </div>
+</div>
+<div class="row">
+  <!-- Striped rows -->
+  <div class="col-md-12">
+    <div class="card shadow">
+      <div class="card-body">
+        <div class="card">
+          <p-table #dt
+                   [globalFilterFields]="['fullName', 'emailTdtu', 'classificationLecturers','lecturerLevel','status']"
+                   [loading]="loading"
+                   [paginator]="true"
+                   [rowsPerPageOptions]="[5, 10, 25, 50]"
+                   [rows]="5"
+                   [showCurrentPageReport]="true"
+                   [tableStyle]="{'min-width': '80rem'}"
+                   [value]="lectureData"
+                   currentPageReportTemplate="{first} - {last} of {totalRecords}"
+                   dataKey="id"
+                   styleClass="p-datatable-gridlines">
+            <ng-template pTemplate="caption">
+              <div class="flex  flex-row flex-wrap">
+                <p-dropdown
+                  (onChange)="onChangeSemester()"
+                  [(ngModel)]="selectedSemester"
+                  [group]="true"
+                  [options]="groupedSemesters"
+                  class="select-semester mr-2"
+                  placeholder="Select Semester">
+                  <ng-template let-group pTemplate="group">
+                    <div class="flex align-items-center">
+                      <span>{{ group.label }}</span>
+                    </div>
+                  </ng-template>
+                </p-dropdown>
+                <button
+                  (click)="clear(dt)"
+                  class="p-button-outlined"
+                  icon="pi pi-filter-slash"
+                  label="Clear"
+                  pButton
+                  size="small"
+                ></button>
+                <div class="ml-auto">
+                <span class="p-input-icon-left mr-2">
+                  <i class="pi pi-search"></i>
+                  <input
+                    (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                    pInputText
+                    placeholder="Search keyword"
+                    type="text"/>
+                </span>
+                  <button
+                    (click)="exportExcel()"
+                    class="p-button-success"
+                    icon="pi pi-file-excel"
+                    pButton
+                    pRipple
+                    pTooltip="XLS"
+                    size="small"
+                    tooltipPosition="bottom"
+                    type="button"
+                  ></button>
+                </div>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr class="text-nowrap">
+                <th class="text-center" rowspan="2">#</th>
+                <th class="text-center" rowspan="2">Giảng viên</th>
+                <th class="text-center" rowspan="2">Phân loại</th>
+                <th class="text-center" rowspan="2">Trình độ</th>
+                <th class="text-center" colspan="2">Số Tiết học Thực tế</th>
+                <th class="text-center" colspan="2">Số Tiết học Quy đổi</th>
+                <th class="text-center" rowspan="2">Tổng số tiết</th>
+                <th class="text-center" rowspan="2">Trang thái</th>
+              </tr>
+              <tr class="text-nowrap">
+                <th class="text-center">Lý Thuyết</th>
+                <th class="text-center">Thực hành</th>
+                <th class="text-center">Lý Thuyết</th>
+                <th class="text-center">Thực hành</th>
+              </tr>
+            </ng-template>
+            <ng-template let-lecturer let-rowIndex="rowIndex" pTemplate="body">
+              <tr class="text-nowrap">
+                <td class="text-center">{{ rowIndex + 1 }}</td>
+                <td>
+                  <div>
+                    <img alt="..."
+                         src="{{lecturer.images}}"
+                         style="vertical-align: middle" width="32"/>
+                    <a [queryParams]="{tab: 'info'}" ariaCurrentWhenActive="page" class="vertical-align-middle"
+                       queryParamsHandling="merge"
+                       routerLink="/lecturers/{{lecturer.id}}" routerLinkActive="active"> {{ lecturer.fullName }}</a>
+                  </div>
+
+                  <div class="ml-5">
+                    <span class="ml-1 vertical-align-middle"> {{ lecturer.emailTdtu }}</span>
+                  </div>
+                </td>
+                <td class="text-center">{{ lecturer.classificationLecturers }}</td>
+                <td class="text-center">{{ lecturer.lecturerLevel }}</td>
+                <td class="text-center">{{ lecturer.practicalLessons.numberTheory }}</td>
+                <td class="text-center">{{ lecturer.practicalLessons.numberPractice }}</td>
+                <td class="text-center">{{ lecturer.conversionLesson.numberTheory }}</td>
+                <td class="text-center">{{ lecturer.conversionLesson.numberPractice }}</td>
+                <td class="text-center">{{ lecturer.totalNumberLessons }}</td>
+                <td class="text-center">
+                  <p-tag [severity]="getSeverity(lecturer.status)" [value]="getStatus(lecturer.status)"
+                         class="text-nowrap"></p-tag>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Striped rows -->
+</div>

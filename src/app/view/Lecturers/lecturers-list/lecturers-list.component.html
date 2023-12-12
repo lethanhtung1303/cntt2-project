@@ -18,7 +18,7 @@
           <div class="card shadow mb-4">
             <div class="card-body">
               <div *ngIf="this.globalErrorService.getGlobalError().errorCode" class="mx-auto">
-                <h6 class="text-danger">{{this.globalErrorService.getGlobalError().errMessage}}</h6>
+                <h6 class="text-danger">{{ this.globalErrorService.getGlobalError().errMessage }}</h6>
               </div>
               <div class="row">
                 <div class="col-md-6">
@@ -304,7 +304,7 @@
           [rowsPerPageOptions]="[5, 10, 25, 50]"
           [rows]="5"
           [showCurrentPageReport]="true"
-          [tableStyle]="{ 'min-width': '85rem' }"
+          [tableStyle]="{'min-width': '80rem'}"
           [value]="lecturers"
           currentPageReportTemplate="{first} - {last} of {totalRecords}"
           dataKey="id"
@@ -424,7 +424,7 @@
                      class="ml-1 vertical-align-middle" queryParamsHandling="merge"
                      routerLink="/lecturers/{{lecturer.id}}" routerLinkActive="active">
                     {{ this.generateLevel(lecturer.trainingProcess) }} {{ lecturer.firstName }}
-                    {{lecturer.fullName }}
+                    {{ lecturer.fullName }}
                   </a>
                 </div>
 
@@ -437,12 +437,12 @@
 
                 <ng-template #thenClassificationBlock>
                                    <span class="badge badge-pill badge-success">
-                                        {{lecturer.classificationLecturers.phanLoai}}
+                                        {{ lecturer.classificationLecturers.phanLoai }}
                                     </span>
                 </ng-template>
                 <ng-template #elseClassificationBlock>
                                     <span class="badge badge-pill badge-warning">
-                                        {{lecturer.classificationLecturers.phanLoai}}
+                                        {{ lecturer.classificationLecturers.phanLoai }}
                                     </span>
                 </ng-template>
               </td>
@@ -538,7 +538,7 @@
                     <h3>Chắc chắn xoá Giảng viên:
                       <p>
                         {{ this.generateLevel(lecturer?.trainingProcess) }}
-                        {{lecturer?.firstName}} {{lecturer?.fullName }}
+                        {{ lecturer?.firstName }} {{ lecturer?.fullName }}
                       </p>
                     </h3>
 

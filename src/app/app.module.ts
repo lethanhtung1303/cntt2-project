@@ -126,6 +126,7 @@ import {
 } from './view/Lecturers/lecturers-detail/tab/lecturer-certificate/lecturer-certificate.component';
 import { SubjectsListComponent } from './view/Subjects/subjects-list/subjects-list.component';
 import { SubjectDetailComponent } from './view/Subjects/subject-detail/subject-detail.component';
+import { NormsLectureHoursComponent } from './view/norms-lecture-hours/norms-lecture-hours.component';
 
 
 @NgModule({
@@ -148,6 +149,7 @@ import { SubjectDetailComponent } from './view/Subjects/subject-detail/subject-d
     LecturerCertificateComponent,
     SubjectsListComponent,
     SubjectDetailComponent,
+    NormsLectureHoursComponent,
   ],
   imports: [
     BrowserModule,

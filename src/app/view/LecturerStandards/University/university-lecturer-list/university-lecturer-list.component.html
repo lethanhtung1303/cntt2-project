@@ -20,7 +20,7 @@
           [rowsPerPageOptions]="[5, 10, 25, 50]"
           [rows]="5"
           [showCurrentPageReport]="true"
-          [tableStyle]="{ 'min-width': '85rem' }"
+          [tableStyle]="{'min-width': '80rem'}"
           [value]="lecturers"
           currentPageReportTemplate="{first} - {last} of {totalRecords}"
           dataKey="id"
@@ -100,7 +100,7 @@
           </ng-template>
           <ng-template let-lecturer let-rowIndex="rowIndex" pTemplate="body">
             <tr class="text-nowrap">
-              <td class="text-center">{{rowIndex + 1}}</td>
+              <td class="text-center">{{ rowIndex + 1 }}</td>
               <td class="text-left">
                 <div>
                   <img alt="..."
@@ -108,11 +108,11 @@
                        style="vertical-align: middle" width="32"/>
                   <a [queryParams]="{tab: 'info'}" ariaCurrentWhenActive="page" class="vertical-align-middle"
                      queryParamsHandling="merge"
-                     routerLink="/lecturers/{{lecturer.id}}" routerLinkActive="active"> {{lecturer.fullName}}</a>
+                     routerLink="/lecturers/{{lecturer.id}}" routerLinkActive="active"> {{ lecturer.fullName }}</a>
                 </div>
 
                 <div class="ml-5">
-                  <span class="ml-1 vertical-align-middle"> {{lecturer.emailTdtu}}</span>
+                  <span class="ml-1 vertical-align-middle"> {{ lecturer.emailTdtu }}</span>
                 </div>
               </td>
               <td class="text-center">

@@ -77,11 +77,11 @@
       </div>
     </div>
     <div *ngIf="this.globalErrorService.getGlobalError().errorCode" class="mx-auto text-center">
-      <h6 class="mb-3 text-danger">{{this.globalErrorService.getGlobalError().errMessage}}</h6>
+      <h6 class="mb-3 text-danger">{{ this.globalErrorService.getGlobalError().errMessage }}</h6>
     </div>
     <button [disabled]="loginForm.invalid" class="btn btn-lg btn-primary btn-block" type="submit">
       Let me in
     </button>
-    <p class="mt-5 mb-3 text-muted">© 2023</p>
+    <p class="mt-5 mb-3 text-muted">© 2023 CNTT2. All rights reserved.</p>
   </form>
 </div>

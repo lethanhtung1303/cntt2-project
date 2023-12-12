@@ -40,7 +40,7 @@
                         >
                           <ng-container *ngFor="let item of subjects">
                             <option [value]="item.maMon">
-                              ({{item.maMon}}) {{ item.tenMon }}
+                              ({{ item.maMon }}) {{ item.tenMon }}
                             </option>
                           </ng-container>
                         </select>
@@ -90,7 +90,7 @@
 
 </div>
 <div class="card">
-  <p-table [tableStyle]="{'min-width': '50rem'}" [value]="satisfactionScoreForSemester">
+  <p-table [tableStyle]="{'min-width': '80rem'}" [value]="satisfactionScoreForSemester">
     <ng-template pTemplate="header">
       <tr>
         <th style="width:10%">#</th>
@@ -103,16 +103,16 @@
     <ng-template let-ri="rowIndex" let-satisfactionScore pTemplate="body">
       <tr>
         <td>
-          {{ri + 1}}
+          {{ ri + 1 }}
         </td>
         <td>
-          {{satisfactionScore.subject.tenMon}}
+          {{ satisfactionScore.subject.tenMon }}
         </td>
         <td>
-          {{genSemesterLabel(satisfactionScore.hocKy)}}
+          {{ genSemesterLabel(satisfactionScore.hocKy) }}
         </td>
         <td>
-          {{satisfactionScore.diemHaiLong }}
+          {{ satisfactionScore.diemHaiLong }}
         </td>
         <td>
           <p-toast key="{{satisfactionScore.id}}"></p-toast>
@@ -121,7 +121,7 @@
               <h3>Bạn có chắc chắn xoá Điểm hài lòng của Môn:
                 <p>
                   {{ satisfactionScore.subject.tenMon }}
-                  Ở {{genSemesterLabel(satisfactionScore.hocKy)}}
+                  Ở {{ genSemesterLabel(satisfactionScore.hocKy) }}
                 </p>
               </h3>
 
