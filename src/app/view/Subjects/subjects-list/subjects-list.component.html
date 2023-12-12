@@ -18,7 +18,7 @@
           <div class="card shadow mb-4">
             <div class="card-body">
               <div *ngIf="this.globalErrorService.getGlobalError().errorCode" class="mx-auto">
-                <h6 class="text-danger">{{this.globalErrorService.getGlobalError().errMessage}}</h6>
+                <h6 class="text-danger">{{ this.globalErrorService.getGlobalError().errMessage }}</h6>
               </div>
               <div class="row">
                 <div class="col-md-6">
@@ -31,7 +31,7 @@
                     >
                       <ng-container *ngFor="let item of subjectGroups">
                         <option [value]="item.maNhom">
-                          ({{item.maNhom}}) {{ item.tenNhom }}
+                          ({{ item.maNhom }}) {{ item.tenNhom }}
                         </option>
                       </ng-container>
                     </select>
@@ -106,10 +106,10 @@
           [globalFilterFields]="[ 'maMon', 'phanLoai', 'tenMon', 'soTiet' ]"
           [loading]="loading"
           [paginator]="true"
-          [rowsPerPageOptions]="[10, 25, 50]"
-          [rows]="10"
+          [rowsPerPageOptions]="[5,10, 25, 50]"
+          [rows]="5"
           [showCurrentPageReport]="true"
-          [tableStyle]="{ 'min-width': '85rem' }"
+          [tableStyle]="{'min-width': '80rem'}"
           [value]="subjects"
           currentPageReportTemplate="{first} - {last} of {totalRecords}"
           dataKey="id"
@@ -179,26 +179,26 @@
           </ng-template>
           <ng-template pTemplate="header">
             <tr class="text-nowrap">
-              <th style="width:5%">
+              <th>
                 <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
               </th>
-              <th pSortableColumn="maMon" style="width:15%">
+              <th pSortableColumn="maMon">
                 Mã môn
                 <p-sortIcon field="maMon"></p-sortIcon>
               </th>
-              <th pSortableColumn="phanLoai" style="width:15%">
+              <th pSortableColumn="phanLoai">
                 Phân loại
                 <p-sortIcon field="phanLoai"></p-sortIcon>
               </th>
-              <th pSortableColumn="tenMon" style="width:40%">
+              <th pSortableColumn="tenMon">
                 Tên môn
                 <p-sortIcon field="tenMon"></p-sortIcon>
               </th>
-              <th pSortableColumn="soTiet" style="width:10%">
+              <th pSortableColumn="soTiet">
                 Số tiết
                 <p-sortIcon field="soTiet"></p-sortIcon>
               </th>
-              <th style="width:15%"></th>
+              <th></th>
             </tr>
           </ng-template>
           <ng-template let-subject pTemplate="body">
@@ -261,7 +261,7 @@
                   <ng-template pTemplate="header">
                     <h3>Chắc chắn xoá Môn học:
                       <p>
-                        {{subject?.tenMon}}
+                        {{ subject?.tenMon }}
                       </p>
                     </h3>
 

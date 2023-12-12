@@ -27,7 +27,7 @@
                           id="certificateType"
                         >
                           <ng-container *ngFor="let item of subjects">
-                            <option [value]="item.value">{{item.label}}</option>
+                            <option [value]="item.value">{{ item.label }}</option>
                           </ng-container>
                         </select>
                       </div>
@@ -61,7 +61,7 @@
 
 </div>
 <div class="card">
-  <p-table [tableStyle]="{'min-width': '50rem'}" [value]="certificateList">
+  <p-table [tableStyle]="{'min-width': '80rem'}" [value]="certificateList">
     <ng-template pTemplate="header">
       <tr>
         <th style="width:10%">#</th>
@@ -73,21 +73,21 @@
     <ng-template let-certificate let-ri="rowIndex" pTemplate="body">
       <tr>
         <td>
-          {{ri + 1}}
+          {{ ri + 1 }}
         </td>
         <td>
-          {{certificate.certificateType.tenLoai}}
+          {{ certificate.certificateType.tenLoai }}
         </td>
         <td>
-          {{certificate.diem }}
+          {{ certificate.diem }}
         </td>
         <td>
           <p-toast key="{{certificate.id}}"></p-toast>
           <p-confirmDialog #cd [style]="{ width: '50vw' }" key="{{certificate.id}}" position="top">
             <ng-template pTemplate="header">
-              <h3>Bạn có chắc chắn xoá Chứng chỉ {{certificate.certificateType.tenLoai}}:
+              <h3>Bạn có chắc chắn xoá Chứng chỉ {{ certificate.certificateType.tenLoai }}:
                 <p>
-                  {{certificate.diem }} Điểm
+                  {{ certificate.diem }} Điểm
                 </p>
               </h3>
 

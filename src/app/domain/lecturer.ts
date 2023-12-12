@@ -142,3 +142,24 @@ export interface MasterStandards {
   images?: string;
   emailTdtu?: string;
 }
+
+export interface NumberLessons {
+  numberTheory: number;
+  numberPractice: number;
+}
+
+export interface NormsLectureHours {
+  id?: number;
+  fullName?: string;
+  images?: string;
+  emailTdtu?: string;
+  classificationLecturersCode?: number;
+  classificationLecturers?: string;
+  lecturerLevelCode?: number;
+  lecturerLevel?: string;
+  displayOrder?: number;
+  practicalLessons: NumberLessons;
+  conversionLesson: NumberLessons;
+  totalNumberLessons: number;
+  status: number;
+}

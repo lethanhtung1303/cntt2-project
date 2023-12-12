@@ -19,6 +19,7 @@ import {
 } from "./view/Lecturers/lecturers-detail/tab/lecturer-training-process/edit-training-process/edit-training-process.component";
 import {SubjectsListComponent} from "./view/Subjects/subjects-list/subjects-list.component";
 import {SubjectDetailComponent} from "./view/Subjects/subject-detail/subject-detail.component";
+import {NormsLectureHoursComponent} from "./view/norms-lecture-hours/norms-lecture-hours.component";
 
 const routes: Routes = [
   {
@@ -36,12 +37,12 @@ const routes: Routes = [
       {path: 'subject/:id', component: SubjectDetailComponent},
 
       {path: 'university-lecturer', component: UniversityLecturerListComponent},
-      {path: 'university-lecturer/add', component: UniversityLecturerListComponent},
-      {path: 'university-lecturer/:id', component: UniversityLecturerListComponent},
 
       {path: 'master-lecturer', component: MasterLecturerListComponent},
-      {path: 'master-lecturer/add', component: MasterLecturerListComponent},
-      {path: 'master-lecturer/:id', component: MasterLecturerListComponent},
+
+      {path: 'norms-lecture-hours', component: NormsLectureHoursComponent},
+      {path: 'norms-lecture-hours/add', component: NormsLectureHoursComponent},
+      {path: 'norms-lecture-hours/:id', component: NormsLectureHoursComponent},
 
       {path: 'satisfaction-score', component: LecturersListComponent},
       {path: 'satisfaction-score/add', component: LecturersListComponent},
@@ -66,10 +67,6 @@ const routes: Routes = [
       {path: 'statistics-number-periods', component: LecturersListComponent},
       {path: 'statistics-number-periods/add', component: LecturersListComponent},
       {path: 'statistics-number-periods/:id', component: LecturersListComponent},
-
-      {path: 'norms-lecture-hours', component: LecturersListComponent},
-      {path: 'norms-lecture-hours/add', component: LecturersListComponent},
-      {path: 'norms-lecture-hours/:id', component: LecturersListComponent},
 
       {path: '', redirectTo: 'home', pathMatch: 'full'}, // redirect to `home-component`
     ],
