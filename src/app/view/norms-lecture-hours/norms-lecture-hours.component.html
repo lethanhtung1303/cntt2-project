@@ -1,6 +1,6 @@
 <div class="row align-items-center my-3">
   <div class="col">
-    <h2 class="page-title">Định mức Giờ giảng của Giảng viên</h2>
+    <h2 class="page-title">Định mức & Thống kê Giờ giảng của Giảng viên</h2>
   </div>
 </div>
 <div class="row">
@@ -13,14 +13,16 @@
                    [globalFilterFields]="['fullName', 'emailTdtu', 'classificationLecturers','lecturerLevel','status']"
                    [loading]="loading"
                    [paginator]="true"
+                   [rowHover]="true"
                    [rowsPerPageOptions]="[5, 10, 25, 50]"
                    [rows]="5"
+                   [scrollable]="true"
                    [showCurrentPageReport]="true"
                    [tableStyle]="{'min-width': '80rem'}"
                    [value]="lectureData"
                    currentPageReportTemplate="{first} - {last} of {totalRecords}"
                    dataKey="id"
-                   styleClass="p-datatable-gridlines">
+                   styleClass="p-datatable-sm p-datatable-gridlines">
             <ng-template pTemplate="caption">
               <div class="flex  flex-row flex-wrap">
                 <p-dropdown
@@ -69,26 +71,41 @@
             </ng-template>
             <ng-template pTemplate="header">
               <tr class="text-nowrap">
-                <th class="text-center" rowspan="2">#</th>
-                <th class="text-center" rowspan="2">Giảng viên</th>
-                <th class="text-center" rowspan="2">Phân loại</th>
-                <th class="text-center" rowspan="2">Trình độ</th>
-                <th class="text-center" colspan="2">Số Tiết học Thực tế</th>
-                <th class="text-center" colspan="2">Số Tiết học Quy đổi</th>
-                <th class="text-center" rowspan="2">Tổng số tiết</th>
-                <th class="text-center" rowspan="2">Trang thái</th>
+                <th class="text-center" pFrozenColumn rowspan="3">#</th>
+                <th class="text-center" pFrozenColumn rowspan="3">Giảng viên</th>
+                <th class="text-center" rowspan="3">Phân loại</th>
+                <th class="text-center" rowspan="3">Trình độ</th>
+                <th class="text-center" colspan="10">Số tiết thực tế</th>
+                <th class="text-center" colspan="2">Số Tiết Quy đổi</th>
+                <th class="text-center" rowspan="3">Tổng số tiết</th>
+                <th class="text-center" rowspan="3">Trang thái</th>
               </tr>
               <tr class="text-nowrap">
-                <th class="text-center">Lý Thuyết</th>
+                <th class="text-center" colspan="2">Tiêu chuẩn</th>
+                <th class="text-center" colspan="2">CLC Tiếng Việt</th>
+                <th class="text-center" colspan="2">CLC Tiếng Anh</th>
+                <th class="text-center" colspan="2">100% tiếng Anh/Liên kết</th>
+                <th class="text-center" colspan="2">Thạc sĩ</th>
+                <th class="text-center" rowspan="2">Lý thuyết</th>
+                <th class="text-center" rowspan="2">Thực hành</th>
+              </tr>
+              <tr class="text-nowrap">
+                <th class="text-center">Lý thuyết</th>
                 <th class="text-center">Thực hành</th>
-                <th class="text-center">Lý Thuyết</th>
+                <th class="text-center">Lý thuyết</th>
+                <th class="text-center">Thực hành</th>
+                <th class="text-center">Lý thuyết</th>
+                <th class="text-center">Thực hành</th>
+                <th class="text-center">Lý thuyết</th>
+                <th class="text-center">Thực hành</th>
+                <th class="text-center">Lý thuyết</th>
                 <th class="text-center">Thực hành</th>
               </tr>
             </ng-template>
             <ng-template let-lecturer let-rowIndex="rowIndex" pTemplate="body">
               <tr class="text-nowrap">
-                <td class="text-center">{{ rowIndex + 1 }}</td>
-                <td>
+                <td class="text-center" pFrozenColumn>{{ rowIndex + 1 }}</td>
+                <td pFrozenColumn>
                   <div>
                     <img alt="..."
                          src="{{lecturer.images}}"
@@ -104,8 +121,16 @@
                 </td>
                 <td class="text-center">{{ lecturer.classificationLecturers }}</td>
                 <td class="text-center">{{ lecturer.lecturerLevel }}</td>
-                <td class="text-center">{{ lecturer.practicalLessons.numberTheory }}</td>
-                <td class="text-center">{{ lecturer.practicalLessons.numberPractice }}</td>
+                <td class="text-center">{{ lecturer.lessonsStandardSys.numberTheory }}</td>
+                <td class="text-center">{{ lecturer.lessonsStandardSys.numberPractice }}</td>
+                <td class="text-center">{{ lecturer.lessonsCLCVietnamese.numberTheory }}</td>
+                <td class="text-center">{{ lecturer.lessonsCLCVietnamese.numberPractice }}</td>
+                <td class="text-center">{{ lecturer.lessonsCLCEnglish.numberTheory }}</td>
+                <td class="text-center">{{ lecturer.lessonsCLCEnglish.numberPractice }}</td>
+                <td class="text-center">{{ lecturer.lessonsEnglishInternational.numberTheory }}</td>
+                <td class="text-center">{{ lecturer.lessonsEnglishInternational.numberPractice }}</td>
+                <td class="text-center">{{ lecturer.lessonsMaster.numberTheory }}</td>
+                <td class="text-center">{{ lecturer.lessonsMaster.numberPractice }}</td>
                 <td class="text-center">{{ lecturer.conversionLesson.numberTheory }}</td>
                 <td class="text-center">{{ lecturer.conversionLesson.numberPractice }}</td>
                 <td class="text-center">{{ lecturer.totalNumberLessons }}</td>

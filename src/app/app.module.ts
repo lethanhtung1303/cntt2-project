@@ -105,10 +105,10 @@ import {PageNotFoundComponent} from './view/page-not-found/page-not-found.compon
 import {LecturersListComponent} from './view/Lecturers/lecturers-list/lecturers-list.component';
 import {
   UniversityLecturerListComponent
-} from './view/LecturerStandards/University/university-lecturer-list/university-lecturer-list.component';
+} from './view/LecturerStandards/university-lecturer-list/university-lecturer-list.component';
 import {
   MasterLecturerListComponent
-} from './view/LecturerStandards/MasterDegree/master-lecturer-list/master-lecturer-list.component';
+} from './view/LecturerStandards/master-lecturer-list/master-lecturer-list.component';
 import {LecturersDetailComponent} from './view/Lecturers/lecturers-detail/lecturers-detail.component';
 import {LecturerInfoComponent} from './view/Lecturers/lecturers-detail/tab/lecturer-info/lecturer-info.component';
 import {
@@ -124,9 +124,9 @@ import {
 import {
   LecturerCertificateComponent
 } from './view/Lecturers/lecturers-detail/tab/lecturer-certificate/lecturer-certificate.component';
-import { SubjectsListComponent } from './view/Subjects/subjects-list/subjects-list.component';
-import { SubjectDetailComponent } from './view/Subjects/subject-detail/subject-detail.component';
-import { NormsLectureHoursComponent } from './view/norms-lecture-hours/norms-lecture-hours.component';
+import {SubjectsListComponent} from './view/Subjects/subjects-list/subjects-list.component';
+import {SubjectDetailComponent} from './view/Subjects/subject-detail/subject-detail.component';
+import {NormsLectureHoursComponent} from './view/norms-lecture-hours/norms-lecture-hours.component';
 
 
 @NgModule({
