@@ -167,3 +167,16 @@ export interface NormsLectureHours {
   totalNumberLessons: number;
   status: number;
 }
+
+export interface LecturerTeachingHistory {
+  subjectCode?: string;
+  subjectTitle?: string;
+  numberLessons?: number;
+  subjectGroupCode?: string;
+  subjectGroupName?: string;
+  subjectTypeCode?: number;
+  nameTypeSubject?: string;
+  trainingSysCode?: number;
+  nameTrainingSys?: string;
+  identification?: number;
+}

@@ -110,7 +110,8 @@
                     <img alt="..."
                          src="{{lecturer.images}}"
                          style="vertical-align: middle" width="32"/>
-                    <a [queryParams]="{tab: 'info'}" ariaCurrentWhenActive="page" class="vertical-align-middle"
+                    <a [queryParams]="{tab: 'teaching-history'}" ariaCurrentWhenActive="page"
+                       class="vertical-align-middle"
                        queryParamsHandling="merge"
                        routerLink="/lecturers/{{lecturer.id}}" routerLinkActive="active"> {{ lecturer.fullName }}</a>
                   </div>

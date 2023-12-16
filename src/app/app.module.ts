@@ -127,6 +127,7 @@ import {
 import {SubjectsListComponent} from './view/Subjects/subjects-list/subjects-list.component';
 import {SubjectDetailComponent} from './view/Subjects/subject-detail/subject-detail.component';
 import {NormsLectureHoursComponent} from './view/norms-lecture-hours/norms-lecture-hours.component';
+import { LecturerTeachingHistoryComponent } from './view/Lecturers/lecturers-detail/tab/lecturer-teaching-history/lecturer-teaching-history.component';
 
 
 @NgModule({
@@ -150,6 +151,7 @@ import {NormsLectureHoursComponent} from './view/norms-lecture-hours/norms-lectu
     SubjectsListComponent,
     SubjectDetailComponent,
     NormsLectureHoursComponent,
+    LecturerTeachingHistoryComponent,
   ],
   imports: [
     BrowserModule,

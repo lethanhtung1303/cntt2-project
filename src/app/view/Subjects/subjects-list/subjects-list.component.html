@@ -39,6 +39,24 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group mb-3">
+                    <label for="subject-training-sys">Hệ đào tạo</label>
+                    <select
+                      class="form-control form-control-lg"
+                      formControlName="subjectTrainingSys"
+                      id="subject-training-sys"
+                    >
+                      <ng-container *ngFor="let item of subjectTrainingSys">
+                        <option [value]="item.maHe">
+                          ({{ item.maHe }}) {{ item.phanHe }}
+                        </option>
+                      </ng-container>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group mb-3">
                     <label for="subject-type">Loại môn</label>
                     <select
                       class="form-control form-control-lg"
@@ -50,9 +68,7 @@
                     </select>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <div class="form-group mb-3">
                     <label for="subject-code">Mã Môn học</label>
                     <input class="form-control form-control-lg" formControlName="subjectCode"
@@ -60,7 +76,7 @@
                            placeholder="Subject Code" required type="text">
                   </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                   <div class="form-group mb-3">
                     <label for="number-lessons">Số tiết học</label>
                     <input class="form-control form-control-lg" formControlName="numberLessons"
@@ -103,7 +119,7 @@
         <p-table
           #dtSubject
           [(selection)]="selectedSubjects"
-          [globalFilterFields]="[ 'maMon', 'phanLoai', 'tenMon', 'soTiet' ]"
+          [globalFilterFields]="[ 'maMon', 'phanLoai','phanHe', 'tenMon', 'soTiet' ]"
           [loading]="loading"
           [paginator]="true"
           [rowsPerPageOptions]="[5,10, 25, 50]"
@@ -190,6 +206,10 @@
                 Phân loại
                 <p-sortIcon field="phanLoai"></p-sortIcon>
               </th>
+              <th pSortableColumn="phanHe">
+                Phân hệ
+                <p-sortIcon field="phanHe"></p-sortIcon>
+              </th>
               <th pSortableColumn="tenMon">
                 Tên môn
                 <p-sortIcon field="tenMon"></p-sortIcon>
@@ -211,7 +231,9 @@
                 <div>
                   <div>
                     <i class="fa fa-info fe-14" style="color: darkgray; vertical-align: middle"></i>
-                    <span class="ml-1 vertical-align-middle"> {{ subject.maMon }}</span>
+                    <a ariaCurrentWhenActive="page" class="ml-1 vertical-align-middle"
+                       routerLink="/subject/{{subject.maMon}}"
+                       routerLinkActive="active"> {{ subject.maMon }}</a>
                   </div>
                 </div>
               </td>
@@ -225,6 +247,15 @@
                   <div>
                     <i class="fa fa-map-pin fe-14" style="color: darkgray; vertical-align: middle"></i>
                     <span class="ml-1 vertical-align-middle"> {{ subject.phanLoai }}</span>
+                  </div>
+                </div>
+              </td>
+
+              <td>
+                <div>
+                  <div>
+                    <i class="fa fa-tags fe-14" style="color: darkgray; vertical-align: middle"></i>
+                    <span class="ml-1 vertical-align-middle"> {{ subject.phanHe }}</span>
                   </div>
                 </div>
               </td>

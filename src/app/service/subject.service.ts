@@ -6,6 +6,7 @@ import {
   SubjectCreateRequest,
   SubjectDeleteRequest,
   SubjectGroup,
+  SubjectTrainingSys,
   SubjectUpdateRequest
 } from "../domain/subject";
 
@@ -20,6 +21,14 @@ export interface SubjectGroupResponse {
   status: number,
   results: {
     subjectGroups: SubjectGroup[];
+  }
+}
+
+export interface SubjectTrainingSysResponse {
+  status: number,
+  results: {
+    resultsTotalCount: number,
+    trainingSys: SubjectTrainingSys[];
   }
 }
 
@@ -46,6 +55,7 @@ export class SubjectService {
   apiUrl: string = 'http://localhost:8080/v1/';
   getAllSubjectEndPoint: string = 'subject';
   getAllSubjectGroupEndPoint: string = 'subjectGroup';
+  getAllSubjectTrainingSysEndPoint: string = 'subjectTrainingSys';
   createEndPoint: string = 'createSubject';
   deleteEndPoint: string = 'deleteSubject';
   updateEndPoint: string = 'updateSubject';
@@ -73,6 +83,19 @@ export class SubjectService {
     );
     return this.httpClient.get<SubjectGroupResponse>(
       this.apiUrl + this.getAllSubjectGroupEndPoint,
+      {
+        headers: headers,
+      }
+    );
+  }
+
+  getAllSubjectTrainingSys(): Observable<SubjectTrainingSysResponse> {
+    const headers: HttpHeaders = new HttpHeaders().append(
+      'content-type',
+      'application/json'
+    );
+    return this.httpClient.get<SubjectTrainingSysResponse>(
+      this.apiUrl + this.getAllSubjectTrainingSysEndPoint,
       {
         headers: headers,
       }

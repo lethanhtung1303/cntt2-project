@@ -1,0 +1,140 @@
+<div class="card shadow">
+  <div class="card-body">
+    <p-table
+      #dtLecturer
+      [globalFilterFields]="[
+            'subjectCode',
+            'subjectTitle',
+            'subjectGroupName',
+            'nameTypeSubject',
+            'nameTrainingSys'
+          ]"
+      [loading]="loading"
+      [paginator]="true"
+      [rowsPerPageOptions]="[5, 10, 25, 50]"
+      [rows]="5"
+      [scrollable]="true"
+      [showCurrentPageReport]="true"
+      [tableStyle]="{'min-width': '80rem'}"
+      [value]="teachingHistory"
+      currentPageReportTemplate="{first} - {last} of {totalRecords}"
+      dataKey="id"
+      styleClass="p-datatable-gridlines"
+    >
+      <ng-template pTemplate="caption">
+        <div class="flex  flex-row flex-wrap">
+          <p-dropdown
+            (onChange)="onChangeSemester()"
+            [(ngModel)]="selectedSemester"
+            [group]="true"
+            [options]="groupedSemesters"
+            class="select-semester mr-2"
+            placeholder="Select Semester">
+            <ng-template let-group pTemplate="group">
+              <div class="flex align-items-center">
+                <span>{{ group.label }}</span>
+              </div>
+            </ng-template>
+          </p-dropdown>
+          <button
+            (click)="clear(dtLecturer)"
+            class="p-button-outlined"
+            icon="pi pi-filter-slash"
+            label="Clear"
+            pButton
+            size="small"
+          ></button>
+
+          <div class="ml-auto">
+                <span class="p-input-icon-left mr-2">
+                  <i class="pi pi-search"></i>
+                  <input
+                    (input)="dtLecturer.filterGlobal($any($event.target).value, 'contains')"
+                    pInputText
+                    placeholder="Search keyword"
+                    type="text"/>
+                </span>
+            <button
+              (click)="exportExcel()"
+              class="p-button-success"
+              icon="pi pi-file-excel"
+              pButton
+              pRipple
+              pTooltip="XLS"
+              size="small"
+              tooltipPosition="bottom"
+              type="button"
+            ></button>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr class="text-nowrap">
+          <th class="text-center" pSortableColumn="subjectCode">
+            <div class="flex justify-content-center align-items-center flex-wrap">
+              Mã Môn học
+              <p-sortIcon class="ml-2" field="subjectCode"></p-sortIcon>
+            </div>
+          </th>
+          <th class="text-center" pSortableColumn="subjectTitle">
+            <div class="flex justify-content-center align-items-center flex-wrap">
+              Tên Môn học
+              <p-sortIcon class="ml-2" field="subjectTitle"></p-sortIcon>
+            </div>
+          </th>
+          <th class="text-center" pSortableColumn="numberLessons">
+            <div class="flex justify-content-center align-items-center flex-wrap">
+              Số tiết học
+              <p-sortIcon class="ml-2" field="numberLessons"></p-sortIcon>
+            </div>
+          </th>
+          <th class="text-center" pSortableColumn="subjectGroupName">
+            <div class="flex justify-content-center align-items-center flex-wrap">
+              Nhóm môn
+              <p-sortIcon class="ml-2" field="subjectGroupName"></p-sortIcon>
+            </div>
+          </th>
+          <th class="text-center" pSortableColumn="nameTypeSubject">
+            <div class="flex justify-content-center align-items-center flex-wrap">
+              Loại môn
+              <p-sortIcon class="ml-2" field="nameTypeSubject"></p-sortIcon>
+            </div>
+          </th>
+          <th class="text-center" pSortableColumn="nameTrainingSys">
+            <div class="flex justify-content-center align-items-center flex-wrap">
+              Hệ đào tạo
+              <p-sortIcon class="ml-2" field="nameTrainingSys"></p-sortIcon>
+            </div>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template let-history pTemplate="body">
+        <tr class="text-nowrap">
+          <td class="text-left">
+            {{ history.subjectCode }}
+          </td>
+          <td class="text-left">
+            {{ history.subjectTitle }}
+          </td>
+          <td class="text-center">
+            {{ history.numberLessons }}
+          </td>
+          <td class="text-left">
+            {{ history.subjectGroupName }}
+          </td>
+          <td class="text-center">
+            {{ history.nameTypeSubject }}
+          </td>
+          <td class="text-left">
+            {{ history.nameTrainingSys }}
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="6">No history found.</td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
