@@ -7,7 +7,7 @@
          routerLinkActive="active"
          type="button"><span class="fe fe-corner-down-left fe-24 text-muted"></span>
       </a>
-      <h2 class="page-title" style="margin: 0">Thông tin chi tiết: {{subject?.tenMon}}</h2>
+      <h2 class="page-title" style="margin: 0">Thông tin chi tiết: {{ subject?.tenMon }}</h2>
     </div>
   </div>
 </div>
@@ -21,7 +21,7 @@
             <div class="card shadow mb-4">
               <div class="card-body">
                 <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <div class="form-group mb-3">
                       <label for="subject-code">Mã môn học</label>
                       <input class="form-control form-control-lg" formControlName="subjectCode"
@@ -29,7 +29,7 @@
                              type="text">
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <div class="form-group mb-3">
                       <label for="subject-type">Loại môn</label>
                       <input class="form-control form-control-lg" formControlName="subjectType"
@@ -37,11 +37,19 @@
                              type="text">
                     </div>
                   </div>
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <div class="form-group mb-3">
                       <label for="subject-group">Nhóm môn</label>
                       <input class="form-control form-control-lg" formControlName="subjectGroup"
                              id="subject-group" placeholder="Subject Group" required
+                             type="text">
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="form-group mb-3">
+                      <label for="subject-training-sys">Hệ đào tạo</label>
+                      <input class="form-control form-control-lg" formControlName="subjectTrainingSys"
+                             id="subject-training-sys" placeholder="Subject Training Sys" required
                              type="text">
                     </div>
                   </div>

@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
 import {Table} from "primeng/table";
 import {SelectItemGroup} from 'primeng/api';
-import {SemesterResponse, SemesterService} from "../../../../service/semester.service";
-import {saveAsExcelFile} from "../../../../helper/excel-helper";
-import {UniversityStandard} from "../../../../domain/lecturer";
-import {LecturerStandardService, UniversityStandardsResponse} from "../../../../service/lecturer-standards.service";
+import {SemesterResponse, SemesterService} from "../../../service/semester.service";
+import {saveAsExcelFile} from "../../../helper/excel-helper";
+import {UniversityStandard} from "../../../domain/lecturer";
+import {LecturerStandardService, UniversityStandardsResponse} from "../../../service/lecturer-standards.service";
 
 
 @Component({

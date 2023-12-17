@@ -3,8 +3,14 @@ export interface SubjectGroup {
   tenNhom: string;
 }
 
+export interface SubjectTrainingSys {
+  maHe: number;
+  phanHe: string;
+}
+
 export interface Subject {
   maMon: string;
+  phanHe: string;
   phanLoai: string;
   subjectGroup: SubjectGroup;
   tenMon: string;
@@ -18,6 +24,7 @@ export interface SubjectCreateRequest {
 
 export interface SubjectCreate {
   maNhom: string,
+  maHe: number,
   maLoai: number,
   maMon: string,
   tenMon: string,

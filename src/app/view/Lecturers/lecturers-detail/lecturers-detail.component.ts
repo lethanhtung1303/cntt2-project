@@ -18,7 +18,7 @@ export class LecturersDetailComponent {
       next: (params: ParamMap) => {
         const tabValue: string | null = params.get('tab');
         if (tabValue) {
-          const validTabs: string[] = ['info', 'training-process', 'certificate', 'satisfaction-score'];
+          const validTabs: string[] = ['info', 'training-process', 'certificate', 'satisfaction-score', 'teaching-history'];
           this.currentTab = validTabs.includes(tabValue) ? tabValue : 'info';
 
           this.router.navigate([], {
@@ -78,6 +78,14 @@ export class LecturersDetailComponent {
       queryParams: {tab: "satisfaction-score"},
     }).then(() => {
       this.currentTab = 'satisfaction-score'
+    });
+  }
+
+  goTeachingHistory() {
+    this.router.navigate([], {
+      queryParams: {tab: "teaching-history"},
+    }).then(() => {
+      this.currentTab = 'teaching-history'
     });
   }
 

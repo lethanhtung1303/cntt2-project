@@ -9,7 +9,7 @@
       </a>
       <h2 class="page-title" style="margin: 0">Thông tin chi
         tiết: {{ this.generateLevel(lecturer?.trainingProcess) }}
-        {{lecturer?.firstName }} {{lecturer?.fullName }}
+        {{ lecturer?.firstName }} {{ lecturer?.fullName }}
       </h2>
     </div>
   </div>
@@ -51,6 +51,13 @@
                  class="nav-link" data-toggle="tab"
                  id="satisfaction-score-tab" role="tab">Điểm hài lòng</a>
             </li>
+            <li class="nav-item">
+              <a (click)="goTeachingHistory()" [class.active]="currentTab==='teaching-history'"
+                 aria-controls="teaching-history"
+                 aria-selected="false"
+                 class="nav-link" data-toggle="tab"
+                 id="teaching-history-tab" role="tab">Lịch sử Giảng dạy</a>
+            </li>
           </ul>
           <app-lecturer-info *ngIf="currentTab === 'info'" [lecturerInfo]="lecturer"></app-lecturer-info>
 
@@ -65,6 +72,9 @@
           <app-lecturer-satisfaction-score
             *ngIf="currentTab === 'satisfaction-score'" [lecturerId]="lecturer?.id"
             [satisfactionScore]="lecturer?.satisfactionScore"></app-lecturer-satisfaction-score>
+
+          <app-lecturer-teaching-history
+            *ngIf="currentTab === 'teaching-history'" [lecturerId]="lecturer?.id"></app-lecturer-teaching-history>
         </div> <!-- /.card-body -->
       </div>
     </div>

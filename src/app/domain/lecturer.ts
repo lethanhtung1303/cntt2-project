@@ -158,8 +158,25 @@ export interface NormsLectureHours {
   lecturerLevelCode?: number;
   lecturerLevel?: string;
   displayOrder?: number;
-  practicalLessons: NumberLessons;
+  lessonsStandardSys: NumberLessons;
+  lessonsCLCVietnamese: NumberLessons;
+  lessonsCLCEnglish: NumberLessons;
+  lessonsEnglishInternational: NumberLessons;
+  lessonsMaster: NumberLessons;
   conversionLesson: NumberLessons;
   totalNumberLessons: number;
   status: number;
+}
+
+export interface LecturerTeachingHistory {
+  subjectCode?: string;
+  subjectTitle?: string;
+  numberLessons?: number;
+  subjectGroupCode?: string;
+  subjectGroupName?: string;
+  subjectTypeCode?: number;
+  nameTypeSubject?: string;
+  trainingSysCode?: number;
+  nameTrainingSys?: string;
+  identification?: number;
 }
