@@ -117,7 +117,7 @@
       </li>
     </ul>
 
-    <!--    Định mức & Thống kê Giờ giảng-->
+    <!--    Định mức giờ giảng-->
     <ul *ngIf="userRoles?.includes('tdt_sys_hr_v')"
         class="navbar-nav flex-fill w-100 mb-2">
       <li class="nav-item w-100">
@@ -127,7 +127,22 @@
           routerLinkActive="active"
         >
           <i class="fe fe-pocket fe-16"></i>
-          <span class="ml-3 item-text">Định mức & Thống kê</span>
+          <span class="ml-3 item-text">Định mức giờ giảng</span>
+        </a>
+      </li>
+    </ul>
+
+    <!--    Thống kê số tiết-->
+    <ul *ngIf="userRoles?.includes('tdt_sys_hr_v')"
+        class="navbar-nav flex-fill w-100 mb-2">
+      <li class="nav-item w-100">
+        <a
+          class="nav-link"
+          routerLink="statistics-number-periods"
+          routerLinkActive="active"
+        >
+          <i class="fe fe-pen-tool fe-16"></i>
+          <span class="ml-3 item-text">Thống kê số tiết</span>
         </a>
       </li>
     </ul>

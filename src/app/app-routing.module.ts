@@ -9,10 +9,10 @@ import {AuthGuardWithoutLogin} from "./auth-guard/AuthGuardWithoutLogin";
 import {LecturersListComponent} from "./view/Lecturers/lecturers-list/lecturers-list.component";
 import {
   UniversityLecturerListComponent
-} from "./view/LecturerStandards/university-lecturer-list/university-lecturer-list.component";
+} from "./view/LecturerStandards/University/university-lecturer-list/university-lecturer-list.component";
 import {
   MasterLecturerListComponent
-} from "./view/LecturerStandards/master-lecturer-list/master-lecturer-list.component";
+} from "./view/LecturerStandards/MasterDegree/master-lecturer-list/master-lecturer-list.component";
 import {LecturersDetailComponent} from "./view/Lecturers/lecturers-detail/lecturers-detail.component";
 import {
   EditTrainingProcessComponent
@@ -63,6 +63,10 @@ const routes: Routes = [
       {path: 'faculty-members', component: LecturersListComponent},
       {path: 'faculty-members/add', component: LecturersListComponent},
       {path: 'faculty-members/:id', component: LecturersListComponent},
+
+      {path: 'statistics-number-periods', component: LecturersListComponent},
+      {path: 'statistics-number-periods/add', component: LecturersListComponent},
+      {path: 'statistics-number-periods/:id', component: LecturersListComponent},
 
       {path: '', redirectTo: 'home', pathMatch: 'full'}, // redirect to `home-component`
     ],

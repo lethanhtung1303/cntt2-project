@@ -19,9 +19,6 @@ export class SubjectDetailComponent {
     subjectGroup: new FormControl({value: '', disabled: true}, [
       Validators.required
     ]),
-    subjectTrainingSys: new FormControl({value: '', disabled: true}, [
-      Validators.required
-    ]),
     subjectType: new FormControl({value: '', disabled: true}, [
       Validators.required
     ]),
@@ -58,7 +55,6 @@ export class SubjectDetailComponent {
   initData() {
     this.subjectUpdateForm.patchValue({
       subjectGroup: this.subjectForUpdate?.subjectGroup.tenNhom,
-      subjectTrainingSys: this.subjectForUpdate?.phanHe,
       subjectType: this.subjectForUpdate?.phanLoai,
       subjectCode: this.subjectForUpdate?.maMon,
       subjectName: this.subjectForUpdate?.tenMon.replace(/^\[.*?\]\s*/, ''),

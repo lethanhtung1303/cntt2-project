@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {MasterStandards} from "../../../domain/lecturer";
-import {LecturerStandardService, MasterStandardsResponse} from "../../../service/lecturer-standards.service";
+import {MasterStandards} from "../../../../domain/lecturer";
+import {LecturerStandardService, MasterStandardsResponse} from "../../../../service/lecturer-standards.service";
 
 @Component({
   selector: 'app-master-lecturer-list',
