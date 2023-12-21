@@ -111,7 +111,11 @@
       <ng-template let-history pTemplate="body">
         <tr class="text-nowrap">
           <td class="text-left">
-            {{ history.subjectCode }}
+            <a ariaCurrentWhenActive="page"
+               class="ml-1 vertical-align-middle"
+               routerLink="/subject/{{history.subjectCode}}"
+               routerLinkActive="active">{{ history.subjectCode }}
+            </a>
           </td>
           <td class="text-left">
             {{ history.subjectTitle }}

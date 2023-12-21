@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnChanges} from '@angular/core';
 import {ConfirmationService, ConfirmEventType, MessageService, SelectItemGroup} from "primeng/api";
 import {SemesterResponse, SemesterService} from "../../../../../service/semester.service";
 import {SubjectResponse, SubjectService} from "../../../../../service/subject.service";
@@ -17,7 +17,7 @@ import {Subject} from "../../../../../domain/subject";
   styleUrls: ['./lecturer-satisfaction-score.component.css'],
   providers: [MessageService, ConfirmationService]
 })
-export class LecturerSatisfactionScoreComponent implements OnInit {
+export class LecturerSatisfactionScoreComponent implements OnChanges {
   @Input() lecturerId?: number;
   @Input() satisfactionScore?: SatisfactionScore[];
 
@@ -70,7 +70,7 @@ export class LecturerSatisfactionScoreComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ngOnChanges() {
     this.initSatisfactionScore()
     this.initData()
     this.initOptions()

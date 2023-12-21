@@ -20,6 +20,9 @@ import {
 import {SubjectsListComponent} from "./view/Subjects/subjects-list/subjects-list.component";
 import {SubjectDetailComponent} from "./view/Subjects/subject-detail/subject-detail.component";
 import {NormsLectureHoursComponent} from "./view/norms-lecture-hours/norms-lecture-hours.component";
+import {
+  ContractualLecturerComponent
+} from "./view/LectureHourStatistics/contractual-lecturer/contractual-lecturer.component";
 
 const routes: Routes = [
   {
@@ -44,25 +47,17 @@ const routes: Routes = [
       {path: 'norms-lecture-hours/add', component: NormsLectureHoursComponent},
       {path: 'norms-lecture-hours/:id', component: NormsLectureHoursComponent},
 
-      {path: 'satisfaction-score', component: LecturersListComponent},
-      {path: 'satisfaction-score/add', component: LecturersListComponent},
-      {path: 'satisfaction-score/:id', component: LecturersListComponent},
+      {path: 'contractual-lecturer', component: ContractualLecturerComponent},
+      {path: 'contractual-lecturer/add', component: ContractualLecturerComponent},
+      {path: 'contractual-lecturer/:id', component: ContractualLecturerComponent},
 
-      {path: 'teaching-history', component: LecturersListComponent},
-      {path: 'teaching-history/add', component: LecturersListComponent},
-      {path: 'teaching-history/:id', component: LecturersListComponent},
+      // {path: 'visiting-lecturer', component: LecturersListComponent},
+      // {path: 'visiting-lecturer/add', component: LecturersListComponent},
+      // {path: 'visiting-lecturer/:id', component: LecturersListComponent},
 
-      {path: 'assign-lecture-hours', component: LecturersListComponent},
-      {path: 'assign-lecture-hours/add', component: LecturersListComponent},
-      {path: 'assign-lecture-hours/:id', component: LecturersListComponent},
-
-      {path: 'guest-lecturers', component: LecturersListComponent},
-      {path: 'guest-lecturers/add', component: LecturersListComponent},
-      {path: 'guest-lecturers/:id', component: LecturersListComponent},
-
-      {path: 'faculty-members', component: LecturersListComponent},
-      {path: 'faculty-members/add', component: LecturersListComponent},
-      {path: 'faculty-members/:id', component: LecturersListComponent},
+      // {path: 'assign-lecture-hours', component: LecturersListComponent},
+      // {path: 'assign-lecture-hours/add', component: LecturersListComponent},
+      // {path: 'assign-lecture-hours/:id', component: LecturersListComponent},
 
       {path: '', redirectTo: 'home', pathMatch: 'full'}, // redirect to `home-component`
     ],
