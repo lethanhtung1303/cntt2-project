@@ -21,7 +21,7 @@
             <div class="card shadow mb-4">
               <div class="card-body">
                 <div class="row">
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                     <div class="form-group mb-3">
                       <label for="subject-code">Mã môn học</label>
                       <input class="form-control form-control-lg" formControlName="subjectCode"
@@ -29,7 +29,7 @@
                              type="text">
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                     <div class="form-group mb-3">
                       <label for="subject-type">Loại môn</label>
                       <input class="form-control form-control-lg" formControlName="subjectType"
@@ -37,19 +37,11 @@
                              type="text">
                     </div>
                   </div>
-                  <div class="col-md-3">
+                  <div class="col-md-4">
                     <div class="form-group mb-3">
                       <label for="subject-group">Nhóm môn</label>
                       <input class="form-control form-control-lg" formControlName="subjectGroup"
                              id="subject-group" placeholder="Subject Group" required
-                             type="text">
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="form-group mb-3">
-                      <label for="subject-training-sys">Hệ đào tạo</label>
-                      <input class="form-control form-control-lg" formControlName="subjectTrainingSys"
-                             id="subject-training-sys" placeholder="Subject Training Sys" required
                              type="text">
                     </div>
                   </div>
@@ -83,52 +75,6 @@
               </div>
             </div>
           </form>
-
-          <!--          <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">-->
-          <!--            <li class="nav-item">-->
-          <!--              <a (click)="goInfo()" [class.active]="currentTab==='info'" aria-controls="info"-->
-          <!--                 aria-selected="true"-->
-          <!--                 class="nav-link"-->
-          <!--                 data-toggle="tab"-->
-          <!--                 id="info-tab" role="tab">Thông tin cá nhân</a>-->
-          <!--            </li>-->
-          <!--            <li class="nav-item">-->
-          <!--              <a (click)="goTrainingProcess()" [class.active]="currentTab==='training-process'"-->
-          <!--                 aria-controls="training-process"-->
-          <!--                 aria-selected="false"-->
-          <!--                 class="nav-link "-->
-          <!--                 data-toggle="tab"-->
-          <!--                 id="training-process-tab" role="tab">Quá trình đào tạo</a>-->
-          <!--            </li>-->
-          <!--            <li class="nav-item">-->
-          <!--              <a (click)="goCertificate()" [class.active]="currentTab==='certificate'"-->
-          <!--                 aria-controls="certificate"-->
-          <!--                 aria-selected="false"-->
-          <!--                 class="nav-link "-->
-          <!--                 data-toggle="tab"-->
-          <!--                 id="certificate-tab" role="tab">Chứng chỉ Ngoại ngữ</a>-->
-          <!--            </li>-->
-          <!--            <li class="nav-item">-->
-          <!--              <a (click)="goSatisfactionScore()" [class.active]="currentTab==='satisfaction-score'"-->
-          <!--                 aria-controls="satisfaction-score"-->
-          <!--                 aria-selected="false"-->
-          <!--                 class="nav-link" data-toggle="tab"-->
-          <!--                 id="satisfaction-score-tab" role="tab">Điểm hài lòng</a>-->
-          <!--            </li>-->
-          <!--          </ul>-->
-          <!--          <app-lecturer-info *ngIf="currentTab === 'info'" [lecturerInfo]="lecturer"></app-lecturer-info>-->
-
-          <!--          <app-lecturer-training-process *ngIf="currentTab === 'training-process'"-->
-          <!--                                         [lecturerId]="lecturer?.id"-->
-          <!--                                         [trainingProcess]="lecturer?.trainingProcess"></app-lecturer-training-process>-->
-
-          <!--          <app-lecturer-certificate *ngIf="currentTab === 'certificate'"-->
-          <!--                                    [certificates]="lecturer?.certificate"-->
-          <!--                                    [lecturerId]="lecturer?.id"></app-lecturer-certificate>-->
-
-          <!--          <app-lecturer-satisfaction-score-->
-          <!--            *ngIf="currentTab === 'satisfaction-score'" [lecturerId]="lecturer?.id"-->
-          <!--            [satisfactionScore]="lecturer?.satisfactionScore"></app-lecturer-satisfaction-score>-->
         </div> <!-- /.card-body -->
       </div>
     </div>
