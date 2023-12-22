@@ -180,3 +180,28 @@ export interface LecturerTeachingHistory {
   nameTrainingSys?: string;
   identification?: number;
 }
+
+export interface ExtraLectureHours {
+  id?: number;
+  fullName?: string;
+  images?: string;
+  emailTdtu?: string;
+  classificationLecturersCode?: number;
+  classificationLecturers?: string;
+  lecturerLevelCode?: number;
+  lecturerLevel?: string;
+  displayOrder?: number;
+  standardLectureHours: number;
+  totalLectureHours: number;
+  extraHoursStandardSys: number;
+  extraHoursCLCVietnamese: ExtraHours;
+  extraHoursCLCEnglish: ExtraHours;
+  extraHoursEnglishInternational: ExtraHours;
+  extraHoursMaster: number;
+  totalPayment: number;
+}
+
+export interface ExtraHours {
+  basicSubjects: number;
+  majoringSubjects: number;
+}
