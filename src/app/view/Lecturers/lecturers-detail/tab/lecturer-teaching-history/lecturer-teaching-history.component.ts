@@ -8,6 +8,7 @@ import {
   LecturerTeachingHistoryService,
   TeachingHistoryResponse
 } from "../../../../../service/lecturer-teaching-history.service";
+import {getCurrentSemester} from "../../../../../helper/semesters";
 
 @Component({
   selector: 'app-lecturer-teaching-history',
@@ -26,7 +27,7 @@ export class LecturerTeachingHistoryComponent implements OnChanges {
     this.semesterService.getAllSemester().subscribe({
       next: (data: SemesterResponse) => {
         this.groupedSemesters = data.results.semesters;
-        this.selectedSemester = this.getSelectedSemester(this.groupedSemesters)?.items[0].value
+        this.selectedSemester = getCurrentSemester(this.groupedSemesters)?.value
         if (this.selectedSemester && this.lecturerId) {
           this.getLecturerTeachingHistory(this.selectedSemester, this.lecturerId)
         }
@@ -62,10 +63,6 @@ export class LecturerTeachingHistoryComponent implements OnChanges {
         console.log(error)
       }
     });
-  }
-
-  getSelectedSemester(groupedSemesters: SelectItemGroup[]): SelectItemGroup | null {
-    return groupedSemesters.find(item => item.value === new Date().getFullYear()) ?? null;
   }
 
   clear(table: Table) {

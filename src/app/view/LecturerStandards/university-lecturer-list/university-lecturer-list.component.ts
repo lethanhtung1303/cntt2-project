@@ -5,6 +5,7 @@ import {SemesterResponse, SemesterService} from "../../../service/semester.servi
 import {saveAsExcelFile} from "../../../helper/excel-helper";
 import {UniversityStandard} from "../../../domain/lecturer";
 import {LecturerStandardService, UniversityStandardsResponse} from "../../../service/lecturer-standards.service";
+import {getCurrentSemester} from "../../../helper/semesters";
 
 
 @Component({
@@ -25,7 +26,7 @@ export class UniversityLecturerListComponent {
     this.semesterService.getAllSemester().subscribe({
       next: (data: SemesterResponse) => {
         this.groupedSemesters = data.results.semesters;
-        this.selectedSemester = this.getSelectedSemester(this.groupedSemesters)?.items[0].value
+        this.selectedSemester = getCurrentSemester(this.groupedSemesters)?.value
         if (this.selectedSemester) {
           this.getLecturerStandards(this.selectedSemester)
         }
@@ -46,10 +47,6 @@ export class UniversityLecturerListComponent {
         console.log(error)
       }
     });
-  }
-
-  getSelectedSemester(groupedSemesters: SelectItemGroup[]): SelectItemGroup | null {
-    return groupedSemesters.find(item => item.value === new Date().getFullYear()) ?? null;
   }
 
   clear(table: Table) {

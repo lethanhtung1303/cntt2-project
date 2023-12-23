@@ -6,6 +6,7 @@ import {saveAsExcelFile} from "../../../helper/excel-helper";
 import {SemesterResponse, SemesterService} from "../../../service/semester.service";
 import {ExtraLectureHoursResponse, ExtraLectureHoursService} from "../../../service/extra-lecture-hours.service";
 import {convertAmount} from "../../../helper/amout";
+import {getCurrentSemester} from "../../../helper/semesters";
 
 @Component({
   selector: 'app-contractual-lecturer',
@@ -23,7 +24,7 @@ export class ContractualLecturerComponent {
     this.semesterService.getAllSemester().subscribe({
       next: (data: SemesterResponse) => {
         this.groupedSemesters = data.results.semesters;
-        this.selectedSemester = this.getSelectedSemester(this.groupedSemesters)?.items[0].value
+        this.selectedSemester = getCurrentSemester(this.groupedSemesters)?.value
         if (this.selectedSemester) {
           this.getExtraLectureHours(this.selectedSemester)
         }
@@ -68,9 +69,5 @@ export class ContractualLecturerComponent {
         console.log(error)
       }
     });
-  }
-
-  getSelectedSemester(groupedSemesters: SelectItemGroup[]): SelectItemGroup | null {
-    return groupedSemesters.find(item => item.value === new Date().getFullYear()) ?? null;
   }
 }
