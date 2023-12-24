@@ -1,19 +1,19 @@
 import {Component} from '@angular/core';
+import {Table} from "primeng/table";
+import {convertAmount} from "../../../helper/amout";
 import {ExtraLectureHours} from "../../../domain/lecturer";
 import {SelectItemGroup} from "primeng/api";
-import {Table} from "primeng/table";
-import {saveAsExcelFile} from "../../../helper/excel-helper";
 import {SemesterResponse, SemesterService} from "../../../service/semester.service";
 import {ExtraLectureHoursResponse, ExtraLectureHoursService} from "../../../service/extra-lecture-hours.service";
-import {convertAmount} from "../../../helper/amout";
+import {saveAsExcelFile} from "../../../helper/excel-helper";
 import {getCurrentSemester} from "../../../helper/semesters";
 
 @Component({
-  selector: 'app-contractual-lecturer',
-  templateUrl: './contractual-lecturer.component.html',
-  styleUrls: ['./contractual-lecturer.component.css']
+  selector: 'app-visiting-lecturer',
+  templateUrl: './visiting-lecturer.component.html',
+  styleUrls: ['./visiting-lecturer.component.css']
 })
-export class ContractualLecturerComponent {
+export class VisitingLecturerComponent {
   loading: boolean = false;
   lectureData: ExtraLectureHours[] = [];
   selectedSemester: number | undefined;
@@ -60,9 +60,7 @@ export class ContractualLecturerComponent {
   getExtraLectureHours(semester: number) {
     this.extraLectureHoursService.getExtraHoursForContractual(semester).subscribe({
       next: (data: ExtraLectureHoursResponse) => {
-        console.log(data.results.extraLectureHours);
         this.lectureData = data.results.extraLectureHours;
-        console.log(this.lectureData)
         this.loading = false;
       },
       error: (error) => {

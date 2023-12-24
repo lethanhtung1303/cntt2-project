@@ -133,6 +133,7 @@ import {
 import {
   ContractualLecturerComponent
 } from './view/LectureHourStatistics/contractual-lecturer/contractual-lecturer.component';
+import { VisitingLecturerComponent } from './view/LectureHourStatistics/visiting-lecturer/visiting-lecturer.component';
 
 
 @NgModule({
@@ -158,6 +159,7 @@ import {
     NormsLectureHoursComponent,
     LecturerTeachingHistoryComponent,
     ContractualLecturerComponent,
+    VisitingLecturerComponent,
   ],
   imports: [
     BrowserModule,

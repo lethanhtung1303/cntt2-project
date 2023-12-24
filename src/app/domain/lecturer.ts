@@ -179,6 +179,7 @@ export interface LecturerTeachingHistory {
   trainingSysCode?: number;
   nameTrainingSys?: string;
   identification?: number;
+  createDatetime?: string;
 }
 
 export interface ExtraLectureHours {

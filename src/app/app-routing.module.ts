@@ -23,6 +23,7 @@ import {NormsLectureHoursComponent} from "./view/norms-lecture-hours/norms-lectu
 import {
   ContractualLecturerComponent
 } from "./view/LectureHourStatistics/contractual-lecturer/contractual-lecturer.component";
+import {VisitingLecturerComponent} from "./view/LectureHourStatistics/visiting-lecturer/visiting-lecturer.component";
 
 const routes: Routes = [
   {
@@ -51,9 +52,9 @@ const routes: Routes = [
       {path: 'contractual-lecturer/add', component: ContractualLecturerComponent},
       {path: 'contractual-lecturer/:id', component: ContractualLecturerComponent},
 
-      // {path: 'visiting-lecturer', component: LecturersListComponent},
-      // {path: 'visiting-lecturer/add', component: LecturersListComponent},
-      // {path: 'visiting-lecturer/:id', component: LecturersListComponent},
+      {path: 'visiting-lecturer', component: VisitingLecturerComponent},
+      {path: 'visiting-lecturer/add', component: VisitingLecturerComponent},
+      {path: 'visiting-lecturer/:id', component: VisitingLecturerComponent},
 
       // {path: 'assign-lecture-hours', component: LecturersListComponent},
       // {path: 'assign-lecture-hours/add', component: LecturersListComponent},

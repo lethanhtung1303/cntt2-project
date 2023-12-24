@@ -4,13 +4,8 @@ import {Router} from "@angular/router";
 import {ConfirmationService, ConfirmEventType, MessageService} from "primeng/api";
 import {UserHelper} from "../../../helper/user-helper";
 import {ErrorResponse, GlobalErrorService} from "../../../service/global-error.service";
-import {
-  SubjectGroupResponse,
-  SubjectResponse,
-  SubjectService,
-  SubjectTrainingSysResponse
-} from "../../../service/subject.service";
-import {Subject, SubjectCreate, SubjectCreateRequest, SubjectGroup, SubjectTrainingSys} from "../../../domain/subject";
+import {SubjectGroupResponse, SubjectResponse, SubjectService} from "../../../service/subject.service";
+import {Subject, SubjectCreate, SubjectCreateRequest, SubjectGroup} from "../../../domain/subject";
 import {Table} from "primeng/table";
 import {saveAsExcelFile} from "../../../helper/excel-helper";
 
@@ -31,9 +26,6 @@ export class SubjectsListComponent {
     subjectGroup: new FormControl<number | null>(null, [
       Validators.required
     ]),
-    subjectTrainingSys: new FormControl<number | null>(null, [
-      Validators.required
-    ]),
     subjectType: new FormControl<number | null>(null, [
       Validators.required
     ]),
@@ -50,7 +42,7 @@ export class SubjectsListComponent {
 
   userLogin: string;
   subjectGroups: SubjectGroup[] = [];
-  subjectTrainingSys: SubjectTrainingSys[] = [];
+
   err: ErrorResponse = {errMessage: null, errorCode: null}
 
   constructor(private router: Router, private confirmationService: ConfirmationService, private messageService: MessageService, private userHelper: UserHelper, public globalErrorService: GlobalErrorService, private subjectService: SubjectService) {
@@ -65,15 +57,6 @@ export class SubjectsListComponent {
       }
     });
 
-    this.subjectService.getAllSubjectTrainingSys().subscribe({
-      next: (data: SubjectTrainingSysResponse) => {
-        this.subjectTrainingSys = data.results.trainingSys;
-        console.log(this.subjectTrainingSys)
-      },
-      error: (error) => {
-        console.log(error)
-      }
-    });
 
     this.subjectService.getAllSubject().subscribe({
       next: (data: SubjectResponse) => {
@@ -123,7 +106,6 @@ export class SubjectsListComponent {
   genSubjectCreateRequest(subjectCreateForm: any, userLogin: string): SubjectCreateRequest {
     const subjectCreate: SubjectCreate = {
       maNhom: subjectCreateForm.subjectGroup,
-      maHe: subjectCreateForm.subjectTrainingSys,
       maLoai: subjectCreateForm.subjectType,
       maMon: subjectCreateForm.subjectCode,
       tenMon: subjectCreateForm.subjectName.replace(/^\[.*?\]\s*/, ''),
