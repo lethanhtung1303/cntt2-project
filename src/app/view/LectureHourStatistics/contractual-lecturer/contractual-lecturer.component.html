@@ -1,6 +1,6 @@
 <div class="row align-items-center my-3">
   <div class="col">
-    <h2 class="page-title">Thống kê Giờ giảng của Giảng viên Cơ hữu</h2>
+    <h2 class="page-title">Thống kê Giờ giảng Phụ trội của Giảng viên Cơ hữu</h2>
   </div>
 </div>
 <div class="row">
@@ -10,7 +10,7 @@
       <div class="card-body">
         <div class="card">
           <p-table #dt
-                   [globalFilterFields]="[]"
+                   [globalFilterFields]="['fullName','emailTdtu','lecturerLevel']"
                    [loading]="loading"
                    [paginator]="true"
                    [rowHover]="true"

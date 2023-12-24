@@ -26,7 +26,7 @@ export class VisitingLecturerComponent {
         this.groupedSemesters = data.results.semesters;
         this.selectedSemester = getCurrentSemester(this.groupedSemesters)?.value
         if (this.selectedSemester) {
-          this.getExtraLectureHours(this.selectedSemester)
+          this.getExtraVisitingLectureHours(this.selectedSemester)
         }
       },
       error: (error) => {
@@ -37,7 +37,7 @@ export class VisitingLecturerComponent {
 
   onChangeSemester() {
     if (this.selectedSemester) {
-      this.getExtraLectureHours(this.selectedSemester)
+      this.getExtraVisitingLectureHours(this.selectedSemester)
     }
   }
 
@@ -57,8 +57,8 @@ export class VisitingLecturerComponent {
     });
   }
 
-  getExtraLectureHours(semester: number) {
-    this.extraLectureHoursService.getExtraHoursForContractual(semester).subscribe({
+  getExtraVisitingLectureHours(semester: number) {
+    this.extraLectureHoursService.getExtraHoursForVisiting(semester).subscribe({
       next: (data: ExtraLectureHoursResponse) => {
         this.lectureData = data.results.extraLectureHours;
         this.loading = false;
