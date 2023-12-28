@@ -63,6 +63,7 @@ export class NormsLectureHoursComponent implements OnInit {
     this.normsLectureHoursService.getNormsLectureHours(semester).subscribe({
       next: (data: NormsLectureHoursResponse) => {
         this.lectureData = data.results.normsLectureHours;
+        console.log(this.lectureData)
         this.loading = false;
       },
       error: (error) => {

@@ -75,8 +75,10 @@
                 <th class="text-center" pFrozenColumn rowspan="3">Giảng viên</th>
                 <th class="text-center" rowspan="3">Phân loại</th>
                 <th class="text-center" rowspan="3">Trình độ</th>
-                <th class="text-center" colspan="10">Số tiết thực tế</th>
-                <th class="text-center" colspan="2">Số Tiết Quy đổi</th>
+                <th class="text-center" colspan="10">
+                  <span>Số tiết thực tế</span> | <span class="text-primary">Số tiết quy đổi</span>
+                </th>
+                <th class="text-center" colspan="2">Tổng số tiết quy đổi</th>
                 <th class="text-center" rowspan="3">Tổng số tiết</th>
                 <th class="text-center" rowspan="3">Trang thái</th>
               </tr>
@@ -122,16 +124,48 @@
                 </td>
                 <td class="text-center">{{ lecturer.classificationLecturers }}</td>
                 <td class="text-center">{{ lecturer.lecturerLevel }}</td>
-                <td class="text-center">{{ lecturer.lessonsStandardSys.numberTheory }}</td>
-                <td class="text-center">{{ lecturer.lessonsStandardSys.numberPractice }}</td>
-                <td class="text-center">{{ lecturer.lessonsCLCVietnamese.numberTheory }}</td>
-                <td class="text-center">{{ lecturer.lessonsCLCVietnamese.numberPractice }}</td>
-                <td class="text-center">{{ lecturer.lessonsCLCEnglish.numberTheory }}</td>
-                <td class="text-center">{{ lecturer.lessonsCLCEnglish.numberPractice }}</td>
-                <td class="text-center">{{ lecturer.lessonsEnglishInternational.numberTheory }}</td>
-                <td class="text-center">{{ lecturer.lessonsEnglishInternational.numberPractice }}</td>
-                <td class="text-center">{{ lecturer.lessonsMaster.numberTheory }}</td>
-                <td class="text-center">{{ lecturer.lessonsMaster.numberPractice }}</td>
+                <td class="text-center">
+                  <span>{{ lecturer.lessonsStandardSys.originalLesson.numberTheory }}</span> |
+                  <span class="text-primary">{{ lecturer.lessonsStandardSys.conversionLessons.numberTheory }}</span>
+                </td>
+                <td class="text-center">
+                  <span>{{ lecturer.lessonsStandardSys.originalLesson.numberPractice }}</span> |
+                  <span class="text-primary">{{ lecturer.lessonsStandardSys.conversionLessons.numberPractice }}</span>
+                </td>
+                <td class="text-center">
+                  <span>{{ lecturer.lessonsCLCVietnamese.originalLesson.numberTheory }}</span> |
+                  <span class="text-primary">{{ lecturer.lessonsCLCVietnamese.conversionLessons.numberTheory }}</span>
+                </td>
+                <td class="text-center">
+                  <span>{{ lecturer.lessonsCLCVietnamese.originalLesson.numberPractice }}</span> |
+                  <span class="text-primary">{{ lecturer.lessonsCLCVietnamese.conversionLessons.numberPractice }}</span>
+                </td>
+                <td class="text-center">
+                  <span>{{ lecturer.lessonsCLCEnglish.originalLesson.numberTheory }}</span> |
+                  <span class="text-primary">{{ lecturer.lessonsCLCEnglish.conversionLessons.numberTheory }}</span>
+                </td>
+                <td class="text-center">
+                  <span>{{ lecturer.lessonsCLCEnglish.originalLesson.numberPractice }}</span> |
+                  <span class="text-primary">{{ lecturer.lessonsCLCEnglish.conversionLessons.numberPractice }}</span>
+                </td>
+                <td class="text-center">
+                  <span>{{ lecturer.lessonsEnglishInternational.originalLesson.numberTheory }}</span> |
+                  <span
+                    class="text-primary">{{ lecturer.lessonsEnglishInternational.conversionLessons.numberTheory }}</span>
+                </td>
+                <td class="text-center">
+                  <span>{{ lecturer.lessonsEnglishInternational.originalLesson.numberPractice }}</span> |
+                  <span
+                    class="text-primary">{{ lecturer.lessonsEnglishInternational.conversionLessons.numberPractice }}</span>
+                </td>
+                <td class="text-center">
+                  <span>{{ lecturer.lessonsMaster.originalLesson.numberTheory }}</span> |
+                  <span class="text-primary">{{ lecturer.lessonsMaster.conversionLessons.numberTheory }}</span>
+                </td>
+                <td class="text-center">
+                  <span>{{ lecturer.lessonsMaster.originalLesson.numberPractice }}</span> |
+                  <span class="text-primary">{{ lecturer.lessonsMaster.conversionLessons.numberPractice }}</span>
+                </td>
                 <td class="text-center">{{ lecturer.conversionLesson.numberTheory }}</td>
                 <td class="text-center">{{ lecturer.conversionLesson.numberPractice }}</td>
                 <td class="text-center">{{ lecturer.totalNumberLessons }}</td>

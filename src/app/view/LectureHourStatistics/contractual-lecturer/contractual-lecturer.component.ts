@@ -26,7 +26,7 @@ export class ContractualLecturerComponent {
         this.groupedSemesters = data.results.semesters;
         this.selectedSemester = getCurrentSemester(this.groupedSemesters)?.value
         if (this.selectedSemester) {
-          this.getExtraLectureHours(this.selectedSemester)
+          this.getExtraContractualLectureHours(this.selectedSemester)
         }
       },
       error: (error) => {
@@ -37,7 +37,7 @@ export class ContractualLecturerComponent {
 
   onChangeSemester() {
     if (this.selectedSemester) {
-      this.getExtraLectureHours(this.selectedSemester)
+      this.getExtraContractualLectureHours(this.selectedSemester)
     }
   }
 
@@ -57,7 +57,7 @@ export class ContractualLecturerComponent {
     });
   }
 
-  getExtraLectureHours(semester: number) {
+  getExtraContractualLectureHours(semester: number) {
     this.extraLectureHoursService.getExtraHoursForContractual(semester).subscribe({
       next: (data: ExtraLectureHoursResponse) => {
         console.log(data.results.extraLectureHours);

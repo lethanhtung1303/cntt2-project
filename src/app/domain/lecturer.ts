@@ -148,6 +148,11 @@ export interface NumberLessons {
   numberPractice: number;
 }
 
+export interface NumberLessonsDetail {
+  originalLesson: NumberLessons;
+  conversionLessons: NumberLessons;
+}
+
 export interface NormsLectureHours {
   id?: number;
   fullName?: string;
@@ -158,11 +163,11 @@ export interface NormsLectureHours {
   lecturerLevelCode?: number;
   lecturerLevel?: string;
   displayOrder?: number;
-  lessonsStandardSys: NumberLessons;
-  lessonsCLCVietnamese: NumberLessons;
-  lessonsCLCEnglish: NumberLessons;
-  lessonsEnglishInternational: NumberLessons;
-  lessonsMaster: NumberLessons;
+  lessonsStandardSys: NumberLessonsDetail;
+  lessonsCLCVietnamese: NumberLessonsDetail;
+  lessonsCLCEnglish: NumberLessonsDetail;
+  lessonsEnglishInternational: NumberLessonsDetail;
+  lessonsMaster: NumberLessonsDetail;
   conversionLesson: NumberLessons;
   totalNumberLessons: number;
   status: number;

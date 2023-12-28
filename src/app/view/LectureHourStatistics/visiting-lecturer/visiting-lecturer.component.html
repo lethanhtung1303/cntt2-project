@@ -1,6 +1,6 @@
 <div class="row align-items-center my-3">
   <div class="col">
-    <h2 class="page-title">Thống kê Giờ giảng của Giảng viên Cơ hữu</h2>
+    <h2 class="page-title">Thống kê Giờ giảng của Giảng viên Thỉnh giảng</h2>
   </div>
 </div>
 <div class="row">
@@ -10,7 +10,7 @@
       <div class="card-body">
         <div class="card">
           <p-table #dt
-                   [globalFilterFields]="[]"
+                   [globalFilterFields]="['fullName','emailTdtu','lecturerLevel']"
                    [loading]="loading"
                    [paginator]="true"
                    [rowHover]="true"
@@ -71,20 +71,15 @@
             </ng-template>
             <ng-template pTemplate="header">
               <tr class="text-nowrap">
-                <th class="text-center" pFrozenColumn rowspan="3">#</th>
-                <th class="text-center" pFrozenColumn rowspan="3">Giảng viên</th>
-                <th class="text-center" rowspan="3">Trình độ</th>
-                <th class="text-center" rowspan="3">Tiết giảng định mức</th>
-                <th class="text-center" rowspan="3">Tổng tiết giảng</th>
-                <th class="text-center" colspan="8">Tiết giảng phụ trội</th>
-                <th class="text-center" rowspan="3">Thanh toán tiết giảng</th>
-              </tr>
-
-              <tr class="text-nowrap">
+                <th class="text-center" pFrozenColumn rowspan="2">#</th>
+                <th class="text-center" pFrozenColumn rowspan="2">Giảng viên</th>
+                <th class="text-center" rowspan="2">Trình độ</th>
                 <th class="text-center" rowspan="2">
                   Tiêu chuẩn
                   <br>
-                  <small class="text-muted">(T = 88.000)</small>
+                  <small class="text-muted">(Thạc sĩ: T = 120.000)</small>
+                  <br>
+                  <small class="text-muted">(>=Tiến sĩ: T = 140.000)</small>
                 </th>
                 <th class="text-center" colspan="2">CLC Tiếng Việt</th>
                 <th class="text-center" colspan="2">CLC Tiếng Anh</th>
@@ -94,6 +89,7 @@
                   <br>
                   <small class="text-muted">(T = 232.000)</small>
                 </th>
+                <th class="text-center" rowspan="2">Thanh toán tiết giảng</th>
               </tr>
 
               <tr class="text-nowrap">
@@ -148,8 +144,6 @@
                   </div>
                 </td>
                 <td>{{ lecturer.lecturerLevel }}</td>
-                <td class="text-center">{{ lecturer.standardLectureHours }}</td>
-                <td class="text-center">{{ lecturer.totalLectureHours }}</td>
                 <td class="text-center">{{ lecturer.extraHoursStandardSys }}</td>
                 <td class="text-center">{{ lecturer.extraHoursCLCVietnamese.basicSubjects }}</td>
                 <td class="text-center">{{ lecturer.extraHoursCLCVietnamese.majoringSubjects }}</td>
