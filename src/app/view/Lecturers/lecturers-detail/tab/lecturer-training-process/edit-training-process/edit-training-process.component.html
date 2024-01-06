@@ -1,110 +1,115 @@
 <form (ngSubmit)="onSubmit()" *ngIf="trainingProcess" [formGroup]="processUpdateForm">
-    <div class="card shadow mb-4">
+  <div class="row justify-content-center align-items-center mb-2">
+    <!-- Striped rows -->
+    <div class="col-md-12">
+      <div class="card shadow">
         <div class="card-body">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="form-group mb-3">
-                        <label for="truong">Trường</label>
-                        <input class="form-control form-control-lg" formControlName="truong" id="truong"
-                               placeholder="Trươờng"
-                               required type="text">
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group mb-3">
-                        <label for="level">Trình độ</label>
-                        <select
-                                class="form-control form-control-lg"
-                                formControlName="level"
-                                id="level"
-                        >
-                            <ng-container *ngFor="let item of levelList">
-                                <option [selected]="item.id == 7" [value]="item.id">
-                                    {{ item.trinhDo }}
-                                </option>
-                            </ng-container>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group mb-3">
-                        <label for="nganh">Ngành đào tạo</label>
-                        <input class="form-control form-control-lg" formControlName="nganh" id="nganh"
-                               placeholder="Ngành đào tạo"
-                               required type="text">
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group mb-3">
-                        <label for="namTotNghiep">Năm tốt nghiệp</label>
-                        <input class="form-control form-control-lg" formControlName="namTotNghiep" id="namTotNghiep"
-                               placeholder="Năm tốt nghiệp"
-                               required type="number">
-                    </div>
-                </div>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="form-group mb-3">
+                <label for="truong">Trường</label>
+                <input class="form-control form-control-lg" formControlName="truong" id="truong"
+                       placeholder="Trươờng"
+                       required type="text">
+              </div>
             </div>
+            <div class="col-md-3">
+              <div class="form-group mb-3">
+                <label for="level">Trình độ</label>
+                <select
+                  class="form-control form-control-lg"
+                  formControlName="level"
+                  id="level"
+                >
+                  <ng-container *ngFor="let item of levelList">
+                    <option [selected]="item.id == 7" [value]="item.id">
+                      {{ item.trinhDo }}
+                    </option>
+                  </ng-container>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group mb-3">
+                <label for="nganh">Ngành đào tạo</label>
+                <input class="form-control form-control-lg" formControlName="nganh" id="nganh"
+                       placeholder="Ngành đào tạo"
+                       required type="text">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group mb-3">
+                <label for="namTotNghiep">Năm tốt nghiệp</label>
+                <input class="form-control form-control-lg" formControlName="namTotNghiep" id="namTotNghiep"
+                       placeholder="Năm tốt nghiệp"
+                       required type="number">
+              </div>
+            </div>
+          </div>
 
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group mb-3">
-                        <label for="deTaiTotNghiep">Đề tài tốt nghiệp</label>
-                        <input class="form-control form-control-lg" formControlName="deTaiTotNghiep" id="deTaiTotNghiep"
-                               placeholder="Đề tài tốt nghiệp"
-                               type="text">
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group mb-3">
-                        <label for="nguoiHuongDan">Người hướng dẫn</label>
-                        <input class="form-control form-control-lg" formControlName="nguoiHuongDan" id="nguoiHuongDan"
-                               placeholder="Người hướng dẫn"
-                               type="text">
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group mb-3">
-                        <label for="loaiTotNghiep">Loại tốt nghiệp</label>
-                        <select
-                                class="form-control form-control-lg"
-                                formControlName="loaiTotNghiep"
-                                id="loaiTotNghiep"
-                        >
-                            <ng-container *ngFor="let item of graduationList">
-                                <option [selected]="item.id === 1" [value]="item.id">
-                                    {{ item.loaiTotNghiep }}
-                                </option>
-                            </ng-container>
-                        </select>
-                    </div>
-                </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group mb-3">
+                <label for="deTaiTotNghiep">Đề tài tốt nghiệp</label>
+                <input class="form-control form-control-lg" formControlName="deTaiTotNghiep" id="deTaiTotNghiep"
+                       placeholder="Đề tài tốt nghiệp"
+                       type="text">
+              </div>
             </div>
+            <div class="col-md-3">
+              <div class="form-group mb-3">
+                <label for="nguoiHuongDan">Người hướng dẫn</label>
+                <input class="form-control form-control-lg" formControlName="nguoiHuongDan" id="nguoiHuongDan"
+                       placeholder="Người hướng dẫn"
+                       type="text">
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group mb-3">
+                <label for="loaiTotNghiep">Loại tốt nghiệp</label>
+                <select
+                  class="form-control form-control-lg"
+                  formControlName="loaiTotNghiep"
+                  id="loaiTotNghiep"
+                >
+                  <ng-container *ngFor="let item of graduationList">
+                    <option [selected]="item.id === 1" [value]="item.id">
+                      {{ item.loaiTotNghiep }}
+                    </option>
+                  </ng-container>
+                </select>
+              </div>
+            </div>
+          </div>
 
-            <div class="row">
-                <div class="col-md-9">
-                    <div class="form-group mb-3">
-                        <label for="check-language">Ngôn ngữ</label>
-                        <div class="form-check form-control-lg">
-                            <ng-container *ngFor="let item of languageList">
-                                <div class="form-check form-check-inline mr-3" id="check-language">
-                                    <input (change)="onSelectedLanguages($event)"
-                                           [checked]="isSelectedLanguages(item.id)"
-                                           class="form-check-input" id="check-{{item.id}}" type="checkbox"
-                                           value="{{item.id}}">
-                                    <label class="form-check-label"
-                                           for="check-{{item.id}}">Tiếng {{item.tenNgonNgu}}</label>
-                                </div>
-                            </ng-container>
-                        </div>
-
+          <div class="row">
+            <div class="col-md-9">
+              <div class="form-group mb-3">
+                <label for="check-language">Ngôn ngữ</label>
+                <div class="form-check form-control-lg">
+                  <ng-container *ngFor="let item of languageList">
+                    <div class="form-check form-check-inline mr-3" id="check-language">
+                      <input (change)="onSelectedLanguages($event)"
+                             [checked]="isSelectedLanguages(item.id)"
+                             class="form-check-input" id="check-{{item.id}}" type="checkbox"
+                             value="{{item.id}}">
+                      <label class="form-check-label"
+                             for="check-{{item.id}}">Tiếng {{ item.tenNgonNgu }}</label>
                     </div>
+                  </ng-container>
                 </div>
+
+              </div>
             </div>
-            <div class="flex justify-content-end flex-wrap ">
-                <button (click)="onCancel()" class="btn btn-outline-dark mr-2" type="button">Cancel</button>
-                <button [disabled]="!processUpdateForm.valid" class="btn btn-primary"
-                        type="submit">Save
-                </button>
-            </div>
+          </div>
+          <div class="flex justify-content-end flex-wrap ">
+            <button (click)="onCancel()" class="btn btn-outline-dark mr-2" type="button">Cancel</button>
+            <button [disabled]="!processUpdateForm.valid" class="btn btn-primary"
+                    type="submit">Save
+            </button>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </form>

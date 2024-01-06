@@ -100,7 +100,6 @@ import {HomeComponent} from './view/home/home.component';
 import {LoginComponent} from './view/login/login.component';
 import {SiteHeaderComponent} from './_layout/site-header/site-header.component';
 import {SiteLayoutComponent} from './_layout/site-layout/site-layout.component';
-import {SiteNavComponent} from './_layout/site-nav/site-nav.component';
 import {PageNotFoundComponent} from './view/page-not-found/page-not-found.component';
 import {LecturersListComponent} from './view/Lecturers/lecturers-list/lecturers-list.component';
 import {
@@ -133,7 +132,9 @@ import {
 import {
   ContractualLecturerComponent
 } from './view/LectureHourStatistics/contractual-lecturer/contractual-lecturer.component';
-import { VisitingLecturerComponent } from './view/LectureHourStatistics/visiting-lecturer/visiting-lecturer.component';
+import {VisitingLecturerComponent} from './view/LectureHourStatistics/visiting-lecturer/visiting-lecturer.component';
+import {TeachingDiaryComponent} from './view/teaching-diary/teaching-diary.component';
+import {AssignLectureHoursComponent} from './view/assign-lecture-hours/assign-lecture-hours.component';
 
 
 @NgModule({
@@ -143,7 +144,6 @@ import { VisitingLecturerComponent } from './view/LectureHourStatistics/visiting
     LoginComponent,
     SiteHeaderComponent,
     SiteLayoutComponent,
-    SiteNavComponent,
     PageNotFoundComponent,
     LecturersListComponent,
     UniversityLecturerListComponent,
@@ -160,6 +160,8 @@ import { VisitingLecturerComponent } from './view/LectureHourStatistics/visiting
     LecturerTeachingHistoryComponent,
     ContractualLecturerComponent,
     VisitingLecturerComponent,
+    TeachingDiaryComponent,
+    AssignLectureHoursComponent,
   ],
   imports: [
     BrowserModule,

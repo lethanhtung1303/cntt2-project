@@ -60,9 +60,7 @@ export class ContractualLecturerComponent {
   getExtraContractualLectureHours(semester: number) {
     this.extraLectureHoursService.getExtraHoursForContractual(semester).subscribe({
       next: (data: ExtraLectureHoursResponse) => {
-        console.log(data.results.extraLectureHours);
         this.lectureData = data.results.extraLectureHours;
-        console.log(this.lectureData)
         this.loading = false;
       },
       error: (error) => {

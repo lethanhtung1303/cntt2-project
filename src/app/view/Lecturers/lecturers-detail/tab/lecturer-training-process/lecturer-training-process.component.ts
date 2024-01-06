@@ -9,181 +9,192 @@ import {TrainingProcessService} from "../../../../../service/training-process.se
 import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
-    selector: 'app-lecturer-training-process',
-    templateUrl: './lecturer-training-process.component.html',
-    styleUrls: ['./lecturer-training-process.component.css'],
-    providers: [MessageService, ConfirmationService]
+  selector: 'app-lecturer-training-process',
+  templateUrl: './lecturer-training-process.component.html',
+  styleUrls: ['./lecturer-training-process.component.css'],
+  providers: [MessageService, ConfirmationService]
 })
 export class LecturerTrainingProcessComponent implements OnChanges {
-    @Input() lecturerId?: number;
-    @Input() trainingProcess?: TrainingProcess[];
-    isEdit: boolean = false;
-    selectedProcess: TrainingProcess | null = null;
-    visible: boolean = false;
-    userLogin: string;
+  @Input() lecturerId?: number;
+  @Input() trainingProcess?: TrainingProcess[];
+  isEdit: boolean = false;
+  selectedProcess: TrainingProcess | null = null;
+  visible: boolean = false;
+  userLogin: string;
 
-    levelList: Level[] = Const.level;
-    languageList: Language[] = Const.language;
-    selectedLanguages: string[] = []
-    graduationList: GraduationType[] = Const.graduationType;
+  levelList: Level[] = Const.level;
+  languageList: Language[] = Const.language;
+  selectedLanguages: string[] = []
+  graduationList: GraduationType[] = Const.graduationType;
 
-    processCreateForm: FormGroup = new FormGroup({
-        level: new FormControl<number | null>(null, [
-            Validators.required
-        ]),
-        languageIds: new FormControl('', [
-            Validators.required
-        ]),
-        truong: new FormControl('', [
-            Validators.required
-        ]),
-        nganh: new FormControl('', [
-            Validators.required
-        ]),
-        deTaiTotNghiep: new FormControl('', []),
-        nguoiHuongDan: new FormControl('', []),
-        loaiTotNghiep: new FormControl<number | null>(null, [
-            Validators.required
-        ]),
-        namTotNghiep: new FormControl<number | null>(null, [
-            Validators.required
-        ]),
+  processCreateForm: FormGroup = new FormGroup({
+    level: new FormControl<number | null>(null, [
+      Validators.required
+    ]),
+    languageIds: new FormControl('', [
+      Validators.required
+    ]),
+    truong: new FormControl('', [
+      Validators.required
+    ]),
+    nganh: new FormControl('', [
+      Validators.required
+    ]),
+    deTaiTotNghiep: new FormControl('', []),
+    nguoiHuongDan: new FormControl('', []),
+    loaiTotNghiep: new FormControl<number | null>(null, [
+      Validators.required
+    ]),
+    namTotNghiep: new FormControl<number | null>(null, [
+      Validators.required
+    ]),
+  });
+
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private userHelper: UserHelper, private trainingProcessService: TrainingProcessService, private messageService: MessageService, private confirmationService: ConfirmationService) {
+    this.userLogin = userHelper.getUserLogin()
+  }
+
+  ngOnChanges(): void {
+    this.trainingProcess?.sort((a, b) => a.level.id - b.level.id)
+  }
+
+  genBgIcoin(displayOrder: number): string {
+    switch (displayOrder) {
+      case 1:
+        return 'bg-danger-light';
+      case 2:
+        return 'bg-warning';
+      case 3:
+        return 'bg-primary';
+      case 4:
+        return 'bg-success';
+      case 5:
+        return 'bg-info';
+      case 6:
+        return 'bg-secondary-light';
+      case 7:
+        return 'bg-secondary-light';
+      default:
+        return 'bg-secondary-light';
+    }
+  }
+
+  generateLanguage(languages: Language[]): string {
+    return languages.sort((a, b) => a.id - b.id).map(language => language.tenNgonNgu).join(' - ');
+  }
+
+  goRemove(processId: number) {
+    this.confirmationService.confirm({
+      key: processId.toString(),
+      accept: () => {
+        this.trainingProcessService.deleteProcess({
+          trainingProcessId: processId,
+          deleteBy: this.userLogin
+        }).subscribe({
+          next: () => {
+            this.messageService.add({
+              key: processId.toString(),
+              severity: 'error',
+              summary: 'Đã xoá',
+              detail: `Bạn đã xoá Điểm hài lòng: ${processId}`
+            });
+            this.router.navigate([], {
+              relativeTo: this.activatedRoute,
+              queryParams: {tab: 'training-process'},
+              queryParamsHandling: 'merge',
+            }).then(() => {
+              setTimeout(() => {
+                window.location.reload()
+              }, 1000);
+            });
+          },
+          error: (error) => {
+            console.log(error)
+          },
+        });
+      },
+      reject: (type: ConfirmEventType) => {
+        switch (type) {
+          case ConfirmEventType.REJECT:
+            this.messageService.add({
+              key: processId.toString(),
+              severity: 'info',
+              summary: 'Đã huỷ',
+              detail: 'You have cancelled'
+            });
+            break;
+          case ConfirmEventType.CANCEL:
+            this.messageService.add({
+              key: processId.toString(),
+              severity: 'info',
+              summary: 'Đã huỷ',
+              detail: 'You have cancelled'
+            });
+            break;
+        }
+      }
     });
+  }
 
-    constructor(private router: Router, private activatedRoute: ActivatedRoute, private userHelper: UserHelper, private trainingProcessService: TrainingProcessService, private messageService: MessageService, private confirmationService: ConfirmationService) {
-        this.userLogin = userHelper.getUserLogin()
-    }
+  goEdit(process: TrainingProcess) {
+    this.selectedProcess = process
+    this.isEdit = true
+  }
 
-    ngOnChanges(): void {
-        this.trainingProcess?.sort((a, b) => a.level.id - b.level.id)
-    }
+  onSubmit() {
+    const request: TrainingProcessCreateRequest = this.genTrainingProcessCreateRequest(this.processCreateForm.value, this.userLogin, this.lecturerId)
+    this.trainingProcessService.createProcess(request).subscribe({
+      next: () => {
+        this.router.navigate([], {
+          relativeTo: this.activatedRoute,
+          queryParams: {tab: 'training-process'},
+          queryParamsHandling: 'merge',
+        }).then(() => window.location.reload());
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    });
+  }
 
-    genBgIcoin(displayOrder: number): string {
-        switch (displayOrder) {
-            case 1:
-                return 'bg-danger-light';
-            case 2:
-                return 'bg-warning';
-            case 3:
-                return 'bg-primary';
-            case 4:
-                return 'bg-success';
-            case 5:
-                return 'bg-info';
-            case 6:
-                return 'bg-secondary-light';
-            case 7:
-                return 'bg-secondary-light';
-            default:
-                return 'bg-secondary-light';
-        }
-    }
+  onCancel() {
+    this.visible = false;
+    this.processCreateForm.reset()
+  }
 
-    generateLanguage(languages: Language[]): string {
-        return languages.sort((a, b) => a.id - b.id).map(language => language.tenNgonNgu).join(' - ');
-    }
+  showDialog() {
+    this.visible = true;
+  }
 
-    goRemove(processId: number) {
-        this.confirmationService.confirm({
-            key: processId.toString(),
-            accept: () => {
-                console.log({
-                    processId: processId,
-                    deleteBy: this.userLogin
-                })
-                this.trainingProcessService.deleteProcess({
-                    trainingProcessId: processId,
-                    deleteBy: this.userLogin
-                }).subscribe({
-                    next: () => {
-                        this.messageService.add({key: processId.toString(), severity: 'error', summary: 'Đã xoá', detail: `Bạn đã xoá Điểm hài lòng: ${processId}`});
-                        this.router.navigate([], {
-                            relativeTo: this.activatedRoute,
-                            queryParams: {tab: 'training-process'},
-                            queryParamsHandling: 'merge',
-                        }).then(() => {
-                            setTimeout(() => {
-                                window.location.reload()
-                            }, 1000);
-                        });
-                    },
-                    error: (error) => {
-                        console.log(error)
-                    },
-                });
-            },
-            reject: (type: ConfirmEventType) => {
-                switch (type) {
-                    case ConfirmEventType.REJECT:
-                        this.messageService.add({key: processId.toString(), severity: 'info', summary: 'Đã huỷ', detail: 'You have cancelled'});
-                        break;
-                    case ConfirmEventType.CANCEL:
-                        this.messageService.add({key: processId.toString(), severity: 'info', summary: 'Đã huỷ', detail: 'You have cancelled'});
-                        break;
-                }
-            }
-        });
+  onSelectedLanguages(e: any) {
+    if (e.target.checked) {
+      this.selectedLanguages.push(e.target.value);
+      this.processCreateForm.patchValue({
+        languageIds: this.selectedLanguages.map(id => id).join(',')
+      })
+    } else {
+      this.selectedLanguages = this.selectedLanguages.filter(id => id !== e.target.value);
+      this.processCreateForm.patchValue({
+        languageIds: this.selectedLanguages.map(id => id).join(',')
+      })
     }
+  }
 
-    goEdit(process: TrainingProcess) {
-        this.selectedProcess = process
-        this.isEdit = true
+  genTrainingProcessCreateRequest(processCreateForm: any, createBy: string, lecturerId?: number,): TrainingProcessCreateRequest {
+    const processCreate: TrainingProcessCreate = {
+      deTaiTotNghiep: processCreateForm.deTaiTotNghiep,
+      languageIds: processCreateForm.languageIds,
+      level: processCreateForm.level,
+      loaiTotNghiep: processCreateForm.loaiTotNghiep,
+      namTotNghiep: processCreateForm.namTotNghiep,
+      nganh: processCreateForm.nganh,
+      nguoiHuongDan: processCreateForm.nguoiHuongDan,
+      truong: processCreateForm.truong
     }
-
-    onSubmit() {
-        const request: TrainingProcessCreateRequest = this.genTrainingProcessCreateRequest(this.processCreateForm.value, this.userLogin, this.lecturerId)
-        this.trainingProcessService.createProcess(request).subscribe({
-            next: () => {
-                this.router.navigate([], {
-                    relativeTo: this.activatedRoute,
-                    queryParams: {tab: 'training-process'},
-                    queryParamsHandling: 'merge',
-                }).then(() => window.location.reload());
-            },
-            error: (error) => {
-                console.log(error)
-            }
-        });
+    return {
+      lecturerId: lecturerId,
+      trainingProcessCreate: processCreate,
+      createBy: createBy
     }
-
-    onCancel() {
-        this.visible = false;
-        this.processCreateForm.reset()
-    }
-
-    showDialog() {
-        this.visible = true;
-    }
-
-    onSelectedLanguages(e: any) {
-        if (e.target.checked) {
-            this.selectedLanguages.push(e.target.value);
-            this.processCreateForm.patchValue({
-                languageIds: this.selectedLanguages.map(id => id).join(',')
-            })
-        } else {
-            this.selectedLanguages = this.selectedLanguages.filter(id => id !== e.target.value);
-            this.processCreateForm.patchValue({
-                languageIds: this.selectedLanguages.map(id => id).join(',')
-            })
-        }
-    }
-
-    genTrainingProcessCreateRequest(processCreateForm: any, createBy: string, lecturerId?: number,): TrainingProcessCreateRequest {
-        const processCreate: TrainingProcessCreate = {
-            deTaiTotNghiep: processCreateForm.deTaiTotNghiep,
-            languageIds: processCreateForm.languageIds,
-            level: processCreateForm.level,
-            loaiTotNghiep: processCreateForm.loaiTotNghiep,
-            namTotNghiep: processCreateForm.namTotNghiep,
-            nganh: processCreateForm.nganh,
-            nguoiHuongDan: processCreateForm.nguoiHuongDan,
-            truong: processCreateForm.truong
-        }
-        return {
-            lecturerId: lecturerId,
-            trainingProcessCreate: processCreate,
-            createBy: createBy
-        }
-    }
+  }
 }
