@@ -174,6 +174,7 @@ export interface NormsLectureHours {
 }
 
 export interface LecturerTeachingHistory {
+  historyId?: number;
   subjectCode?: string;
   subjectTitle?: string;
   numberLessons?: number;
@@ -210,4 +211,9 @@ export interface ExtraLectureHours {
 export interface ExtraHours {
   basicSubjects: number;
   majoringSubjects: number;
+}
+
+export interface TrainingSys {
+  trainingSysCode?: number;
+  nameTrainingSys?: string;
 }

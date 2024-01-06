@@ -45,7 +45,7 @@ export class SubjectsListComponent {
 
   err: ErrorResponse = {errMessage: null, errorCode: null}
 
-  constructor(private router: Router, private confirmationService: ConfirmationService, private messageService: MessageService, private userHelper: UserHelper, public globalErrorService: GlobalErrorService, private subjectService: SubjectService) {
+  constructor(private router: Router, private confirmationService: ConfirmationService, private messageService: MessageService, private userHelper: UserHelper, protected globalErrorService: GlobalErrorService, private subjectService: SubjectService) {
     this.userLogin = userHelper.getUserLogin()
 
     this.subjectService.getAllSubjectGroup().subscribe({

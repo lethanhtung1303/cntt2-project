@@ -24,6 +24,8 @@ import {
   ContractualLecturerComponent
 } from "./view/LectureHourStatistics/contractual-lecturer/contractual-lecturer.component";
 import {VisitingLecturerComponent} from "./view/LectureHourStatistics/visiting-lecturer/visiting-lecturer.component";
+import {TeachingDiaryComponent} from "./view/teaching-diary/teaching-diary.component";
+import {AssignLectureHoursComponent} from "./view/assign-lecture-hours/assign-lecture-hours.component";
 
 const routes: Routes = [
   {
@@ -56,9 +58,13 @@ const routes: Routes = [
       {path: 'visiting-lecturer/add', component: VisitingLecturerComponent},
       {path: 'visiting-lecturer/:id', component: VisitingLecturerComponent},
 
-      // {path: 'assign-lecture-hours', component: LecturersListComponent},
-      // {path: 'assign-lecture-hours/add', component: LecturersListComponent},
-      // {path: 'assign-lecture-hours/:id', component: LecturersListComponent},
+      {path: 'teaching-diary', component: TeachingDiaryComponent},
+      {path: 'teaching-diary/add', component: TeachingDiaryComponent},
+      {path: 'teaching-diary/:id', component: TeachingDiaryComponent},
+
+      {path: 'assign-lecture-hours', component: AssignLectureHoursComponent},
+      {path: 'assign-lecture-hours/add', component: AssignLectureHoursComponent},
+      {path: 'assign-lecture-hours/:id', component: AssignLectureHoursComponent},
 
       {path: '', redirectTo: 'home', pathMatch: 'full'}, // redirect to `home-component`
     ],

@@ -69,7 +69,7 @@ export class LecturersListComponent {
     ]),
   });
 
-  constructor(private router: Router, private lecturerService: LecturerService, private confirmationService: ConfirmationService, private messageService: MessageService, private userHelper: UserHelper, public globalErrorService: GlobalErrorService) {
+  constructor(private router: Router, private lecturerService: LecturerService, private confirmationService: ConfirmationService, private messageService: MessageService, private userHelper: UserHelper, protected globalErrorService: GlobalErrorService) {
     this.userLogin = userHelper.getUserLogin()
 
     this.lecturerService.getAllLecturer().subscribe({
