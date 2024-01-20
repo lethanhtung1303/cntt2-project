@@ -1,1 +1,305 @@
-<p>teaching-diary works!</p>
+<div class="row justify-content-center align-items-center my-3">
+  <div class="col">
+    <div class="row justify-content-start align-items-center m-0">
+      <a
+        [queryParams]="{ tab: 'teaching-history' }"
+        [routerLink]="['/lecturers', lecturerId]"
+        class="btn btn-sm ml-4"
+        queryParamsHandling="merge"
+        routerLinkActive="active"
+        type="button">
+        <span class="fe fe-corner-down-left fe-24 text-muted"></span>
+      </a>
+      <h2 class="page-title" style="margin: 0">Nhật ký Giảng dạy môn: {{ teachingHistory?.subjectTitle }}</h2>
+    </div>
+  </div>
+</div>
+<div class="card shadow">
+  <div class="card-body p-5">
+    <div class="row mt-5">
+      <div class="col-md-4 "></div>
+
+      <div class="col-md-4">
+        <div class="text-left ml-2">
+          <p class="mb-2 h6">
+            <span class="text-muted">Subject Title : </span>
+            <strong>{{ teachingHistory?.subjectTitle }}</strong>
+          </p>
+          <p class="mb-2 h6">
+            <span class="text-muted">Subject Code : </span>
+            <span>{{ teachingHistory?.subjectCode }}</span>
+          </p>
+          <p class="mb-2 h6">
+            <span class="text-muted">Name Type Subject : </span>
+            <span>{{ teachingHistory?.nameTypeSubject }}</span>
+          </p>
+          <p class="mb-2 h6">
+            <span class="text-muted">Number Lessons : </span>
+            <span>{{ teachingHistory?.numberLessons }}</span>
+          </p>
+          <p class="mb-2 h6">
+            <span class="text-muted">Subject Group Name : </span>
+            <strong>{{ teachingHistory?.subjectGroupName }}</strong>
+          </p>
+          <p class="mb-2 h6">
+            <span class="text-muted">Name Training System : </span>
+            <span>{{ teachingHistory?.nameTrainingSys }}</span>
+          </p>
+          <p class="mb-2 h6">
+            <span class="text-muted">Datetime Assignment : </span>
+            <span>{{ teachingHistory?.createDatetime| date: 'dd/MM/yyyy HH:mm:ss' }}</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="col-md-4"></div>
+    </div> <!-- /.row -->
+
+    <div class="row mt-5">
+      <div class="col-md-12 ">
+        <form (ngSubmit)="onSubmit()" *ngIf="teachingDiary" [formGroup]="teachingDiaryUpdateForm">
+          <div class="card shadow mb-4">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group mb-3">
+                    <label for="absenceReport">Absence Report</label>
+                    <input
+                      [class.is-invalid]="(absenceReport?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
+                      class="form-control form-control-lg" formControlName="absenceReport" id="absenceReport"
+                      min="0"
+                      placeholder="Absence Report" required type="number">
+                    <div *ngIf="absenceReport?.invalid && (absenceReport?.dirty || absenceReport?.touched)"
+                         class="invalid-feedback">
+                      <div *ngIf="absenceReport?.errors?.['required']">
+                        Absence Report is required.
+                      </div>
+                      <div *ngIf="absenceReport?.errors?.['min']">
+                        Absence Report minimum is 0.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group mb-3">
+                    <label for="compensationReport">Compensation Report</label>
+                    <input
+                      [class.is-invalid]="(compensationReport?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
+                      class="form-control form-control-lg" formControlName="compensationReport" id="compensationReport"
+                      min="0"
+                      placeholder="Compensation Report" required type="number">
+                    <div
+                      *ngIf="compensationReport?.invalid && (compensationReport?.dirty || compensationReport?.touched)"
+                      class="invalid-feedback">
+                      <div *ngIf="compensationReport?.errors?.['required']">
+                        Compensation Report is required.
+                      </div>
+                      <div *ngIf="compensationReport?.errors?.['min']">
+                        Compensation Report minimum is 0.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group mb-3">
+                    <label for="incorrectGradingReport">Incorrect Grading Report</label>
+                    <input
+                      [class.is-invalid]="(incorrectGradingReport?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
+                      class="form-control form-control-lg" formControlName="incorrectGradingReport"
+                      id="incorrectGradingReport"
+                      min="0"
+                      placeholder="Incorrect Grading Report" required type="number">
+                    <div
+                      *ngIf="incorrectGradingReport?.invalid && (incorrectGradingReport?.dirty || incorrectGradingReport?.touched)"
+                      class="invalid-feedback">
+                      <div *ngIf="incorrectGradingReport?.errors?.['required']">
+                        Incorrect Grading Report is required.
+                      </div>
+                      <div *ngIf="incorrectGradingReport?.errors?.['min']">
+                        Incorrect Grading Report minimum is 0.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group mb-3">
+                    <label for="lateReport">Late Report</label>
+                    <input
+                      [class.is-invalid]="(lateReport?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
+                      class="form-control form-control-lg" formControlName="lateReport" id="lateReport"
+                      min="0"
+                      placeholder="Late Report" required type="number">
+                    <div
+                      *ngIf="lateReport?.invalid && (lateReport?.dirty || lateReport?.touched)"
+                      class="invalid-feedback">
+                      <div *ngIf="lateReport?.errors?.['required']">
+                        Late Report is required.
+                      </div>
+                      <div *ngIf="lateReport?.errors?.['min']">
+                        Late Report minimum is 0.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group mb-3">
+                    <label for="lateSubmissionScoresReport">Late Submission Scores Report</label>
+                    <input
+                      [class.is-invalid]="(lateSubmissionScoresReport?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
+                      class="form-control form-control-lg" formControlName="lateSubmissionScoresReport"
+                      id="lateSubmissionScoresReport"
+                      min="0"
+                      placeholder="Late Submission Scores Report" required type="number">
+                    <div
+                      *ngIf="lateSubmissionScoresReport?.invalid && (lateSubmissionScoresReport?.dirty || lateSubmissionScoresReport?.touched)"
+                      class="invalid-feedback">
+                      <div *ngIf="lateSubmissionScoresReport?.errors?.['required']">
+                        Late Submission Scores Report is required.
+                      </div>
+                      <div *ngIf="lateSubmissionScoresReport?.errors?.['min']">
+                        Late Submission Scores Report minimum is 0.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group mb-3">
+                    <label for="manyFailedReport">Many Failed Report</label>
+                    <input
+                      [class.is-invalid]="(manyFailedReport?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
+                      class="form-control form-control-lg" formControlName="manyFailedReport" id="manyFailedReport"
+                      min="0"
+                      placeholder="Many Failed Report" required type="number">
+                    <div
+                      *ngIf="manyFailedReport?.invalid && (manyFailedReport?.dirty || manyFailedReport?.touched)"
+                      class="invalid-feedback">
+                      <div *ngIf="manyFailedReport?.errors?.['required']">
+                        Many Failed Report is required.
+                      </div>
+                      <div *ngIf="manyFailedReport?.errors?.['min']">
+                        Many Failed Report minimum is 0.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group mb-3">
+                    <label for="manyPassingReports">Many Passing Reports</label>
+                    <input
+                      [class.is-invalid]="(manyPassingReports?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
+                      class="form-control form-control-lg" formControlName="manyPassingReports" id="manyPassingReports"
+                      min="0"
+                      placeholder="Many Passing Reports" required type="number">
+                    <div
+                      *ngIf="manyPassingReports?.invalid && (manyPassingReports?.dirty || manyPassingReports?.touched)"
+                      class="invalid-feedback">
+                      <div *ngIf="manyPassingReports?.errors?.['required']">
+                        Many Passing Reports is required.
+                      </div>
+                      <div *ngIf="manyPassingReports?.errors?.['min']">
+                        Many Passing Reports minimum is 0.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group mb-3">
+                    <label for="reminderReport">Reminder Report</label>
+                    <input
+                      [class.is-invalid]="(reminderReport?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
+                      class="form-control form-control-lg" formControlName="reminderReport" id="reminderReport"
+                      min="0"
+                      placeholder="Reminder Report" required type="number">
+                    <div
+                      *ngIf="reminderReport?.invalid && (reminderReport?.dirty || reminderReport?.touched)"
+                      class="invalid-feedback">
+                      <div *ngIf="reminderReport?.errors?.['required']">
+                        Reminder Report is required.
+                      </div>
+                      <div *ngIf="reminderReport?.errors?.['min']">
+                        Reminder Report minimum is 0.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group mb-3">
+                    <label for="reportBehavior">Report Behavior</label>
+                    <input
+                      [class.is-invalid]="(reportBehavior?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
+                      class="form-control form-control-lg" formControlName="reportBehavior" id="reportBehavior"
+                      min="0"
+                      placeholder="Report Behavior" required type="number">
+                    <div
+                      *ngIf="reportBehavior?.invalid && (reportBehavior?.dirty || reportBehavior?.touched)"
+                      class="invalid-feedback">
+                      <div *ngIf="reportBehavior?.errors?.['required']">
+                        Report Behavior is required.
+                      </div>
+                      <div *ngIf="reportBehavior?.errors?.['min']">
+                        Report Behavior minimum is 0.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group mb-3">
+                    <label for="returnEarlyReport">Return Early Report</label>
+                    <input
+                      [class.is-invalid]="(returnEarlyReport?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
+                      class="form-control form-control-lg" formControlName="returnEarlyReport" id="returnEarlyReport"
+                      min="0"
+                      placeholder="Return Early Report" required type="number">
+                    <div
+                      *ngIf="returnEarlyReport?.invalid && (returnEarlyReport?.dirty || returnEarlyReport?.touched)"
+                      class="invalid-feedback">
+                      <div *ngIf="returnEarlyReport?.errors?.['required']">
+                        Return Early Report is required.
+                      </div>
+                      <div *ngIf="returnEarlyReport?.errors?.['min']">
+                        Return Early Report minimum is 0.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group mb-3">
+                    <label for="reviewReport">Review Report</label>
+                    <input
+                      [class.is-invalid]="(reviewReport?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
+                      class="form-control form-control-lg" formControlName="reviewReport" id="reviewReport"
+                      min="0"
+                      placeholder="Review Report" required type="number">
+                    <div
+                      *ngIf="reviewReport?.invalid && (reviewReport?.dirty || reviewReport?.touched)"
+                      class="invalid-feedback">
+                      <div *ngIf="reviewReport?.errors?.['required']">
+                        Review Report is required.
+                      </div>
+                      <div *ngIf="reviewReport?.errors?.['min']">
+                        Review Report minimum is 0.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex justify-content-end flex-wrap ">
+                <button (click)="onCancel()" class="btn btn-outline-dark mr-2" type="button">Cancel</button>
+                <button [disabled]="!teachingDiaryUpdateForm.valid" class="btn btn-primary"
+                        type="submit">Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+    </div> <!-- /.row -->
+  </div> <!-- /.card-body -->
+</div> <!-- /.card -->
