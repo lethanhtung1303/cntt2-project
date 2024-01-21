@@ -10,8 +10,8 @@
       <div class="card-body mb-n3">
         <div class="row items-align-baseline h-100">
           <div class="col">
-            <span class="h2 mb-0">8</span>
-            <p class="text-nowrap small text-muted mb-0">Tổng nhân viên</p>
+            <span class="h2 mb-0">{{ totalLecturers }}</span>
+            <p class="text-nowrap small text-muted mb-0">Tổng số Giảng viên</p>
           </div>
           <div class="col-auto">
             <span class="fe fe-32 fe-users text-muted mb-0"></span>
@@ -26,13 +26,11 @@
       <div class="card-body mb-n3">
         <div class="row items-align-baseline h-100">
           <div class="col">
-            <span class="h2 mb-0">8</span>
-            <p class="text-nowrap small text-muted mb-0">
-              Sinh nhật trong tháng
-            </p>
+            <span class="text-success h2 mb-0">{{ getContractualLecturer() }}</span>
+            <p class="text-nowrap small text-muted mb-0">Tổng số Giảng viên cơ hữu</p>
           </div>
           <div class="col-auto">
-            <span class="fe fe-32 fe-gift text-muted mb-0"></span>
+            <span class="fe fe-32 fe-user-check text-muted mb-0"></span>
           </div>
         </div>
       </div> <!-- .card-body -->
@@ -44,10 +42,8 @@
       <div class="card-body mb-n3">
         <div class="row items-align-baseline h-100">
           <div class="col">
-            <span class="text-danger h2 mb-0">8</span>
-            <p class="text-nowrap small text-muted mb-0">
-              Hết hạn hợp đồng trong tháng
-            </p>
+            <span class="text-danger h2 mb-0">{{ getVisitingLecturer() }}</span>
+            <p class="text-nowrap small text-muted mb-0">Tổng số Giảng viên thỉnh giảng</p>
           </div>
           <div class="col-auto">
             <span class="fe fe-32 fe-user text-muted mb-0"></span>
@@ -64,13 +60,11 @@
       <div class="card-body mb-n3">
         <div class="row items-align-baseline h-100">
           <div class="col">
-            <span class="text-success h2 mb-0">8</span>
-            <p class="text-nowrap small text-muted mb-0">
-              Hết hạn hợp đồng tháng tới
-            </p>
+            <span class="h2 mb-0">{{ totalSubjects }}</span>
+            <p class="text-nowrap small text-muted mb-0">Tổng số Môn học</p>
           </div>
           <div class="col-auto">
-            <span class="fe fe-32 fe-user text-muted mb-0"></span>
+            <span class="fe fe-32 fe-edit text-muted mb-0"></span>
           </div>
         </div>
       </div> <!-- .card-body -->
@@ -82,13 +76,11 @@
       <div class="card-body mb-n3">
         <div class="row items-align-baseline h-100">
           <div class="col">
-            <span class="text-success h2 mb-0">8</span>
-            <p class="text-nowrap small text-muted mb-0">
-              Nghỉ phép trong ngày
-            </p>
+            <span class="text-success h2 mb-0">{{ getPracticeSubjects() }}</span>
+            <p class="text-nowrap small text-muted mb-0">Tổng môn Thực hành</p>
           </div>
           <div class="col-auto">
-            <span class="fe fe-32 fe-calendar text-muted mb-0"></span>
+            <span class="fe fe-32 fe-codepen text-muted mb-0"></span>
           </div>
         </div>
       </div> <!-- .card-body -->
@@ -100,11 +92,11 @@
       <div class="card-body mb-n3">
         <div class="row items-align-baseline h-100">
           <div class="col">
-            <span class="text-success h2 mb-0">0/8</span>
-            <p class="text-nowrap small text-muted mb-0">Nhân viên đã xếp ca</p>
+            <span class="text-success h2 mb-0">{{ getTheorySubjects() }}</span>
+            <p class="text-nowrap small text-muted mb-0">Tổng môn Lý thuyết</p>
           </div>
           <div class="col-auto">
-            <span class="fe fe-32 fe-check-circle text-muted mb-0"></span>
+            <span class="fe fe-32 fe-book-open text-muted mb-0"></span>
           </div>
         </div>
       </div> <!-- .card-body -->

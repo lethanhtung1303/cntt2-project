@@ -122,6 +122,8 @@
                     Nhật ký
                   </div>
                 </th>
+
+                <th class="text-center">#</th>
               </tr>
             </ng-template>
             <ng-template let-history pTemplate="body">
@@ -158,11 +160,42 @@
                      routerLinkActive="active">Chi tiết
                   </a>
                 </td>
+
+                <td>
+                  <p-toast key="{{history.historyId}}"></p-toast>
+                  <p-confirmDialog #cd [style]="{ width: '50vw' }" key="{{history.historyId}}" position="top">
+                    <ng-template pTemplate="header">
+                      <h3>Chắc chắn xoá Lịch sử Giảng dạy:
+                        <p>
+                          Môn: {{ history.subjectTitle }}
+                        </p>
+                      </h3>
+
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                      <button (click)="cd.reject()" icon="pi pi-times" label="No" pButton
+                              type="button">
+                      </button>
+                      <button (click)="cd.accept()" class="p-button-danger"
+                              icon="pi pi-check"
+                              label="Yes" pButton
+                              type="button">
+                      </button>
+                    </ng-template>
+                  </p-confirmDialog>
+
+                  <button
+                    (click)="confirmDelete(history.historyId)"
+                    class="p-button-rounded p-button-warning"
+                    icon="pi pi-trash"
+                    pButton
+                  ></button>
+                </td>
               </tr>
             </ng-template>
             <ng-template pTemplate="emptymessage">
               <tr>
-                <td colspan="8">No history found.</td>
+                <td colspan="9">No history found.</td>
               </tr>
             </ng-template>
           </p-table>

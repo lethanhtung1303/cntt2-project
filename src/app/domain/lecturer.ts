@@ -1,5 +1,5 @@
-import {Certificate} from "./certificate";
-import {Subject} from "./subject";
+import { Certificate } from './certificate';
+import { Subject } from './subject';
 
 export interface ClassificationLecturer {
   maLoai: number;
@@ -75,7 +75,7 @@ export interface Lecturer {
 export interface LecturerUpdateRequest {
   lecturerId?: number;
   lecturerUpdate?: LecturerUpdate;
-  updateBy?: string
+  updateBy?: string;
 }
 
 export interface LecturerCreateRequest {
@@ -106,8 +106,8 @@ export interface LecturerUpdate {
   firstName: string;
   fullName: string;
   classification: string;
-  mainPosition: string | null
-  secondaryPosition: string | null
+  mainPosition: string | null;
+  secondaryPosition: string | null;
   birthday: string;
   gender: string;
   placeOfBirth: string;
@@ -121,7 +121,7 @@ export interface LecturerUpdate {
 
 export interface LecturerDeleteRequest {
   lecturerIds: string;
-  deleteBy: string
+  deleteBy: string;
 }
 
 export interface UniversityStandard {
@@ -186,6 +186,41 @@ export interface LecturerTeachingHistory {
   nameTrainingSys?: string;
   identification?: number;
   createDatetime?: string;
+}
+
+export interface TeachingDiaryDetailResponse {
+  historyId: number;
+  absenceReport: number;
+  compensationReport: number;
+  reminderReport: number;
+  lateReport: number;
+  returnEarlyReport: number;
+  reportBehavior: number;
+  incorrectGradingReport: number;
+  lateSubmissionScoresReport: number;
+  reviewReport: number;
+  manyPassingReports: string;
+  manyFailedReport: string;
+}
+
+export interface TeachingDiaryUpdate {
+  absenceReport: number;
+  compensationReport: number;
+  reminderReport: number;
+  lateReport: number;
+  returnEarlyReport: number;
+  reportBehavior: number;
+  incorrectGradingReport: number;
+  lateSubmissionScoresReport: number;
+  reviewReport: number;
+  manyPassingReports: number;
+  manyFailedReport: number;
+}
+
+export interface TeachingDiaryUpdateRequest {
+  historyId: string;
+  teachingDiaryUpdate: TeachingDiaryUpdate;
+  updateBy?: string;
 }
 
 export interface ExtraLectureHours {
