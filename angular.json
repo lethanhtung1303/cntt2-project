@@ -111,7 +111,8 @@
               "browserTarget": "cntt2-project:build:production"
             },
             "development": {
-              "browserTarget": "cntt2-project:build:development"
+              "browserTarget": "cntt2-project:build:development",
+              "disableHostCheck": true
             }
           },
           "defaultConfiguration": "development"
