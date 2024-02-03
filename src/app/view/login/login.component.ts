@@ -61,7 +61,7 @@ export class LoginComponent {
       EmployeeID: data.results.user.employeeID ?? '',
       Password: data.results.user.password ?? '',
       userRoles: data.results.userRoles ?? '',
-      expiry: new Date().getTime() + 60 * 1000,
+      expiry: new Date().getTime() + 60 * 30 * 1000,
     };
     localStorage.setItem('userInfo', JSON.stringify(item));
   }
