@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
-import {UserHelper} from "../../helper/user-helper";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserHelper } from '../../helper/user-helper';
 
 @Component({
   selector: 'app-site-header',
@@ -12,16 +12,21 @@ export class SiteHeaderComponent implements OnInit {
 
   userRoles: string | null = '';
 
-  constructor(private router: Router, private userHelper: UserHelper) {
-    this.userName = userHelper.getUserLogin()
+  constructor(
+    private router: Router,
+    private userHelper: UserHelper,
+  ) {
+    this.userName = userHelper.getUserLogin();
   }
 
   ngOnInit(): void {
-    this.userRoles = localStorage.getItem('userRoles') ?? null
+    this.userRoles = this.userHelper.getUserRoles();
   }
 
   logout() {
-    localStorage.clear();
-    this.router.navigate(['/login']).then(() => window.location.reload());
+    this.router.navigate(['/login']).then(() => {
+      localStorage.removeItem('userInfo');
+      window.location.reload();
+    });
   }
 }
