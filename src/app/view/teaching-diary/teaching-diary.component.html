@@ -22,31 +22,31 @@
       <div class="col-md-4">
         <div class="text-left ml-2">
           <p class="mb-2 h6">
-            <span class="text-muted">Subject Title : </span>
+            <span class="text-muted">Tên môn học : </span>
             <strong>{{ teachingHistory?.subjectTitle }}</strong>
           </p>
           <p class="mb-2 h6">
-            <span class="text-muted">Subject Code : </span>
+            <span class="text-muted">Mã môn học : </span>
             <span>{{ teachingHistory?.subjectCode }}</span>
           </p>
           <p class="mb-2 h6">
-            <span class="text-muted">Name Type Subject : </span>
+            <span class="text-muted">Loại môn học : </span>
             <span>{{ teachingHistory?.nameTypeSubject }}</span>
           </p>
           <p class="mb-2 h6">
-            <span class="text-muted">Number Lessons : </span>
+            <span class="text-muted">Tổng số tiết : </span>
             <span>{{ teachingHistory?.numberLessons }}</span>
           </p>
           <p class="mb-2 h6">
-            <span class="text-muted">Subject Group Name : </span>
+            <span class="text-muted">Nhóm môn học : </span>
             <strong>{{ teachingHistory?.subjectGroupName }}</strong>
           </p>
           <p class="mb-2 h6">
-            <span class="text-muted">Name Training System : </span>
+            <span class="text-muted">Chương trình đào tạo : </span>
             <span>{{ teachingHistory?.nameTrainingSys }}</span>
           </p>
           <p class="mb-2 h6">
-            <span class="text-muted">Datetime Assignment : </span>
+            <span class="text-muted">Thời gian phân công : </span>
             <span>{{ teachingHistory?.createDatetime| date: 'dd/MM/yyyy HH:mm:ss' }}</span>
           </p>
         </div>
@@ -63,7 +63,7 @@
               <div class="row">
                 <div class="col-md-3">
                   <div class="form-group mb-3">
-                    <label for="absenceReport">Absence Report</label>
+                    <label for="absenceReport">Báo cáo vắng</label>
                     <input
                       [class.is-invalid]="(absenceReport?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
                       class="form-control form-control-lg" formControlName="absenceReport" id="absenceReport"
@@ -72,17 +72,17 @@
                     <div *ngIf="absenceReport?.invalid && (absenceReport?.dirty || absenceReport?.touched)"
                          class="invalid-feedback">
                       <div *ngIf="absenceReport?.errors?.['required']">
-                        Absence Report is required.
+                        Bắt buộc phải có báo cáo vắng.
                       </div>
                       <div *ngIf="absenceReport?.errors?.['min']">
-                        Absence Report minimum is 0.
+                        Báo cáo vắng tối thiểu là 0.
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-3">
                   <div class="form-group mb-3">
-                    <label for="compensationReport">Compensation Report</label>
+                    <label for="compensationReport">Báo cáo bù</label>
                     <input
                       [class.is-invalid]="(compensationReport?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
                       class="form-control form-control-lg" formControlName="compensationReport" id="compensationReport"
@@ -92,17 +92,17 @@
                       *ngIf="compensationReport?.invalid && (compensationReport?.dirty || compensationReport?.touched)"
                       class="invalid-feedback">
                       <div *ngIf="compensationReport?.errors?.['required']">
-                        Compensation Report is required.
+                        Yêu cầu phải có báo cáo bù.
                       </div>
                       <div *ngIf="compensationReport?.errors?.['min']">
-                        Compensation Report minimum is 0.
+                        Báo cáo bù tối thiểu là 0.
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-3">
                   <div class="form-group mb-3">
-                    <label for="incorrectGradingReport">Incorrect Grading Report</label>
+                    <label for="incorrectGradingReport">Báo cáo đánh giá sai bài làm</label>
                     <input
                       [class.is-invalid]="(incorrectGradingReport?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
                       class="form-control form-control-lg" formControlName="incorrectGradingReport"
@@ -113,17 +113,17 @@
                       *ngIf="incorrectGradingReport?.invalid && (incorrectGradingReport?.dirty || incorrectGradingReport?.touched)"
                       class="invalid-feedback">
                       <div *ngIf="incorrectGradingReport?.errors?.['required']">
-                        Incorrect Grading Report is required.
+                        Yêu cầu phải có báo cáo đánh giá sai bài làm.
                       </div>
                       <div *ngIf="incorrectGradingReport?.errors?.['min']">
-                        Incorrect Grading Report minimum is 0.
+                        Báo cáo đánh giá sai bài làm tối thiểu là 0.
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-3">
                   <div class="form-group mb-3">
-                    <label for="lateReport">Late Report</label>
+                    <label for="lateReport">Báo cáo trễ</label>
                     <input
                       [class.is-invalid]="(lateReport?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
                       class="form-control form-control-lg" formControlName="lateReport" id="lateReport"
@@ -133,10 +133,10 @@
                       *ngIf="lateReport?.invalid && (lateReport?.dirty || lateReport?.touched)"
                       class="invalid-feedback">
                       <div *ngIf="lateReport?.errors?.['required']">
-                        Late Report is required.
+                        Yêu cầu phải có báo cáo trễ.
                       </div>
                       <div *ngIf="lateReport?.errors?.['min']">
-                        Late Report minimum is 0.
+                        Báo cáo trễ tối thiểu là 0.
                       </div>
                     </div>
                   </div>
@@ -146,7 +146,7 @@
               <div class="row">
                 <div class="col-md-3">
                   <div class="form-group mb-3">
-                    <label for="lateSubmissionScoresReport">Late Submission Scores Report</label>
+                    <label for="lateSubmissionScoresReport">Báo cáo điểm muộn</label>
                     <input
                       [class.is-invalid]="(lateSubmissionScoresReport?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
                       class="form-control form-control-lg" formControlName="lateSubmissionScoresReport"
@@ -157,17 +157,17 @@
                       *ngIf="lateSubmissionScoresReport?.invalid && (lateSubmissionScoresReport?.dirty || lateSubmissionScoresReport?.touched)"
                       class="invalid-feedback">
                       <div *ngIf="lateSubmissionScoresReport?.errors?.['required']">
-                        Late Submission Scores Report is required.
+                        Yêu cầu phải có báo cáo điểm muộn.
                       </div>
                       <div *ngIf="lateSubmissionScoresReport?.errors?.['min']">
-                        Late Submission Scores Report minimum is 0.
+                        Báo cáo điểm muộn tối thiểu là 0.
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-3">
                   <div class="form-group mb-3">
-                    <label for="manyFailedReport">Many Failed Report</label>
+                    <label for="manyFailedReport">Nhiều báo cáo rớt môn</label>
                     <input
                       [class.is-invalid]="(manyFailedReport?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
                       class="form-control form-control-lg" formControlName="manyFailedReport" id="manyFailedReport"
@@ -177,17 +177,17 @@
                       *ngIf="manyFailedReport?.invalid && (manyFailedReport?.dirty || manyFailedReport?.touched)"
                       class="invalid-feedback">
                       <div *ngIf="manyFailedReport?.errors?.['required']">
-                        Many Failed Report is required.
+                        Yêu cầu phải có nhiều báo cáo rớt môn.
                       </div>
                       <div *ngIf="manyFailedReport?.errors?.['min']">
-                        Many Failed Report minimum is 0.
+                        Nhiều báo cáo rớt môn tối thiểu là 0.
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-3">
                   <div class="form-group mb-3">
-                    <label for="manyPassingReports">Many Passing Reports</label>
+                    <label for="manyPassingReports">Nhiều báo cáo qua môn</label>
                     <input
                       [class.is-invalid]="(manyPassingReports?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
                       class="form-control form-control-lg" formControlName="manyPassingReports" id="manyPassingReports"
@@ -197,17 +197,17 @@
                       *ngIf="manyPassingReports?.invalid && (manyPassingReports?.dirty || manyPassingReports?.touched)"
                       class="invalid-feedback">
                       <div *ngIf="manyPassingReports?.errors?.['required']">
-                        Many Passing Reports is required.
+                        Yêu cầu phải có nhiều báo cáo qua môn.
                       </div>
                       <div *ngIf="manyPassingReports?.errors?.['min']">
-                        Many Passing Reports minimum is 0.
+                        Nhiều báo cáo qua môn tối thiểu là 0.
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-3">
                   <div class="form-group mb-3">
-                    <label for="reminderReport">Reminder Report</label>
+                    <label for="reminderReport">Báo cáo nhắc nhở</label>
                     <input
                       [class.is-invalid]="(reminderReport?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
                       class="form-control form-control-lg" formControlName="reminderReport" id="reminderReport"
@@ -217,10 +217,10 @@
                       *ngIf="reminderReport?.invalid && (reminderReport?.dirty || reminderReport?.touched)"
                       class="invalid-feedback">
                       <div *ngIf="reminderReport?.errors?.['required']">
-                        Reminder Report is required.
+                        Yêu cầu phải có báo cáo nhắc nhở.
                       </div>
                       <div *ngIf="reminderReport?.errors?.['min']">
-                        Reminder Report minimum is 0.
+                        Báo cáo nhắc nhở tối thiểu là 0.
                       </div>
                     </div>
                   </div>
@@ -230,7 +230,7 @@
               <div class="row">
                 <div class="col-md-4">
                   <div class="form-group mb-3">
-                    <label for="reportBehavior">Report Behavior</label>
+                    <label for="reportBehavior">Báo cáo hành vi</label>
                     <input
                       [class.is-invalid]="(reportBehavior?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
                       class="form-control form-control-lg" formControlName="reportBehavior" id="reportBehavior"
@@ -240,17 +240,17 @@
                       *ngIf="reportBehavior?.invalid && (reportBehavior?.dirty || reportBehavior?.touched)"
                       class="invalid-feedback">
                       <div *ngIf="reportBehavior?.errors?.['required']">
-                        Report Behavior is required.
+                        Yêu cầu phải có báo cáo hành vi.
                       </div>
                       <div *ngIf="reportBehavior?.errors?.['min']">
-                        Report Behavior minimum is 0.
+                        Báo cáo hành vi tối thiểu là 0.
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group mb-3">
-                    <label for="returnEarlyReport">Return Early Report</label>
+                    <label for="returnEarlyReport">Báo cáo về sớm</label>
                     <input
                       [class.is-invalid]="(returnEarlyReport?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
                       class="form-control form-control-lg" formControlName="returnEarlyReport" id="returnEarlyReport"
@@ -260,17 +260,17 @@
                       *ngIf="returnEarlyReport?.invalid && (returnEarlyReport?.dirty || returnEarlyReport?.touched)"
                       class="invalid-feedback">
                       <div *ngIf="returnEarlyReport?.errors?.['required']">
-                        Return Early Report is required.
+                        Yêu cầu phải có báo cáo về sớm.
                       </div>
                       <div *ngIf="returnEarlyReport?.errors?.['min']">
-                        Return Early Report minimum is 0.
+                        Báo cáo về sớm tối thiểu là 0.
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-4">
                   <div class="form-group mb-3">
-                    <label for="reviewReport">Review Report</label>
+                    <label for="reviewReport">Báo cáo xem lại bài làm</label>
                     <input
                       [class.is-invalid]="(reviewReport?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
                       class="form-control form-control-lg" formControlName="reviewReport" id="reviewReport"
@@ -280,19 +280,19 @@
                       *ngIf="reviewReport?.invalid && (reviewReport?.dirty || reviewReport?.touched)"
                       class="invalid-feedback">
                       <div *ngIf="reviewReport?.errors?.['required']">
-                        Review Report is required.
+                        Yêu cầu phải có báo cáo xem lại bài làm.
                       </div>
                       <div *ngIf="reviewReport?.errors?.['min']">
-                        Review Report minimum is 0.
+                        Báo cáo xem lại bài làm tối thiểu là 0.
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="flex justify-content-end flex-wrap ">
-                <button (click)="onCancel()" class="btn btn-outline-dark mr-2" type="button">Cancel</button>
+                <button (click)="onCancel()" class="btn btn-outline-dark mr-2" type="button">Hủy</button>
                 <button [disabled]="!teachingDiaryUpdateForm.valid" class="btn btn-primary"
-                        type="submit">Save
+                        type="submit">Lưu
                 </button>
               </div>
             </div>
