@@ -44,7 +44,7 @@
                 (click)="clear(dtLecturer)"
                 class="p-button-outlined"
                 icon="pi pi-filter-slash"
-                label="Clear"
+                label="Xóa chọn lọc"
                 pButton
                 size="small"
               ></button>
@@ -55,7 +55,7 @@
                   <input
                     (input)="dtLecturer.filterGlobal($any($event.target).value, 'contains')"
                     pInputText
-                    placeholder="Search keyword"
+                    placeholder="Tìm kiếm"
                     type="text"/>
                 </span>
                 <button
