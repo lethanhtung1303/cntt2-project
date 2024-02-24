@@ -8,8 +8,8 @@ import { UserHelper } from '../../helper/user-helper';
   styleUrls: ['./site-header.component.css'],
 })
 export class SiteHeaderComponent implements OnInit {
+  isSidebarVisible: boolean = false;
   userName: string;
-
   userRoles: string | null = '';
 
   constructor(
@@ -17,6 +17,10 @@ export class SiteHeaderComponent implements OnInit {
     private userHelper: UserHelper,
   ) {
     this.userName = userHelper.getUserLogin();
+  }
+
+  toggleSidebar() {
+    this.isSidebarVisible = !this.isSidebarVisible;
   }
 
   ngOnInit(): void {

@@ -58,7 +58,7 @@
                     <label for="subject-code">Mã Môn học</label>
                     <input class="form-control form-control-lg" formControlName="subjectCode"
                            id="subject-code"
-                           placeholder="Subject Code" required type="text">
+                           placeholder="Mã Môn học" required type="text">
                   </div>
                 </div>
                 <div class="col-md-6">
@@ -66,7 +66,7 @@
                     <label for="number-lessons">Số tiết học</label>
                     <input class="form-control form-control-lg" formControlName="numberLessons"
                            id="number-lessons"
-                           max="360" min="0" placeholder="Number of lessons" required type="number">
+                           max="360" min="0" placeholder="Số tiết học" required type="number">
                   </div>
                 </div>
               </div>
@@ -76,16 +76,16 @@
                     <label for="subject-name">Tên Môn học</label>
                     <input class="form-control form-control-lg" formControlName="subjectName"
                            id="subject-name"
-                           placeholder="Subject Name" required type="text">
+                           placeholder="Tên Môn học" required type="text">
                   </div>
                 </div>
               </div>
 
               <div class="flex justify-content-end flex-wrap ">
-                <button (click)="onCancel()" class="btn btn-outline-dark mr-2" type="button">Cancel
+                <button (click)="onCancel()" class="btn btn-outline-dark mr-2" type="button">Hủy bỏ
                 </button>
                 <button [disabled]="!subjectCreateForm.valid" class="btn btn-primary"
-                        type="submit">Save
+                        type="submit">Lưu
                 </button>
               </div>
             </div>
@@ -120,7 +120,7 @@
                 (click)="clear(dtSubject)"
                 class="p-button-outlined mr-2"
                 icon="pi pi-filter-slash"
-                label="Clear"
+                label="Xóa chọn lọc"
                 pButton
                 size="small"
               ></button>
@@ -129,7 +129,7 @@
                 [disabled]="!selectedSubjects || !selectedSubjects.length"
                 class="p-button-danger"
                 icon="pi pi-trash"
-                label="Delete"
+                label="Xóa "
                 pButton
                 pRipple
                 size="small"
@@ -160,7 +160,7 @@
                         <input
                           (input)="dtSubject.filterGlobal($any($event.target).value, 'contains')"
                           pInputText
-                          placeholder="Search keyword"
+                          placeholder="Tìm kiếm"
                           type="text"/>
                       </span>
                 <button

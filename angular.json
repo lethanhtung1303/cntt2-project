@@ -108,11 +108,14 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "cntt2-project:build:production"
+              "browserTarget": "cntt2-project:build:production",
+              "disableHostCheck": true,
+              "host": "0.0.0.0"
             },
             "development": {
               "browserTarget": "cntt2-project:build:development",
-              "disableHostCheck": true
+              "disableHostCheck": true,
+              "host": "0.0.0.0"
             }
           },
           "defaultConfiguration": "development"

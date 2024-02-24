@@ -31,7 +31,7 @@
                     <div *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)"
                          class="invalid-feedback">
                       <div *ngIf="firstName?.errors?.['required']">
-                        First Name is required.
+                        Tên đầu tiên là bắt buộc.
                       </div>
                     </div>
                   </div>
@@ -47,7 +47,7 @@
                     <div *ngIf="fullName?.invalid && (fullName?.dirty || fullName?.touched)"
                          class="invalid-feedback">
                       <div *ngIf="fullName?.errors?.['required']">
-                        Full Name is required.
+                        Họ và tên đầy đủ là bắt buộc.
                       </div>
                     </div>
                   </div>
@@ -69,7 +69,7 @@
                     <div *ngIf="classification?.invalid && (classification?.dirty || classification?.touched)"
                          class="invalid-feedback">
                       <div *ngIf="classification?.errors?.['required']">
-                        Classification is required.
+                        Phân loại là bắt buộc.
                       </div>
                     </div>
                   </div>
@@ -85,10 +85,10 @@
                     <div *ngIf="emailTdtu?.invalid && (emailTdtu?.dirty || emailTdtu?.touched)"
                          class="invalid-feedback">
                       <div *ngIf="emailTdtu?.errors?.['required']">
-                        Email TDTU is required.
+                        Email TDTU là bắt buộc.
                       </div>
                       <div *ngIf="emailTdtu?.errors?.['pattern']">
-                        Email format is wrong.
+                        Định dạng Email không đúng.
                       </div>
                     </div>
                   </div>
@@ -105,7 +105,7 @@
                     <div *ngIf="mainPosition?.invalid && (mainPosition?.dirty || mainPosition?.touched)"
                          class="invalid-feedback">
                       <div *ngIf="mainPosition?.errors?.['required']">
-                        Main Position is required.
+                        Vị trí chính là bắt buộc.
                       </div>
                     </div>
                   </div>
@@ -134,7 +134,7 @@
                     <div *ngIf="birthday?.invalid && (birthday?.dirty || birthday?.touched)"
                          class="invalid-feedback">
                       <div *ngIf="birthday?.errors?.['required']">
-                        Birthday is required.
+                        Ngày sinh là bắt buộc.
                       </div>
                     </div>
                   </div>
@@ -153,7 +153,7 @@
                     <div *ngIf="gender?.invalid && (gender?.dirty || gender?.touched)"
                          class="invalid-feedback">
                       <div *ngIf="gender?.errors?.['required']">
-                        Gender is required.
+                        Giới tính là bắt buộc.
                       </div>
                     </div>
                   </div>
@@ -170,7 +170,7 @@
                     <div *ngIf="placeOfBirth?.invalid && (placeOfBirth?.dirty || placeOfBirth?.touched)"
                          class="invalid-feedback">
                       <div *ngIf="placeOfBirth?.errors?.['required']">
-                        Place Of Birth is required.
+                        Nơi Sinh là bắt buộc.
                       </div>
                     </div>
                   </div>
@@ -187,10 +187,10 @@
                     <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)"
                          class="invalid-feedback">
                       <div *ngIf="phone?.errors?.['required']">
-                        Phone is required.
+                        Số điện thoại là bắt buộc.
                       </div>
                       <div *ngIf="phone?.errors?.['pattern']">
-                        Phone format is wrong.
+                        Định dạng số điện thoại không đúng.
                       </div>
                     </div>
                   </div>
@@ -206,7 +206,7 @@
                     <div *ngIf="workplace?.invalid && (workplace?.dirty || workplace?.touched)"
                          class="invalid-feedback">
                       <div *ngIf="workplace?.errors?.['required']">
-                        Workplace is required.
+                        Nơi làm việc là bắt buộc.
                       </div>
                     </div>
                   </div>
@@ -221,10 +221,10 @@
                     <div *ngIf="email?.invalid && (email?.dirty || email?.touched)"
                          class="invalid-feedback">
                       <div *ngIf="email?.errors?.['required']">
-                        Email is required.
+                        Email là bắt buộc.
                       </div>
                       <div *ngIf="email?.errors?.['pattern']">
-                        Email format is wrong.
+                        Định dạng email không đúng.
                       </div>
                     </div>
                   </div>
@@ -243,7 +243,7 @@
                     <div *ngIf="address?.invalid && (address?.dirty || address?.touched)"
                          class="invalid-feedback">
                       <div *ngIf="address?.errors?.['required']">
-                        Address is required.
+                        Địa chỉ là bắt buộc.
                       </div>
                     </div>
                   </div>
@@ -259,17 +259,17 @@
                     <div *ngIf="addressTmp?.invalid && (addressTmp?.dirty || addressTmp?.touched)"
                          class="invalid-feedback">
                       <div *ngIf="addressTmp?.errors?.['required']">
-                        Address Tmp is required.
+                        Địa chỉ tạm trú là bắt buộc.
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="flex justify-content-end flex-wrap ">
-                <button (click)="onCancel()" class="btn btn-outline-dark mr-2" type="button">Cancel
+                <button (click)="onCancel()" class="btn btn-outline-dark mr-2" type="button">Hủy bỏ
                 </button>
                 <button [disabled]="!lecturerCreateForm.valid" class="btn btn-primary"
-                        type="submit">Save
+                        type="submit">Lưu lại
                 </button>
               </div>
             </div>
