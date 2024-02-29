@@ -68,7 +68,7 @@
                       [class.is-invalid]="(absenceReport?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
                       class="form-control form-control-lg" formControlName="absenceReport" id="absenceReport"
                       min="0"
-                      placeholder="Absence Report" required type="number">
+                      placeholder="Báo cáo vắng" required type="number">
                     <div *ngIf="absenceReport?.invalid && (absenceReport?.dirty || absenceReport?.touched)"
                          class="invalid-feedback">
                       <div *ngIf="absenceReport?.errors?.['required']">
@@ -87,7 +87,7 @@
                       [class.is-invalid]="(compensationReport?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
                       class="form-control form-control-lg" formControlName="compensationReport" id="compensationReport"
                       min="0"
-                      placeholder="Compensation Report" required type="number">
+                      placeholder="Báo cáo bù" required type="number">
                     <div
                       *ngIf="compensationReport?.invalid && (compensationReport?.dirty || compensationReport?.touched)"
                       class="invalid-feedback">
@@ -108,7 +108,7 @@
                       class="form-control form-control-lg" formControlName="incorrectGradingReport"
                       id="incorrectGradingReport"
                       min="0"
-                      placeholder="Incorrect Grading Report" required type="number">
+                      placeholder="Báo cáo đánh giá sai bài làm" required type="number">
                     <div
                       *ngIf="incorrectGradingReport?.invalid && (incorrectGradingReport?.dirty || incorrectGradingReport?.touched)"
                       class="invalid-feedback">
@@ -128,7 +128,7 @@
                       [class.is-invalid]="(lateReport?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
                       class="form-control form-control-lg" formControlName="lateReport" id="lateReport"
                       min="0"
-                      placeholder="Late Report" required type="number">
+                      placeholder="Báo cáo trễ" required type="number">
                     <div
                       *ngIf="lateReport?.invalid && (lateReport?.dirty || lateReport?.touched)"
                       class="invalid-feedback">
@@ -152,7 +152,7 @@
                       class="form-control form-control-lg" formControlName="lateSubmissionScoresReport"
                       id="lateSubmissionScoresReport"
                       min="0"
-                      placeholder="Late Submission Scores Report" required type="number">
+                      placeholder="Báo cáo điểm muộn" required type="number">
                     <div
                       *ngIf="lateSubmissionScoresReport?.invalid && (lateSubmissionScoresReport?.dirty || lateSubmissionScoresReport?.touched)"
                       class="invalid-feedback">
@@ -172,7 +172,7 @@
                       [class.is-invalid]="(manyFailedReport?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
                       class="form-control form-control-lg" formControlName="manyFailedReport" id="manyFailedReport"
                       min="0"
-                      placeholder="Many Failed Report" required type="number">
+                      placeholder="Nhiều báo cáo rớt môn" required type="number">
                     <div
                       *ngIf="manyFailedReport?.invalid && (manyFailedReport?.dirty || manyFailedReport?.touched)"
                       class="invalid-feedback">
@@ -192,7 +192,7 @@
                       [class.is-invalid]="(manyPassingReports?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
                       class="form-control form-control-lg" formControlName="manyPassingReports" id="manyPassingReports"
                       min="0"
-                      placeholder="Many Passing Reports" required type="number">
+                      placeholder="Nhiều báo cáo qua môn" required type="number">
                     <div
                       *ngIf="manyPassingReports?.invalid && (manyPassingReports?.dirty || manyPassingReports?.touched)"
                       class="invalid-feedback">
@@ -212,7 +212,7 @@
                       [class.is-invalid]="(reminderReport?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
                       class="form-control form-control-lg" formControlName="reminderReport" id="reminderReport"
                       min="0"
-                      placeholder="Reminder Report" required type="number">
+                      placeholder="Báo cáo nhắc nhở" required type="number">
                     <div
                       *ngIf="reminderReport?.invalid && (reminderReport?.dirty || reminderReport?.touched)"
                       class="invalid-feedback">
@@ -235,7 +235,7 @@
                       [class.is-invalid]="(reportBehavior?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
                       class="form-control form-control-lg" formControlName="reportBehavior" id="reportBehavior"
                       min="0"
-                      placeholder="Report Behavior" required type="number">
+                      placeholder="Báo cáo hành vi" required type="number">
                     <div
                       *ngIf="reportBehavior?.invalid && (reportBehavior?.dirty || reportBehavior?.touched)"
                       class="invalid-feedback">
@@ -255,7 +255,7 @@
                       [class.is-invalid]="(returnEarlyReport?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
                       class="form-control form-control-lg" formControlName="returnEarlyReport" id="returnEarlyReport"
                       min="0"
-                      placeholder="Return Early Report" required type="number">
+                      placeholder="Báo cáo về sớm" required type="number">
                     <div
                       *ngIf="returnEarlyReport?.invalid && (returnEarlyReport?.dirty || returnEarlyReport?.touched)"
                       class="invalid-feedback">
@@ -275,7 +275,7 @@
                       [class.is-invalid]="(reviewReport?.errors && (teachingDiaryUpdateForm.touched || teachingDiaryUpdateForm.dirty))"
                       class="form-control form-control-lg" formControlName="reviewReport" id="reviewReport"
                       min="0"
-                      placeholder="Review Report" required type="number">
+                      placeholder="Báo cáo xem lại bài làm" required type="number">
                     <div
                       *ngIf="reviewReport?.invalid && (reviewReport?.dirty || reviewReport?.touched)"
                       class="invalid-feedback">

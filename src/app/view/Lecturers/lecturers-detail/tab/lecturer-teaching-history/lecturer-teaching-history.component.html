@@ -44,7 +44,7 @@
                   (click)="clear(dtLecturer)"
                   class="p-button-outlined"
                   icon="pi pi-filter-slash"
-                  label="Clear"
+                  label="Xóa chọn lọc"
                   pButton
                   size="small"
                 ></button>
@@ -55,7 +55,7 @@
                   <input
                     (input)="dtLecturer.filterGlobal($any($event.target).value, 'contains')"
                     pInputText
-                    placeholder="Search keyword"
+                    placeholder="Tìm từ khóa"
                     type="text"/>
                 </span>
                   <button
@@ -173,12 +173,14 @@
 
                     </ng-template>
                     <ng-template pTemplate="footer">
-                      <button (click)="cd.reject()" icon="pi pi-times" label="No" pButton
+                      <button (click)="cd.reject()"
+                              icon="pi pi-times"
+                              label="Không" pButton
                               type="button">
                       </button>
                       <button (click)="cd.accept()" class="p-button-danger"
                               icon="pi pi-check"
-                              label="Yes" pButton
+                              label="Có" pButton
                               type="button">
                       </button>
                     </ng-template>
@@ -195,7 +197,7 @@
             </ng-template>
             <ng-template pTemplate="emptymessage">
               <tr>
-                <td colspan="9">No history found.</td>
+                <td colspan="9">Không tìm thấy lịch sử giảng dạy.</td>
               </tr>
             </ng-template>
           </p-table>

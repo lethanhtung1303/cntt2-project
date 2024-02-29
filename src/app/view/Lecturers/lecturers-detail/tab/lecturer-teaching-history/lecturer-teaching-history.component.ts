@@ -140,7 +140,7 @@ export class LecturerTeachingHistoryComponent implements OnChanges {
               key: historyId.toString(),
               severity: 'info',
               summary: 'Đã huỷ',
-              detail: 'You have cancelled',
+              detail: 'Đã hủy thao tác',
             });
             break;
           case ConfirmEventType.CANCEL:
@@ -148,7 +148,7 @@ export class LecturerTeachingHistoryComponent implements OnChanges {
               key: historyId.toString(),
               severity: 'info',
               summary: 'Đã huỷ',
-              detail: 'You have cancelled',
+              detail: 'Đã hủy thao tác',
             });
             break;
         }
