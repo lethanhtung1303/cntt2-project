@@ -1,20 +1,24 @@
-import {Component} from '@angular/core';
-import {Table} from "primeng/table";
-import {SelectItemGroup} from 'primeng/api';
-import {SemesterResponse, SemesterService} from "../../../service/semester.service";
-import {saveAsExcelFile} from "../../../helper/excel-helper";
-import {UniversityStandard} from "../../../domain/lecturer";
-import {LecturerStandardService, UniversityStandardsResponse} from "../../../service/lecturer-standards.service";
-import {getCurrentSemester} from "../../../helper/semesters";
-
+import { Component } from '@angular/core';
+import { Table } from 'primeng/table';
+import { SelectItemGroup } from 'primeng/api';
+import {
+  SemesterResponse,
+  SemesterService,
+} from '../../../service/semester.service';
+import { saveAsExcelFile } from '../../../helper/excel-helper';
+import { UniversityStandard } from '../../../domain/lecturer';
+import {
+  LecturerStandardService,
+  UniversityStandardsResponse,
+} from '../../../service/lecturer-standards.service';
+import { getCurrentSemester } from '../../../helper/semesters';
 
 @Component({
   selector: 'app-university-lecturer-list',
   templateUrl: './university-lecturer-list.component.html',
-  styleUrls: ['./university-lecturer-list.component.css']
+  styleUrls: ['./university-lecturer-list.component.css'],
 })
 export class UniversityLecturerListComponent {
-
   lecturers: UniversityStandard[] = [];
   loading: boolean = true;
 
@@ -22,18 +26,23 @@ export class UniversityLecturerListComponent {
 
   selectedSemester: number | undefined;
 
-  constructor(private semesterService: SemesterService, private lecturerStandardService: LecturerStandardService) {
+  constructor(
+    private semesterService: SemesterService,
+    private lecturerStandardService: LecturerStandardService,
+  ) {
     this.semesterService.getAllSemester().subscribe({
       next: (data: SemesterResponse) => {
         this.groupedSemesters = data.results.semesters;
-        this.selectedSemester = getCurrentSemester(this.groupedSemesters)?.value
+        this.selectedSemester = getCurrentSemester(
+          this.groupedSemesters,
+        )?.value;
         if (this.selectedSemester) {
-          this.getLecturerStandards(this.selectedSemester)
+          this.getLecturerStandards(this.selectedSemester);
         }
       },
       error: (error) => {
-        console.log(error)
-      }
+        console.log(error);
+      },
     });
   }
 
@@ -41,11 +50,12 @@ export class UniversityLecturerListComponent {
     this.lecturerStandardService.getUniversityStandards(semester).subscribe({
       next: (data: UniversityStandardsResponse) => {
         this.lecturers = data.results.universityStandards;
+        console.log(this.lecturers);
         this.loading = false;
       },
       error: (error) => {
-        console.log(error)
-      }
+        console.log(error);
+      },
     });
   }
 
@@ -56,7 +66,7 @@ export class UniversityLecturerListComponent {
   exportExcel() {
     import('xlsx').then((xlsx) => {
       const worksheet = xlsx.utils.json_to_sheet(this.lecturers);
-      const workbook = {Sheets: {data: worksheet}, SheetNames: ['data']};
+      const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
       const excelBuffer: any = xlsx.write(workbook, {
         bookType: 'xlsx',
         type: 'array',
@@ -67,7 +77,7 @@ export class UniversityLecturerListComponent {
 
   onChangeSemester() {
     if (this.selectedSemester) {
-      this.getLecturerStandards(this.selectedSemester)
+      this.getLecturerStandards(this.selectedSemester);
     }
   }
 }

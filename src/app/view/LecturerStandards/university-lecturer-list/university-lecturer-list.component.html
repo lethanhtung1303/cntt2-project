@@ -19,21 +19,22 @@
           [rowsPerPageOptions]="[5, 10, 25, 50]"
           [rows]="5"
           [showCurrentPageReport]="true"
-          [tableStyle]="{'min-width': '80rem'}"
+          [tableStyle]="{ 'min-width': '80rem' }"
           [value]="lecturers"
           currentPageReportTemplate="{first} - {last} of {totalRecords}"
           dataKey="id"
           styleClass="p-datatable-gridlines"
         >
           <ng-template pTemplate="caption">
-            <div class="flex  flex-row flex-wrap">
+            <div class="flex flex-row flex-wrap">
               <p-dropdown
                 (onChange)="onChangeSemester()"
                 [(ngModel)]="selectedSemester"
                 [group]="true"
                 [options]="groupedSemesters"
                 class="select-semester mr-2"
-                placeholder="Select Semester">
+                placeholder="Select Semester"
+              >
                 <ng-template let-group pTemplate="group">
                   <div class="flex align-items-center">
                     <span>{{ group.label }}</span>
@@ -53,10 +54,16 @@
                 <span class="p-input-icon-left mr-2">
                   <i class="pi pi-search"></i>
                   <input
-                    (input)="dtLecturer.filterGlobal($any($event.target).value, 'contains')"
+                    (input)="
+                      dtLecturer.filterGlobal(
+                        $any($event.target).value,
+                        'contains'
+                      )
+                    "
                     pInputText
                     placeholder="Tìm kiếm"
-                    type="text"/>
+                    type="text"
+                  />
                 </span>
                 <button
                   (click)="exportExcel()"
@@ -78,69 +85,254 @@
               <th class="text-center" rowspan="2">Giảng viên</th>
               <th class="text-center" colspan="2">Tiêu chuẩn</th>
               <th class="text-center" colspan="2">Chất lượng cao</th>
-              <th class="text-center" rowspan="2"> 100% tiếng Anh/Liên kết
-                <p-columnFilter display="menu" field="isEnglishInternational" type="boolean"></p-columnFilter>
+              <th class="text-center" rowspan="2">
+                100% tiếng Anh/Liên kết
+                <p-columnFilter
+                  display="menu"
+                  field="isEnglishInternational"
+                  type="boolean"
+                ></p-columnFilter>
               </th>
             </tr>
             <tr class="text-nowrap">
-              <th class="text-center">Môn Lý thuyết
-                <p-columnFilter display="menu" field="isTeachingTheory" type="boolean"></p-columnFilter>
+              <th class="text-center">
+                Môn Lý thuyết
+                <p-columnFilter
+                  display="menu"
+                  field="isTeachingTheory"
+                  type="boolean"
+                ></p-columnFilter>
               </th>
-              <th class="text-center">Môn Thực hành
-                <p-columnFilter display="menu" field="isTeachingPractice" type="boolean"></p-columnFilter>
+              <th class="text-center">
+                Môn Thực hành
+                <p-columnFilter
+                  display="menu"
+                  field="isTeachingPractice"
+                  type="boolean"
+                ></p-columnFilter>
               </th>
-              <th class="text-center">Môn Tiếng Việt
-                <p-columnFilter display="menu" field="isTeachingVietnamese" type="boolean"></p-columnFilter>
+              <th class="text-center">
+                Môn Tiếng Việt
+                <p-columnFilter
+                  display="menu"
+                  field="isTeachingVietnamese"
+                  type="boolean"
+                ></p-columnFilter>
               </th>
-              <th class="text-center">Môn Tiếng Anh
-                <p-columnFilter display="menu" field="isTeachingEnglish" type="boolean"></p-columnFilter>
+              <th class="text-center">
+                Môn Tiếng Anh
+                <p-columnFilter
+                  display="menu"
+                  field="isTeachingEnglish"
+                  type="boolean"
+                ></p-columnFilter>
               </th>
             </tr>
           </ng-template>
-          <ng-template let-lecturer let-rowIndex="rowIndex" pTemplate="body">
+          <ng-template
+            let-expanded="expanded"
+            let-lecturer
+            let-rowIndex="rowIndex"
+            pTemplate="body"
+          >
             <tr class="text-nowrap">
-              <td class="text-center">{{ rowIndex + 1 }}</td>
+              <td class="text-center">
+                <button
+                  [icon]="
+                    expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'
+                  "
+                  [pRowToggler]="lecturer"
+                  class="p-button-text p-button-rounded p-button-plain"
+                  pButton
+                  pRipple
+                  type="button"
+                ></button>
+              </td>
               <td class="text-left">
                 <div>
-                  <img alt="..."
-                       src="{{lecturer.images}}"
-                       style="vertical-align: middle" width="32"/>
-                  <a [queryParams]="{tab: 'info'}" ariaCurrentWhenActive="page" class="vertical-align-middle"
-                     queryParamsHandling="merge"
-                     routerLink="/lecturers/{{lecturer.id}}" routerLinkActive="active"> {{ lecturer.fullName }}</a>
+                  <img
+                    alt="..."
+                    src="{{ lecturer.images }}"
+                    style="vertical-align: middle"
+                    width="32"
+                  />
+                  <a
+                    [queryParams]="{ tab: 'info' }"
+                    ariaCurrentWhenActive="page"
+                    class="vertical-align-middle"
+                    queryParamsHandling="merge"
+                    routerLink="/lecturers/{{ lecturer.id }}"
+                    routerLinkActive="active"
+                  >
+                    {{ lecturer.fullName }}</a
+                  >
                 </div>
 
                 <div class="ml-5">
-                  <span class="ml-1 vertical-align-middle"> {{ lecturer.emailTdtu }}</span>
+                  <span class="ml-1 vertical-align-middle">
+                    {{ lecturer.emailTdtu }}</span
+                  >
                 </div>
               </td>
               <td class="text-center">
                 <i
-                  [ngClass]="{ 'text-green-500 pi-check-circle': lecturer.isTeachingTheory, 'text-red-500 pi-times-circle': !lecturer.isTeachingTheory }"
-                  class="pi"></i>
+                  [ngClass]="{
+                    'text-green-500 pi-check-circle': lecturer.isTeachingTheory,
+                    'text-red-500 pi-times-circle': !lecturer.isTeachingTheory
+                  }"
+                  class="pi"
+                ></i>
               </td>
               <td class="text-center">
                 <i
-                  [ngClass]="{ 'text-green-500 pi-check-circle': lecturer.isTeachingPractice, 'text-red-500 pi-times-circle': !lecturer.isTeachingPractice }"
-                  class="pi"></i>
+                  [ngClass]="{
+                    'text-green-500 pi-check-circle':
+                      lecturer.isTeachingPractice,
+                    'text-red-500 pi-times-circle': !lecturer.isTeachingPractice
+                  }"
+                  class="pi"
+                ></i>
               </td>
-
               <td class="text-center">
                 <i
-                  [ngClass]="{ 'text-green-500 pi-check-circle': lecturer.isTeachingVietnamese, 'text-red-500 pi-times-circle': !lecturer.isTeachingVietnamese }"
-                  class="pi"></i>
+                  [ngClass]="{
+                    'text-green-500 pi-check-circle':
+                      lecturer.isTeachingVietnamese,
+                    'text-red-500 pi-times-circle':
+                      !lecturer.isTeachingVietnamese
+                  }"
+                  class="pi"
+                ></i>
               </td>
-
               <td class="text-center">
                 <i
-                  [ngClass]="{ 'text-green-500 pi-check-circle': lecturer.isTeachingEnglish, 'text-red-500 pi-times-circle': !lecturer.isTeachingEnglish }"
-                  class="pi"></i>
+                  [ngClass]="{
+                    'text-green-500 pi-check-circle':
+                      lecturer.isTeachingEnglish,
+                    'text-red-500 pi-times-circle': !lecturer.isTeachingEnglish
+                  }"
+                  class="pi"
+                ></i>
               </td>
-
               <td class="text-center">
                 <i
-                  [ngClass]="{ 'text-green-500 pi-check-circle': lecturer.isEnglishInternational, 'text-red-500 pi-times-circle': !lecturer.isEnglishInternational }"
-                  class="pi"></i>
+                  [ngClass]="{
+                    'text-green-500 pi-check-circle':
+                      lecturer.isEnglishInternational,
+                    'text-red-500 pi-times-circle':
+                      !lecturer.isEnglishInternational
+                  }"
+                  class="pi"
+                ></i>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template let-lecturer pTemplate="rowexpansion">
+            <tr>
+              <td colspan="7">
+                <p-table [value]="lecturer.standardDetail" dataKey="id">
+                  <ng-template pTemplate="header">
+                    <tr class="text-nowrap">
+                      <th class="text-center">Quá trình đào tạo</th>
+                      <th class="text-center">Số tiết đã dạy</th>
+                      <th class="text-center">Chứng chỉ ngoại ngữ</th>
+                      <th class="text-center">Trung bình điểm hài lòng</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template let-standardDetail pTemplate="body">
+                    <tr class="text-nowrap">
+                      <td class="text-left">
+                        <div
+                          *ngIf="
+                            standardDetail.trainingProcessStandard.school ===
+                            null
+                          "
+                        >
+                          Quá trình đào tạo chưa đủ tiêu chuẩn
+                        </div>
+                        <section
+                          *ngIf="
+                            standardDetail.trainingProcessStandard.school !=
+                            null
+                          "
+                        >
+                          <ul>
+                            <li>
+                              Trường:
+                              <strong>{{
+                                standardDetail.trainingProcessStandard.school
+                              }}</strong>
+                            </li>
+                            <li>
+                              Ngành đào tạo:
+                              <strong>{{
+                                standardDetail.trainingProcessStandard.majors
+                              }}</strong>
+                            </li>
+                            <li>
+                              Năm tốt nghiệp:
+                              <strong>{{
+                                standardDetail.trainingProcessStandard
+                                  .graduationYear
+                              }}</strong>
+                            </li>
+                            <li>
+                              Loại tốt nghiệp:
+                              <strong>{{
+                                standardDetail.trainingProcessStandard
+                                  .graduationType
+                              }}</strong>
+                            </li>
+                            <li>
+                              Trình độ:
+                              <strong>{{
+                                standardDetail.trainingProcessStandard.level
+                              }}</strong>
+                            </li>
+                            <li>
+                              Ngôn ngữ:
+                              <strong>{{
+                                standardDetail.trainingProcessStandard.language
+                              }}</strong>
+                            </li>
+                          </ul>
+                        </section>
+                      </td>
+                      <td class="text-center">
+                        {{ standardDetail.totalNumberLessons }}
+                      </td>
+                      <td class="text-left">
+                        <div
+                          *ngIf="
+                            standardDetail.certificate.certificateName === null
+                          "
+                        >
+                          Chứng chỉ ngoại ngữ chưa đủ tiêu chuẩn
+                        </div>
+                        <div
+                          *ngIf="
+                            standardDetail.certificate.certificateName != null
+                          "
+                        >
+                          {{ standardDetail.certificate.certificateName }} :
+                          <strong>{{
+                            standardDetail.certificate.certificateScore
+                          }}</strong>
+                        </div>
+                      </td>
+                      <td class="text-center">
+                        {{ standardDetail.averageSatisfaction }}
+                      </td>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage">
+                    <tr>
+                      <td colspan="7">
+                        Giảng viên chưa đủ tiêu chuẩn giảng dạy.
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
               </td>
             </tr>
           </ng-template>
