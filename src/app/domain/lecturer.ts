@@ -138,6 +138,7 @@ export interface UniversityStandard {
 }
 
 export interface StandardDetail {
+  highestLevel: HighestLevel;
   trainingProcessStandard?: TrainingProcessStandard;
   totalNumberLessons?: number;
   certificate?: CertificateStandard;
@@ -156,6 +157,12 @@ export interface TrainingProcessStandard {
 export interface CertificateStandard {
   certificateName?: string;
   certificateScore?: string;
+}
+
+export interface HighestLevel {
+  level?: string;
+  graduationYear?: number;
+  graduationType?: string;
 }
 
 export interface MasterStandards {
