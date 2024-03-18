@@ -1,0 +1,235 @@
+<div class="row justify-content-center align-items-center my-3">
+  <div class="col">
+    
+  </div>
+  <div *ngIf="!isEdit" class="col-auto">
+    <button
+      (click)="showDialog()"
+      class="btn btn-primary"
+      type="button"
+    >
+      <span class="fe fe-plus fe-16 mr-2"></span>Thêm mới
+    </button>
+    <p-dialog (onHide)="onCancel()" [(visible)]="visible" [draggable]="false" [modal]="true" [resizable]="false"
+              [style]="{ width: '50vw' }"
+              header="Thêm mới Quá trình đào tạo">
+      <form (ngSubmit)="onSubmit()" [formGroup]="processCreateForm">
+        <div class="card shadow mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label for="truong">Trường</label>
+                  <input class="form-control form-control-lg" formControlName="truong" id="truong"
+                         placeholder="Trường"
+                         required type="text">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label for="nganh">Ngành đào tạo</label>
+                  <input class="form-control form-control-lg" formControlName="nganh" id="nganh"
+                         placeholder="Ngành đào tạo"
+                         required type="text">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+
+              <div class="col-md-3">
+                <div class="form-group mb-3">
+                  <label for="loaiTotNghiep">Loại tốt nghiệp</label>
+                  <select
+                    class="form-control form-control-lg"
+                    formControlName="loaiTotNghiep"
+                    id="loaiTotNghiep"
+                  >
+                    <ng-container *ngFor="let item of graduationList">
+                      <option [selected]="item.id === 1" [value]="item.id">
+                        {{ item.loaiTotNghiep }}
+                      </option>
+                    </ng-container>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="form-group mb-3">
+                  <label for="namTotNghiep">Năm tốt nghiệp</label>
+                  <input class="form-control form-control-lg" formControlName="namTotNghiep"
+                         id="namTotNghiep"
+                         placeholder="Năm tốt nghiệp"
+                         required type="number">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label for="level">Trình độ</label>
+                  <select
+                    class="form-control form-control-lg"
+                    formControlName="level"
+                    id="level"
+                  >
+                    <ng-container *ngFor="let item of levelList">
+                      <option [selected]="item.id == 7" [value]="item.id">
+                        {{ item.trinhDo }}
+                      </option>
+                    </ng-container>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label for="deTaiTotNghiep">Đề tài tốt nghiệp</label>
+                  <input class="form-control form-control-lg" formControlName="deTaiTotNghiep"
+                         id="deTaiTotNghiep"
+                         placeholder="Đề tài tốt nghiệp"
+                         type="text">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group mb-3">
+                  <label for="nguoiHuongDan">Người hướng dẫn</label>
+                  <input class="form-control form-control-lg" formControlName="nguoiHuongDan"
+                         id="nguoiHuongDan"
+                         placeholder="Người hướng dẫn"
+                         type="text">
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group mb-3">
+                  <label for="check-language">Ngôn ngữ</label>
+                  <div class="form-check form-control-lg">
+                    <ng-container *ngFor="let item of languageList">
+                      <div class="form-check form-check-inline  mr-3" id="check-language">
+                        <input (change)="onSelectedLanguages($event)"
+                               class="form-check-input" id="check-{{item.id}}" type="checkbox"
+                               value="{{item.id}}">
+                        <label class="form-check-label"
+                               for="check-{{item.id}}">Tiếng {{ item.tenNgonNgu }}</label>
+                      </div>
+                    </ng-container>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="flex justify-content-end flex-wrap ">
+              <button (click)="onCancel()" class="btn btn-outline-dark mr-2" type="button">Cancel</button>
+              <button [disabled]="!processCreateForm.valid" class="btn btn-primary"
+                      type="submit">Save
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </p-dialog>
+  </div>
+</div>
+
+<ng-template *ngIf="!isEdit;then viewBlock;else editBlock"></ng-template>
+<ng-template #viewBlock>
+  <div *ngIf="trainingProcess && trainingProcess.length > 0" class="card shadow mb-4">
+    <div class="card-body">
+      <div class="list-group list-group-flush my-n3">
+        <ng-container *ngFor="let process of trainingProcess">
+          <div class="list-group-item">
+            <div class="row align-items-center">
+              <div class="col-auto">
+                                <span [ngClass]="genBgIcoin(process.level.displayOrder)"
+                                      class="circle circle-sm">
+                                    <i class="fe fe-book-open fe-16 text-white"></i>
+                                </span>
+              </div>
+              <div class="col">
+                <small>
+                  <strong>{{ process.truong }}</strong>
+                </small>
+                <div class="mb-2">
+                                <span [ngClass]="genBgIcoin(process.level.displayOrder)"
+                                      class="badge badge-pill text-white">{{ process.level.trinhDo }}</span>
+                </div>
+                <div class="text-muted small">
+                  <section>
+                    <ul>
+                      <li>Năm tốt nghiệp: <strong>{{ process.namTotNghiep }}</strong></li>
+                      <li>Ngành đào tạo: <strong>{{ process.nganh }}</strong></li>
+                      <li>Đề tài tốt nghiệp: <strong>{{ process.deTaiTotNghiep }}</strong>
+                      </li>
+                      <li>Người hướng dẫn: <strong>{{ process.nguoiHuongDan }}</strong></li>
+                      <li>Loại tốt nghiệp:
+                        <strong>{{ process.graduationType.loaiTotNghiep }}</strong>
+                      </li>
+                      <li>Ngôn ngữ:
+                        <strong>{{ this.generateLanguage(process.language) }}</strong>
+                      </li>
+                    </ul>
+                  </section>
+                </div>
+              </div>
+              <div class="col-auto pr-0">
+                <button
+                  (click)="goEdit(process)"
+                  class="p-button-rounded p-button-success mr-2"
+                  icon="pi pi-pencil"
+                  pButton
+                  pRipple
+                ></button>
+                <button
+                  (click)="goRemove(process.id)"
+                  class="p-button-rounded p-button-warning"
+                  icon="pi pi-trash"
+                  pButton
+                  pRipple
+                ></button>
+                <p-toast key="{{process.id}}"></p-toast>
+                <p-confirmDialog #cd [style]="{ width: '50vw' }" key="{{process.id}}" position="top">
+                  <ng-template pTemplate="header">
+                    <h3>Bạn có chắc chắn xoá Quá trình đào tạo tại trường:
+                      <p>
+                        {{ process.truong }}
+                      </p>
+                    </h3>
+
+                  </ng-template>
+                  <ng-template pTemplate="message">
+                    <p>Message Template</p>
+                  </ng-template>
+                  <ng-template pTemplate="footer">
+                    <button (click)="cd.reject()" icon="pi pi-times" label="No" pButton
+                            type="button"></button>
+                    <button (click)="cd.accept()" class="p-button-danger"
+                            icon="pi pi-check"
+                            label="Yes" pButton
+                            type="button"></button>
+                  </ng-template>
+                </p-confirmDialog>
+              </div>
+            </div>
+            <!-- / .row -->
+          </div>
+        </ng-container>
+      </div>
+      <!-- / .list-group -->
+    </div>
+    <!-- / .card-body -->
+  </div>
+  <div *ngIf="trainingProcess && trainingProcess.length <= 0">
+    No Training Process found.
+  </div>
+</ng-template>
+<ng-template #editBlock>
+  <ng-template [ngIf]="selectedProcess">
+    <app-edit-training-process [lecturerId]="lecturerId"
+                               [trainingProcess]="selectedProcess"></app-edit-training-process>
+  </ng-template>
+</ng-template>

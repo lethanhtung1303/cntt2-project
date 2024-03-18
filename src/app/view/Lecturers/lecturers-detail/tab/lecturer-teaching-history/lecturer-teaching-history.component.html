@@ -1,0 +1,208 @@
+<div class="row justify-content-center align-items-center mb-2">
+  <!-- Striped rows -->
+  <div class="col-md-12">
+    <div class="card shadow">
+      <div class="card-body">
+        <div class="card">
+          <p-table
+            #dtLecturer
+            [globalFilterFields]="[
+            'subjectCode',
+            'subjectTitle',
+            'subjectGroupName',
+            'nameTypeSubject',
+            'nameTrainingSys'
+          ]"
+            [loading]="loading"
+            [paginator]="true"
+            [rowsPerPageOptions]="[5, 10, 25, 50]"
+            [rows]="5"
+            [scrollable]="true"
+            [showCurrentPageReport]="true"
+            [tableStyle]="{'min-width': '80rem'}"
+            [value]="teachingHistory"
+            currentPageReportTemplate="{first} - {last} of {totalRecords}"
+            dataKey="id"
+            styleClass="p-datatable-gridlines"
+          >
+            <ng-template pTemplate="caption">
+              <div class="flex  flex-row ">
+                <p-dropdown
+                  (onChange)="onChangeSemester()"
+                  [(ngModel)]="selectedSemester"
+                  [group]="true"
+                  [options]="groupedSemesters"
+                  class="select-semester mr-2"
+                  placeholder="Select Semester">
+                  <ng-template let-group pTemplate="group">
+                    <div class="flex align-items-center">
+                      <span>{{ group.label }}</span>
+                    </div>
+                  </ng-template>
+                </p-dropdown>
+                <button
+                  (click)="clear(dtLecturer)"
+                  class="p-button-outlined"
+                  icon="pi pi-filter-slash"
+                  label="Xóa chọn lọc"
+                  pButton
+                  size="small"
+                ></button>
+
+                <div class="ml-auto">
+                <span class="p-input-icon-left mr-2">
+                  <i class="pi pi-search"></i>
+                  <input
+                    (input)="dtLecturer.filterGlobal($any($event.target).value, 'contains')"
+                    pInputText
+                    placeholder="Tìm từ khóa"
+                    type="text"/>
+                </span>
+                  <button
+                    (click)="exportExcel()"
+                    class="p-button-success"
+                    icon="pi pi-file-excel"
+                    pButton
+                    pRipple
+                    pTooltip="XLS"
+                    size="small"
+                    tooltipPosition="bottom"
+                    type="button"
+                  ></button>
+                </div>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr class="text-nowrap">
+                <th class="text-center" pSortableColumn="subjectCode">
+                  <div class="flex justify-content-center align-items-center ">
+                    Mã Môn học
+                    <p-sortIcon class="ml-2" field="subjectCode"></p-sortIcon>
+                  </div>
+                </th>
+                <th class="text-center" pSortableColumn="subjectTitle">
+                  <div class="flex justify-content-center align-items-center ">
+                    Tên Môn học
+                    <p-sortIcon class="ml-2" field="subjectTitle"></p-sortIcon>
+                  </div>
+                </th>
+                <th class="text-center" pSortableColumn="numberLessons">
+                  <div class="flex justify-content-center align-items-center ">
+                    Số tiết học
+                    <p-sortIcon class="ml-2" field="numberLessons"></p-sortIcon>
+                  </div>
+                </th>
+                <th class="text-center" pSortableColumn="subjectGroupName">
+                  <div class="flex justify-content-center align-items-center ">
+                    Nhóm môn
+                    <p-sortIcon class="ml-2" field="subjectGroupName"></p-sortIcon>
+                  </div>
+                </th>
+                <th class="text-center" pSortableColumn="nameTypeSubject">
+                  <div class="flex justify-content-center align-items-center ">
+                    Loại môn
+                    <p-sortIcon class="ml-2" field="nameTypeSubject"></p-sortIcon>
+                  </div>
+                </th>
+                <th class="text-center" pSortableColumn="nameTrainingSys">
+                  <div class="flex justify-content-center align-items-center ">
+                    Hệ đào tạo
+                    <p-sortIcon class="ml-2" field="nameTrainingSys"></p-sortIcon>
+                  </div>
+                </th>
+                <th class="text-center" pSortableColumn="createDatetime">
+                  <div class="flex justify-content-center align-items-center ">
+                    Ngày phân công
+                    <p-sortIcon class="ml-2" field="createDatetime"></p-sortIcon>
+                  </div>
+                </th>
+
+                <th class="text-center">
+                  <div class="flex justify-content-center align-items-center ">
+                    Nhật ký
+                  </div>
+                </th>
+
+                <th class="text-center">#</th>
+              </tr>
+            </ng-template>
+            <ng-template let-history pTemplate="body">
+              <tr class="text-nowrap">
+                <td class="text-left">
+                  <a ariaCurrentWhenActive="page"
+                     class="ml-1 vertical-align-middle"
+                     routerLink="/subject/{{history.subjectCode}}"
+                     routerLinkActive="active">{{ history.subjectCode }}
+                  </a>
+                </td>
+                <td class="text-left">
+                  {{ history.subjectTitle }}
+                </td>
+                <td class="text-center">
+                  {{ history.numberLessons }}
+                </td>
+                <td class="text-left">
+                  {{ history.subjectGroupName }}
+                </td>
+                <td class="text-center">
+                  {{ history.nameTypeSubject }}
+                </td>
+                <td class="text-left">
+                  {{ history.nameTrainingSys }}
+                </td>
+                <td class="text-center">
+                  {{ history.createDatetime | date: 'dd/MM/yyyy HH:mm:ss' }}
+                </td>
+                <td class="text-left">
+                  <a ariaCurrentWhenActive="page"
+                     class="ml-1 vertical-align-middle"
+                     routerLink="/teaching-diary/{{history.historyId}}"
+                     routerLinkActive="active">Chi tiết
+                  </a>
+                </td>
+
+                <td>
+                  <p-toast key="{{history.historyId}}"></p-toast>
+                  <p-confirmDialog #cd [style]="{ width: '50vw' }" key="{{history.historyId}}" position="top">
+                    <ng-template pTemplate="header">
+                      <h3>Chắc chắn xoá Lịch sử Giảng dạy:
+                        <p>
+                          Môn: {{ history.subjectTitle }}
+                        </p>
+                      </h3>
+
+                    </ng-template>
+                    <ng-template pTemplate="footer">
+                      <button (click)="cd.reject()"
+                              icon="pi pi-times"
+                              label="Không" pButton
+                              type="button">
+                      </button>
+                      <button (click)="cd.accept()" class="p-button-danger"
+                              icon="pi pi-check"
+                              label="Có" pButton
+                              type="button">
+                      </button>
+                    </ng-template>
+                  </p-confirmDialog>
+
+                  <button
+                    (click)="confirmDelete(history.historyId)"
+                    class="p-button-rounded p-button-warning"
+                    icon="pi pi-trash"
+                    pButton
+                  ></button>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td colspan="9">Không tìm thấy lịch sử giảng dạy.</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

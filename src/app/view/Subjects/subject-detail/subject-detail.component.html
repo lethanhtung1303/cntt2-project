@@ -1,0 +1,84 @@
+<div class="row justify-content-center align-items-center my-3">
+  <div class="col">
+    <div class="row justify-content-start align-items-center m-0">
+      <a ariaCurrentWhenActive="page"
+         class="btn btn-sm ml-4"
+         routerLink="/subject"
+         routerLinkActive="active"
+         type="button"><span class="fe fe-corner-down-left fe-24 text-muted"></span>
+      </a>
+      <h2 class="page-title" style="margin: 0">Thông tin chi tiết: {{ subject?.tenMon }}</h2>
+    </div>
+  </div>
+</div>
+<div class="row justify-content-center align-items-center mb-2">
+  <!-- Striped rows -->
+  <div class="col-md-12">
+    <div class="card shadow">
+      <div class="card-body">
+        <div class="my-4">
+          <form (ngSubmit)="onSubmit()" *ngIf="subject" [formGroup]="subjectUpdateForm">
+            <div class="card shadow mb-4">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group mb-3">
+                      <label for="subject-code">Mã môn học</label>
+                      <input class="form-control form-control-lg" formControlName="subjectCode"
+                             id="subject-code" placeholder="Subject Code" required
+                             type="text">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group mb-3">
+                      <label for="subject-type">Loại môn</label>
+                      <input class="form-control form-control-lg" formControlName="subjectType"
+                             id="subject-type" placeholder="Loại môn" required
+                             type="text">
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group mb-3">
+                      <label for="subject-group">Nhóm môn</label>
+                      <input class="form-control form-control-lg" formControlName="subjectGroup"
+                             id="subject-group" placeholder="Nhóm môn" required
+                             type="text">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label for="subject-name">Tên Môn học</label>
+                      <input class="form-control form-control-lg" formControlName="subjectName"
+                             id="subject-name" placeholder="Tên Môn học" required
+                             type="text">
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label for="number-lessons">Số tiết học</label>
+                      <input class="form-control form-control-lg" formControlName="numberLessons"
+                             id="number-lessons" placeholder="Số tiết học" required
+                             type="number">
+                    </div>
+                  </div>
+                </div>
+                <div class="flex justify-content-end flex-wrap ">
+                  <button (click)="onCancel()" class="btn btn-outline-dark mr-2" type="button">Hủy bỏ</button>
+                  <button [disabled]="!subjectUpdateForm.valid" class="btn btn-primary"
+                          type="submit">Lưu
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div> <!-- /.card-body -->
+      </div>
+    </div>
+  </div>
+  <!-- Striped rows -->
+</div>
+

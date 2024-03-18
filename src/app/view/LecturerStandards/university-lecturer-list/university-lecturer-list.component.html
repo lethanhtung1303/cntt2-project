@@ -1,0 +1,157 @@
+<div class="row justify-content-center align-items-center my-3">
+  <div class="col">
+    <h2 class="page-title">Danh sách Giảng viên - Bậc Đại học</h2>
+  </div>
+</div>
+<div class="row justify-content-center align-items-center mb-2">
+  <div class="col-md-12">
+    <div class="card shadow">
+      <div class="card-body">
+        <p-table
+          #dtLecturer
+          [globalFilterFields]="[
+            'teachingSystem.name',
+            'fullName',
+            'emailTdtu'
+          ]"
+          [loading]="loading"
+          [paginator]="true"
+          [rowsPerPageOptions]="[5, 10, 25, 50]"
+          [rows]="5"
+          [showCurrentPageReport]="true"
+          [tableStyle]="{'min-width': '80rem'}"
+          [value]="lecturers"
+          currentPageReportTemplate="{first} - {last} of {totalRecords}"
+          dataKey="id"
+          styleClass="p-datatable-gridlines"
+        >
+          <ng-template pTemplate="caption">
+            <div class="flex  flex-row flex-wrap">
+              <p-dropdown
+                (onChange)="onChangeSemester()"
+                [(ngModel)]="selectedSemester"
+                [group]="true"
+                [options]="groupedSemesters"
+                class="select-semester mr-2"
+                placeholder="Select Semester">
+                <ng-template let-group pTemplate="group">
+                  <div class="flex align-items-center">
+                    <span>{{ group.label }}</span>
+                  </div>
+                </ng-template>
+              </p-dropdown>
+              <button
+                (click)="clear(dtLecturer)"
+                class="p-button-outlined"
+                icon="pi pi-filter-slash"
+                label="Xóa chọn lọc"
+                pButton
+                size="small"
+              ></button>
+
+              <div class="ml-auto">
+                <span class="p-input-icon-left mr-2">
+                  <i class="pi pi-search"></i>
+                  <input
+                    (input)="dtLecturer.filterGlobal($any($event.target).value, 'contains')"
+                    pInputText
+                    placeholder="Tìm kiếm"
+                    type="text"/>
+                </span>
+                <button
+                  (click)="exportExcel()"
+                  class="p-button-success"
+                  icon="pi pi-file-excel"
+                  pButton
+                  pRipple
+                  pTooltip="XLS"
+                  size="small"
+                  tooltipPosition="bottom"
+                  type="button"
+                ></button>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr class="text-nowrap">
+              <th class="text-center" rowspan="2">#</th>
+              <th class="text-center" rowspan="2">Giảng viên</th>
+              <th class="text-center" colspan="2">Tiêu chuẩn</th>
+              <th class="text-center" colspan="2">Chất lượng cao</th>
+              <th class="text-center" rowspan="2"> 100% tiếng Anh/Liên kết
+                <p-columnFilter display="menu" field="isEnglishInternational" type="boolean"></p-columnFilter>
+              </th>
+            </tr>
+            <tr class="text-nowrap">
+              <th class="text-center">Môn Lý thuyết
+                <p-columnFilter display="menu" field="isTeachingTheory" type="boolean"></p-columnFilter>
+              </th>
+              <th class="text-center">Môn Thực hành
+                <p-columnFilter display="menu" field="isTeachingPractice" type="boolean"></p-columnFilter>
+              </th>
+              <th class="text-center">Môn Tiếng Việt
+                <p-columnFilter display="menu" field="isTeachingVietnamese" type="boolean"></p-columnFilter>
+              </th>
+              <th class="text-center">Môn Tiếng Anh
+                <p-columnFilter display="menu" field="isTeachingEnglish" type="boolean"></p-columnFilter>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template let-lecturer let-rowIndex="rowIndex" pTemplate="body">
+            <tr class="text-nowrap">
+              <td class="text-center">{{ rowIndex + 1 }}</td>
+              <td class="text-left">
+                <div>
+                  <img alt="..."
+                       src="{{lecturer.images}}"
+                       style="vertical-align: middle" width="32"/>
+                  <a [queryParams]="{tab: 'info'}" ariaCurrentWhenActive="page" class="vertical-align-middle"
+                     queryParamsHandling="merge"
+                     routerLink="/lecturers/{{lecturer.id}}" routerLinkActive="active"> {{ lecturer.fullName }}</a>
+                </div>
+
+                <div class="ml-5">
+                  <span class="ml-1 vertical-align-middle"> {{ lecturer.emailTdtu }}</span>
+                </div>
+              </td>
+              <td class="text-center">
+                <i
+                  [ngClass]="{ 'text-green-500 pi-check-circle': lecturer.isTeachingTheory, 'text-red-500 pi-times-circle': !lecturer.isTeachingTheory }"
+                  class="pi"></i>
+              </td>
+              <td class="text-center">
+                <i
+                  [ngClass]="{ 'text-green-500 pi-check-circle': lecturer.isTeachingPractice, 'text-red-500 pi-times-circle': !lecturer.isTeachingPractice }"
+                  class="pi"></i>
+              </td>
+
+              <td class="text-center">
+                <i
+                  [ngClass]="{ 'text-green-500 pi-check-circle': lecturer.isTeachingVietnamese, 'text-red-500 pi-times-circle': !lecturer.isTeachingVietnamese }"
+                  class="pi"></i>
+              </td>
+
+              <td class="text-center">
+                <i
+                  [ngClass]="{ 'text-green-500 pi-check-circle': lecturer.isTeachingEnglish, 'text-red-500 pi-times-circle': !lecturer.isTeachingEnglish }"
+                  class="pi"></i>
+              </td>
+
+              <td class="text-center">
+                <i
+                  [ngClass]="{ 'text-green-500 pi-check-circle': lecturer.isEnglishInternational, 'text-red-500 pi-times-circle': !lecturer.isEnglishInternational }"
+                  class="pi"></i>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="8">No lecturers found.</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+  <!-- Striped rows -->
+</div>

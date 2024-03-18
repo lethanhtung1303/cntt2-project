@@ -1,0 +1,168 @@
+<div class="row justify-content-center align-items-center my-3">
+  <div class="col">
+    <h2 class="page-title">Thống kê Giờ giảng của Giảng viên Thỉnh giảng</h2>
+  </div>
+</div>
+<div class="row justify-content-center align-items-center mb-2">
+  <div class="col-md-12">
+    <div class="card shadow">
+      <div class="card-body">
+        <div class="card">
+          <p-table #dt
+                   [globalFilterFields]="['fullName','emailTdtu','lecturerLevel']"
+                   [loading]="loading"
+                   [paginator]="true"
+                   [rowHover]="true"
+                   [rowsPerPageOptions]="[5, 10, 25, 50]"
+                   [rows]="5"
+                   [scrollable]="true"
+                   [showCurrentPageReport]="true"
+                   [tableStyle]="{'min-width': '80rem'}"
+                   [value]="lectureData"
+                   currentPageReportTemplate="{first} - {last} of {totalRecords}"
+                   dataKey="id"
+                   styleClass="p-datatable-sm p-datatable-gridlines">
+            <ng-template pTemplate="caption">
+              <div class="flex  flex-row flex-wrap">
+                <p-dropdown
+                  (onChange)="onChangeSemester()"
+                  [(ngModel)]="selectedSemester"
+                  [group]="true"
+                  [options]="groupedSemesters"
+                  class="select-semester mr-2"
+                  placeholder="Select Semester">
+                  <ng-template let-group pTemplate="group">
+                    <div class="flex align-items-center">
+                      <span>{{ group.label }}</span>
+                    </div>
+                  </ng-template>
+                </p-dropdown>
+                <button
+                  (click)="clear(dt)"
+                  class="p-button-outlined"
+                  icon="pi pi-filter-slash"
+                  label="Xóa chọn lọc"
+                  pButton
+                  size="small">
+                </button>
+                <div class="ml-auto">
+                <span class="p-input-icon-left mr-2">
+                  <i class="pi pi-search"></i>
+                  <input
+                    (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                    pInputText
+                    placeholder="Tìm từ khóa"
+                    type="text"/>
+                </span>
+                  <button
+                    (click)="exportExcel()"
+                    class="p-button-success"
+                    icon="pi pi-file-excel"
+                    pButton
+                    pRipple
+                    pTooltip="XLS"
+                    size="small"
+                    tooltipPosition="bottom"
+                    type="button">
+                  </button>
+                </div>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr class="text-nowrap">
+                <th class="text-center" pFrozenColumn rowspan="2">#</th>
+                <th class="text-center" pFrozenColumn rowspan="2">Giảng viên</th>
+                <th class="text-center" rowspan="2">Trình độ</th>
+                <th class="text-center" rowspan="2">
+                  Tiêu chuẩn
+                  <br>
+                  <small class="text-muted">(Thạc sĩ: T = 120.000)</small>
+                  <br>
+                  <small class="text-muted">(>=Tiến sĩ: T = 140.000)</small>
+                </th>
+                <th class="text-center" colspan="2">CLC Tiếng Việt</th>
+                <th class="text-center" colspan="2">CLC Tiếng Anh</th>
+                <th class="text-center" colspan="2">100% tiếng Anh/Liên kết</th>
+                <th class="text-center" rowspan="2">
+                  Thạc sĩ
+                  <br>
+                  <small class="text-muted">(T = 232.000)</small>
+                </th>
+                <th class="text-center" rowspan="2">Thanh toán tiết giảng</th>
+              </tr>
+
+              <tr class="text-nowrap">
+                <th class="text-center">
+                  Môn cơ sở
+                  <br>
+                  <small class="text-muted">(T = 160.000)</small>
+                </th>
+                <th class="text-center">
+                  Môn chuyên ngành
+                  <br>
+                  <small class="text-muted">(T = 180.000)</small>
+                </th>
+                <th class="text-center">
+                  Môn cơ sở
+                  <br>
+                  <small class="text-muted">(T = 180.000)</small>
+                </th>
+                <th class="text-center">
+                  Môn chuyên ngành
+                  <br>
+                  <small class="text-muted">(T = 200.000)</small>
+                </th>
+                <th class="text-center">
+                  Môn cơ sở
+                  <br>
+                  <small class="text-muted">(T = 180.000)</small>
+                </th>
+                <th class="text-center">
+                  Môn chuyên ngành
+                  <br>
+                  <small class="text-muted">(T = 200.000)</small>
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template let-lecturer let-rowIndex="rowIndex" pTemplate="body">
+              <tr class="text-nowrap">
+                <td class="text-center" pFrozenColumn>{{ rowIndex + 1 }}</td>
+                <td pFrozenColumn>
+                  <div>
+                    <img alt="..."
+                         src="{{lecturer.images}}"
+                         style="vertical-align: middle" width="32"/>
+                    <a [queryParams]="{tab: 'teaching-history'}" ariaCurrentWhenActive="page"
+                       class="vertical-align-middle"
+                       queryParamsHandling="merge"
+                       routerLink="/lecturers/{{lecturer.id}}" routerLinkActive="active">{{ lecturer.fullName }}
+                    </a>
+                  </div>
+                  <div class="ml-5">
+                    <span class="ml-1 vertical-align-middle">{{ lecturer.emailTdtu }}</span>
+                  </div>
+                </td>
+                <td>{{ lecturer.lecturerLevel }}</td>
+                <td class="text-center">{{ lecturer.extraHoursStandardSys }}</td>
+                <td class="text-center">{{ lecturer.extraHoursCLCVietnamese.basicSubjects }}</td>
+                <td class="text-center">{{ lecturer.extraHoursCLCVietnamese.majoringSubjects }}</td>
+                <td class="text-center">{{ lecturer.extraHoursCLCEnglish.basicSubjects }}</td>
+                <td class="text-center">{{ lecturer.extraHoursCLCEnglish.majoringSubjects }}</td>
+                <td class="text-center">{{ lecturer.extraHoursEnglishInternational.basicSubjects }}</td>
+                <td class="text-center">{{ lecturer.extraHoursEnglishInternational.majoringSubjects }}</td>
+                <td class="text-center">{{ lecturer.extraHoursMaster }}</td>
+                <td class="text-center">{{ convertAmount(lecturer.totalPayment) }}</td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td colspan="14">Không tìm thấy giảng viên.</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Striped rows -->
+</div>

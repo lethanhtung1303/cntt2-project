@@ -1,0 +1,37 @@
+<div class="row justify-content-center align-items-center my-3">
+  <div class="col">
+    <h2 class="page-title">Danh sách Giảng viên - Bậc Thạc sĩ</h2>
+  </div>
+</div>
+<div class="row justify-content-center align-items-center mb-2">
+  <div class="col-md-12">
+    <div class="card shadow">
+      <div class="card-body">
+        <div *ngIf="lecturers.length>0" class="list-group list-group-flush my-n3">
+          <ng-container *ngFor="let item of lecturers">
+            <div class="list-group-item">
+              <div class="row">
+                <div class="col-auto">
+                  <div class="avatar avatar-sm mt-2">
+                    <img alt="..." class="avatar-img rounded-circle"
+                         src="{{item.images}}">
+                  </div>
+                </div>
+                <div class="col">
+                  <a [queryParams]="{tab: 'info'}" ariaCurrentWhenActive="page" class="font-weight-bold"
+                     queryParamsHandling="merge"
+                     routerLink="/lecturers/{{item.id}}"
+                     routerLinkActive="active">
+                    {{ item.fullName }}
+                  </a>
+                  <div class="my-0 text-muted small">{{ item.emailTdtu }}</div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Striped rows -->
+</div>

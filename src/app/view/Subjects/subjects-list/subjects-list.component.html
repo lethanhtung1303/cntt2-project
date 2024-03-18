@@ -1,0 +1,304 @@
+<div class="row justify-content-center align-items-center my-3">
+  <div class="col">
+    <h2 class="page-title">Danh sách Môn học</h2>
+  </div>
+  <div class="col-auto">
+    <div class="col-auto">
+      <button
+        (click)="showDialog()"
+        class="btn btn-primary"
+        type="button"
+      >
+        <span class="fe fe-plus fe-16 mr-2"></span>Thêm mới
+      </button>
+      <p-dialog (onHide)="onCancel()" [(visible)]="visible" [draggable]="false" [modal]="true" [resizable]="false"
+                [style]="{ width: '50vw' }"
+                header="Thêm mới Môn học">
+        <form (ngSubmit)="onSubmit()" [formGroup]="subjectCreateForm">
+          <div class="card shadow mb-4">
+            <div class="card-body">
+              <div *ngIf="this.globalErrorService.getGlobalError().errorCode" class="mx-auto">
+                <h6 class="text-danger">{{ this.globalErrorService.getGlobalError().errMessage }}</h6>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group mb-3">
+                    <label for="subject-group">Nhóm môn</label>
+                    <select
+                      class="form-control form-control-lg"
+                      formControlName="subjectGroup"
+                      id="subject-group"
+                    >
+                      <ng-container *ngFor="let item of subjectGroups">
+                        <option [value]="item.maNhom">
+                          ({{ item.maNhom }}) {{ item.tenNhom }}
+                        </option>
+                      </ng-container>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-3">
+                    <label for="subject-type">Loại môn</label>
+                    <select
+                      class="form-control form-control-lg"
+                      formControlName="subjectType"
+                      id="subject-type"
+                    >
+                      <option value="0">Môn thực hành</option>
+                      <option value="1">Môn lý thuyết</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+
+                <div class="col-md-6">
+                  <div class="form-group mb-3">
+                    <label for="subject-code">Mã Môn học</label>
+                    <input class="form-control form-control-lg" formControlName="subjectCode"
+                           id="subject-code"
+                           placeholder="Mã Môn học" required type="text">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-3">
+                    <label for="number-lessons">Số tiết học</label>
+                    <input class="form-control form-control-lg" formControlName="numberLessons"
+                           id="number-lessons"
+                           max="360" min="0" placeholder="Số tiết học" required type="number">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group mb-3">
+                    <label for="subject-name">Tên Môn học</label>
+                    <input class="form-control form-control-lg" formControlName="subjectName"
+                           id="subject-name"
+                           placeholder="Tên Môn học" required type="text">
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex justify-content-end flex-wrap ">
+                <button (click)="onCancel()" class="btn btn-outline-dark mr-2" type="button">Hủy bỏ
+                </button>
+                <button [disabled]="!subjectCreateForm.valid" class="btn btn-primary"
+                        type="submit">Lưu
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+      </p-dialog>
+    </div>
+  </div>
+</div>
+<div class="row justify-content-center align-items-center mb-2">
+  <div class="col-md-12">
+    <div class="card shadow">
+      <div class="card-body">
+        <p-table
+          #dtSubject
+          [(selection)]="selectedSubjects"
+          [globalFilterFields]="[ 'maMon', 'phanLoai', 'tenMon', 'soTiet' ]"
+          [loading]="loading"
+          [paginator]="true"
+          [rowsPerPageOptions]="[5,10, 25, 50]"
+          [rows]="5"
+          [showCurrentPageReport]="true"
+          [tableStyle]="{'min-width': '80rem'}"
+          [value]="subjects"
+          currentPageReportTemplate="{first} - {last} of {totalRecords}"
+          dataKey="id"
+        >
+          <ng-template pTemplate="caption">
+            <div class="flex  flex-row flex-wrap">
+              <button
+                (click)="clear(dtSubject)"
+                class="p-button-outlined mr-2"
+                icon="pi pi-filter-slash"
+                label="Xóa chọn lọc"
+                pButton
+                size="small"
+              ></button>
+              <button
+                (click)="deleteSelectedSubjects()"
+                [disabled]="!selectedSubjects || !selectedSubjects.length"
+                class="p-button-danger"
+                icon="pi pi-trash"
+                label="Xóa "
+                pButton
+                pRipple
+                size="small"
+              ></button>
+
+              <p-toast key="deleteSelectedSubjects"></p-toast>
+              <p-confirmDialog #cd [style]="{ width: '50vw' }" key="deleteSelectedSubjects"
+                               position="top">
+                <ng-template pTemplate="header">
+                  <h3>Chắc chắn xoá TẤT CẢ Môn học đã chọn?</h3>
+                </ng-template>
+                <ng-template pTemplate="message">
+                  <p>Message Template</p>
+                </ng-template>
+                <ng-template pTemplate="footer">
+                  <button (click)="cd.reject()" icon="pi pi-times" label="Không" pButton
+                          type="button"></button>
+                  <button (click)="cd.accept()" class="p-button-danger"
+                          icon="pi pi-check"
+                          label="Có" pButton
+                          type="button"></button>
+                </ng-template>
+              </p-confirmDialog>
+
+              <div class="ml-auto">
+                        <span class="p-input-icon-left mr-2">
+                        <i class="pi pi-search"></i>
+                        <input
+                          (input)="dtSubject.filterGlobal($any($event.target).value, 'contains')"
+                          pInputText
+                          placeholder="Tìm kiếm"
+                          type="text"/>
+                      </span>
+                <button
+                  (click)="exportExcel()"
+                  class="p-button-success"
+                  icon="pi pi-file-excel"
+                  pButton
+                  pRipple
+                  pTooltip="XLS"
+                  size="small"
+                  tooltipPosition="bottom"
+                  type="button"
+                ></button>
+              </div>
+            </div>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr class="text-nowrap">
+              <th>
+                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+              </th>
+              <th pSortableColumn="maMon">
+                Mã môn
+                <p-sortIcon field="maMon"></p-sortIcon>
+              </th>
+              <th pSortableColumn="phanLoai">
+                Phân loại
+                <p-sortIcon field="phanLoai"></p-sortIcon>
+              </th>
+              <th pSortableColumn="tenMon">
+                Tên môn
+                <p-sortIcon field="tenMon"></p-sortIcon>
+              </th>
+              <th pSortableColumn="soTiet">
+                Số tiết
+                <p-sortIcon field="soTiet"></p-sortIcon>
+              </th>
+              <th></th>
+            </tr>
+          </ng-template>
+          <ng-template let-subject pTemplate="body">
+            <tr class="text-nowrap">
+              <td>
+                <p-tableCheckbox [value]="subject"></p-tableCheckbox>
+              </td>
+
+              <td>
+                <div>
+                  <div>
+                    <i class="fa fa-info fe-14" style="color: darkgray; vertical-align: middle"></i>
+                    <a ariaCurrentWhenActive="page" class="ml-1 vertical-align-middle"
+                       routerLink="/subject/{{subject.maMon}}"
+                       routerLinkActive="active"> {{ subject.maMon }}</a>
+                  </div>
+                </div>
+              </td>
+
+              <td>
+                <div>
+                  <div>
+                    <i class="fa fa-sitemap fe-14" style="color: darkgray; vertical-align: middle"></i>
+                    <span class="ml-1 vertical-align-middle"> {{ subject.subjectGroup.tenNhom }}</span>
+                  </div>
+                  <div>
+                    <i class="fa fa-map-pin fe-14" style="color: darkgray; vertical-align: middle"></i>
+                    <span class="ml-1 vertical-align-middle"> {{ subject.phanLoai }}</span>
+                  </div>
+                </div>
+              </td>
+
+              <td>
+                <div>
+                  <div>
+                    <i class="fa fa-newspaper-o fe-14" style="color: darkgray; vertical-align: middle"></i>
+                    <span class="ml-1 vertical-align-middle"> {{ subject.tenMon }}</span>
+                  </div>
+                </div>
+              </td>
+
+              <td>
+                <div>
+                  <div>
+                    <i class="fa fa-calendar-check-o fe-14" style="color: darkgray; vertical-align: middle"></i>
+                    <span class="ml-1 vertical-align-middle"> {{ subject.soTiet }}</span>
+                  </div>
+                </div>
+              </td>
+
+              <td class="text-center">
+                <button
+                  [routerLink]="[subject.maMon]"
+                  class="p-button-rounded p-button-success mr-2"
+                  icon="pi pi-pencil"
+                  pButton
+                  pRipple
+                ></button>
+
+                <p-toast key="{{subject.maMon}}"></p-toast>
+                <p-confirmDialog #cd [style]="{ width: '50vw' }" key="{{subject.maMon}}" position="top">
+                  <ng-template pTemplate="header">
+                    <h3>Chắc chắn xoá Môn học:
+                      <p>
+                        {{ subject?.tenMon }}
+                      </p>
+                    </h3>
+
+                  </ng-template>
+                  <ng-template pTemplate="message">
+                    <p>Message Template</p>
+                  </ng-template>
+                  <ng-template pTemplate="footer">
+                    <button (click)="cd.reject()" icon="pi pi-times" label="Không" pButton
+                            type="button"></button>
+                    <button (click)="cd.accept()" class="p-button-danger"
+                            icon="pi pi-check"
+                            label="Có" pButton
+                            type="button"></button>
+                  </ng-template>
+                </p-confirmDialog>
+
+                <button
+                  (click)="confirmDelete(subject.maMon)"
+                  class="p-button-rounded p-button-warning"
+                  icon="pi pi-trash"
+                  pButton
+                ></button>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <tr>
+              <td colspan="8">Không tìm thấy Môn học.</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+  <!-- Striped rows -->
+</div>
+

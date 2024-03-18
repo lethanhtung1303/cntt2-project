@@ -1,0 +1,132 @@
+<div class="row align-items-center h-100">
+  <form
+    #formDir="ngForm"
+    (ngSubmit)="onSubmit()"
+    [formGroup]="loginForm"
+    class="col-lg-3 col-md-4 col-10 mx-auto text-center"
+  >
+    <a
+      class="navbar-brand mx-auto mt-2 flex-fill text-center"
+      routerLink="/login"
+    >
+      <svg
+        class="navbar-brand-img brand-md"
+        id="logo"
+        viewBox="0 0 120 120"
+        x="0px"
+        xmlns="http://www.w3.org/2000/svg"
+        y="0px"
+      >
+        <g>
+          <polygon class="st0" points="78,105 15,105 24,87 87,87 	" />
+          <polygon class="st0" points="96,69 33,69 42,51 105,51 	" />
+          <polygon class="st0" points="78,33 15,33 24,15 87,15 	" />
+        </g>
+      </svg>
+    </a>
+    <h1 class="h6 mb-3">Sign in</h1>
+    <div class="form-group">
+      <label class="sr-only" for="inputUserName">Email address</label>
+      <input
+        (focus)="onInputFocus()"
+        [class.is-invalid]="
+          (inputUserName.errors && (loginForm.touched || loginForm.dirty)) ||
+          this.globalErrorService.getGlobalError().errorCode
+        "
+        [class.is-valid]="
+          !inputUserName.errors &&
+          (loginForm.touched || loginForm.dirty) &&
+          !this.globalErrorService.getGlobalError().errorCode
+        "
+        aria-describedby="userNameHelp"
+        class="form-control form-control-lg"
+        formControlName="inputUserName"
+        id="inputUserName"
+        placeholder="User name"
+        required
+      />
+      <div
+        *ngIf="
+          inputUserName.invalid &&
+          (inputUserName.dirty || inputUserName.touched)
+        "
+        class="invalid-feedback"
+      >
+        <div *ngIf="inputUserName.errors?.['required']">
+          User Name is required.
+        </div>
+
+        <div *ngIf="inputUserName.errors?.['minlength']">
+          User Name must be at least 3 characters long.
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="sr-only" for="inputPassword">Password</label>
+      <input
+        (focus)="onInputFocus()"
+        [class.is-invalid]="
+          (inputPassword.errors && (loginForm.touched || loginForm.dirty)) ||
+          this.globalErrorService.getGlobalError().errorCode
+        "
+        [class.is-valid]="
+          !inputPassword.errors &&
+          (loginForm.touched || loginForm.dirty) &&
+          !this.globalErrorService.getGlobalError().errorCode
+        "
+        aria-describedby="passwordHelp"
+        class="form-control form-control-lg"
+        formControlName="inputPassword"
+        id="inputPassword"
+        placeholder="Password"
+        required
+        type="password"
+      />
+      <div
+        *ngIf="
+          inputPassword.invalid &&
+          (inputPassword.dirty || inputPassword.touched)
+        "
+        class="invalid-feedback"
+      >
+        <div *ngIf="inputPassword.errors?.['required']">
+          Password is required.
+        </div>
+
+        <div *ngIf="inputPassword.errors?.['minlength']">
+          Password must be at least 6 characters long.
+        </div>
+
+        <div *ngIf="inputPassword.errors?.['forbiddenValue']">
+          Password is too simple.
+        </div>
+      </div>
+    </div>
+    <div
+      *ngIf="this.globalErrorService.getGlobalError().errorCode"
+      class="mx-auto text-center"
+    >
+      <h6 class="mb-3 text-danger">
+        {{ this.globalErrorService.getGlobalError().errMessage }}
+      </h6>
+    </div>
+    <button
+      [disabled]="loginForm.invalid"
+      class="btn btn-lg btn-primary btn-block"
+      type="submit"
+    >
+      Let me in
+    </button>
+    <p class="mt-5 mb-3 text-muted">© 2023 CNTT2. All rights reserved.</p>
+    <li class="nav-item" style="display: none">
+      <a
+        class="nav-link text-muted my-2"
+        data-mode="light"
+        href="./#"
+        id="modeSwitcher"
+      >
+        <i class="fe fe-sun fe-16"></i>
+      </a>
+    </li>
+  </form>
+</div>

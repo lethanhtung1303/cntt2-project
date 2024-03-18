@@ -1,0 +1,183 @@
+<div class="row justify-content-center align-items-center my-3">
+  <div class="col">
+    <h2 class="page-title">Định mức & Thống kê Giờ giảng của Giảng viên</h2>
+  </div>
+</div>
+<div class="row justify-content-center align-items-center mb-2">
+  <div class="col-md-12">
+    <div class="card shadow">
+      <div class="card-body">
+        <div class="card">
+          <p-table #dt
+                   [globalFilterFields]="['fullName', 'emailTdtu', 'classificationLecturers','lecturerLevel','status']"
+                   [loading]="loading"
+                   [paginator]="true"
+                   [rowHover]="true"
+                   [rowsPerPageOptions]="[5, 10, 25, 50]"
+                   [rows]="5"
+                   [scrollable]="true"
+                   [showCurrentPageReport]="true"
+                   [tableStyle]="{'min-width': '80rem'}"
+                   [value]="lectureData"
+                   currentPageReportTemplate="{first} - {last} of {totalRecords}"
+                   dataKey="id"
+                   styleClass="p-datatable-sm p-datatable-gridlines">
+            <ng-template pTemplate="caption">
+              <div class="flex  flex-row flex-wrap">
+                <p-dropdown
+                  (onChange)="onChangeSemester()"
+                  [(ngModel)]="selectedSemester"
+                  [group]="true"
+                  [options]="groupedSemesters"
+                  class="select-semester mr-2"
+                  placeholder="Select Semester">
+                  <ng-template let-group pTemplate="group">
+                    <div class="flex align-items-center">
+                      <span>{{ group.label }}</span>
+                    </div>
+                  </ng-template>
+                </p-dropdown>
+                <button
+                  (click)="clear(dt)"
+                  class="p-button-outlined"
+                  icon="pi pi-filter-slash"
+                  label="Xóa chọn lọc"
+                  pButton
+                  size="small"
+                ></button>
+                <div class="ml-auto">
+                <span class="p-input-icon-left mr-2">
+                  <i class="pi pi-search"></i>
+                  <input
+                    (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+                    pInputText
+                    placeholder="Tìm từ khóa"
+                    type="text"/>
+                </span>
+                  <button
+                    (click)="exportExcel()"
+                    class="p-button-success"
+                    icon="pi pi-file-excel"
+                    pButton
+                    pRipple
+                    pTooltip="XLS"
+                    size="small"
+                    tooltipPosition="bottom"
+                    type="button"
+                  ></button>
+                </div>
+              </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr class="text-nowrap">
+                <th class="text-center" pFrozenColumn rowspan="3">#</th>
+                <th class="text-center" pFrozenColumn rowspan="3">Giảng viên</th>
+                <th class="text-center" rowspan="3">Phân loại</th>
+                <th class="text-center" rowspan="3">Trình độ</th>
+                <th class="text-center" colspan="10">
+                  <span>Số tiết thực tế</span> | <span class="text-primary">Số tiết quy đổi</span>
+                </th>
+                <th class="text-center" colspan="2">Tổng số tiết quy đổi</th>
+                <th class="text-center" rowspan="3">Tổng số tiết</th>
+                <th class="text-center" rowspan="3">Trạng thái</th>
+              </tr>
+              <tr class="text-nowrap">
+                <th class="text-center" colspan="2">Tiêu chuẩn</th>
+                <th class="text-center" colspan="2">CLC Tiếng Việt</th>
+                <th class="text-center" colspan="2">CLC Tiếng Anh</th>
+                <th class="text-center" colspan="2">100% tiếng Anh/Liên kết</th>
+                <th class="text-center" colspan="2">Thạc sĩ</th>
+                <th class="text-center" rowspan="2">Lý thuyết</th>
+                <th class="text-center" rowspan="2">Thực hành</th>
+              </tr>
+              <tr class="text-nowrap">
+                <th class="text-center">Lý thuyết</th>
+                <th class="text-center">Thực hành</th>
+                <th class="text-center">Lý thuyết</th>
+                <th class="text-center">Thực hành</th>
+                <th class="text-center">Lý thuyết</th>
+                <th class="text-center">Thực hành</th>
+                <th class="text-center">Lý thuyết</th>
+                <th class="text-center">Thực hành</th>
+                <th class="text-center">Lý thuyết</th>
+                <th class="text-center">Thực hành</th>
+              </tr>
+            </ng-template>
+            <ng-template let-lecturer let-rowIndex="rowIndex" pTemplate="body">
+              <tr class="text-nowrap">
+                <td class="text-center" pFrozenColumn>{{ rowIndex + 1 }}</td>
+                <td pFrozenColumn>
+                  <div>
+                    <img alt="..."
+                         src="{{lecturer.images}}"
+                         style="vertical-align: middle" width="32"/>
+                    <a [queryParams]="{tab: 'teaching-history'}" ariaCurrentWhenActive="page"
+                       class="vertical-align-middle"
+                       queryParamsHandling="merge"
+                       routerLink="/lecturers/{{lecturer.id}}" routerLinkActive="active"> {{ lecturer.fullName }}</a>
+                  </div>
+
+                  <div class="ml-5">
+                    <span class="ml-1 vertical-align-middle"> {{ lecturer.emailTdtu }}</span>
+                  </div>
+                </td>
+                <td class="text-center">{{ lecturer.classificationLecturers }}</td>
+                <td class="text-center">{{ lecturer.lecturerLevel }}</td>
+                <td class="text-center">
+                  <span>{{ lecturer.lessonsStandardSys.originalLesson.numberTheory }}</span> |
+                  <span class="text-primary">{{ lecturer.lessonsStandardSys.conversionLessons.numberTheory }}</span>
+                </td>
+                <td class="text-center">
+                  <span>{{ lecturer.lessonsStandardSys.originalLesson.numberPractice }}</span> |
+                  <span class="text-primary">{{ lecturer.lessonsStandardSys.conversionLessons.numberPractice }}</span>
+                </td>
+                <td class="text-center">
+                  <span>{{ lecturer.lessonsCLCVietnamese.originalLesson.numberTheory }}</span> |
+                  <span class="text-primary">{{ lecturer.lessonsCLCVietnamese.conversionLessons.numberTheory }}</span>
+                </td>
+                <td class="text-center">
+                  <span>{{ lecturer.lessonsCLCVietnamese.originalLesson.numberPractice }}</span> |
+                  <span class="text-primary">{{ lecturer.lessonsCLCVietnamese.conversionLessons.numberPractice }}</span>
+                </td>
+                <td class="text-center">
+                  <span>{{ lecturer.lessonsCLCEnglish.originalLesson.numberTheory }}</span> |
+                  <span class="text-primary">{{ lecturer.lessonsCLCEnglish.conversionLessons.numberTheory }}</span>
+                </td>
+                <td class="text-center">
+                  <span>{{ lecturer.lessonsCLCEnglish.originalLesson.numberPractice }}</span> |
+                  <span class="text-primary">{{ lecturer.lessonsCLCEnglish.conversionLessons.numberPractice }}</span>
+                </td>
+                <td class="text-center">
+                  <span>{{ lecturer.lessonsEnglishInternational.originalLesson.numberTheory }}</span> |
+                  <span
+                    class="text-primary">{{ lecturer.lessonsEnglishInternational.conversionLessons.numberTheory }}</span>
+                </td>
+                <td class="text-center">
+                  <span>{{ lecturer.lessonsEnglishInternational.originalLesson.numberPractice }}</span> |
+                  <span
+                    class="text-primary">{{ lecturer.lessonsEnglishInternational.conversionLessons.numberPractice }}</span>
+                </td>
+                <td class="text-center">
+                  <span>{{ lecturer.lessonsMaster.originalLesson.numberTheory }}</span> |
+                  <span class="text-primary">{{ lecturer.lessonsMaster.conversionLessons.numberTheory }}</span>
+                </td>
+                <td class="text-center">
+                  <span>{{ lecturer.lessonsMaster.originalLesson.numberPractice }}</span> |
+                  <span class="text-primary">{{ lecturer.lessonsMaster.conversionLessons.numberPractice }}</span>
+                </td>
+                <td class="text-center">{{ lecturer.conversionLesson.numberTheory }}</td>
+                <td class="text-center">{{ lecturer.conversionLesson.numberPractice }}</td>
+                <td class="text-center">{{ lecturer.totalNumberLessons }}</td>
+                <td class="text-center">
+                  <p-tag [severity]="getSeverity(lecturer.status)" [value]="getStatus(lecturer.status)"
+                         class="text-nowrap"></p-tag>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Striped rows -->
+</div>

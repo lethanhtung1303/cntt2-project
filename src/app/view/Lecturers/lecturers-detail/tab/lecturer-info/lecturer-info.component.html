@@ -1,0 +1,240 @@
+<form (ngSubmit)="onSubmit()" *ngIf="lecturerInfo" [formGroup]="lecturerUpdateForm">
+  <div class="row justify-content-center align-items-center my-3">
+    <div class="col-md-3 text-center">
+      <div class="avatar avatar-xl">
+        <img alt="{{lecturerInfo.firstName}} {{lecturerInfo.fullName}}" class="avatar-img rounded-circle"
+             src="{{lecturerInfo.images}}">
+      </div>
+    </div>
+    <div class="col">
+      <div class="row align-items-center">
+        <div class="col-md-3">
+          <div class="form-group mb-3">
+            <label for="lecturer-id">ID</label>
+            <input class="form-control form-control-lg" formControlName="lecturerId" id="lecturer-id"
+                   placeholder="Lecturer ID" required
+                   type="text">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group mb-3">
+            <label for="first-name">Họ</label>
+            <input [class.is-invalid]="(firstName?.errors && (lecturerUpdateForm.touched || lecturerUpdateForm.dirty))"
+                   class="form-control form-control-lg" formControlName="firstName" id="first-name"
+                   placeholder="First Name" required type="text">
+            <div *ngIf="firstName?.invalid && (firstName?.dirty || firstName?.touched)"
+                 class="invalid-feedback">
+              <div *ngIf="firstName?.errors?.['required']">
+                First Name is required.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group mb-3">
+            <label for="full-Name">Tên</label>
+            <input [class.is-invalid]="(fullName?.errors && (lecturerUpdateForm.touched || lecturerUpdateForm.dirty))"
+                   class="form-control form-control-lg" formControlName="fullName" id="full-Name"
+                   placeholder="Full Name"
+                   required type="text">
+            <div *ngIf="fullName?.invalid && (fullName?.dirty || fullName?.touched)"
+                 class="invalid-feedback">
+              <div *ngIf="fullName?.errors?.['required']">
+                Full Name is required.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row align-items-center">
+        <div class="col-md-3">
+          <div class="form-group mb-3">
+            <label for="classification">Phân loại giản viên</label>
+            <select
+              class="form-control form-control-lg"
+              formControlName="classification"
+              id="classification"
+            >
+              <option value="0">Giảng viên thỉnh giảng</option>
+              <option value="1">Giảng viên cơ hữu</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group mb-3">
+            <label for="main-position">Vị trí chính</label>
+            <input
+              class="form-control form-control-lg" formControlName="mainPosition"
+              id="main-position"
+              placeholder="Main Position" type="text">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group mb-3">
+            <label for="secondary-position">Vị trí phụ</label>
+            <input
+              class="form-control form-control-lg" formControlName="secondaryPosition"
+              id="secondary-position"
+              placeholder="Secondary Position"
+              type="text">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card shadow mb-4">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group mb-3">
+            <label for="birthday">Ngày sinh</label>
+            <input class="form-control form-control-lg" formControlName="birthday" id="birthday"
+                   placeholder="Birthday"
+                   required type="date">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group mb-3">
+            <label for="gender">Giới tính</label>
+            <select
+              class="form-control form-control-lg"
+              formControlName="gender"
+              id="gender"
+            >
+              <option value="true">Nam</option>
+              <option value="false">Nữ</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group mb-3">
+            <label for="place-of-birth">Nơi sinh</label>
+            <input
+              [class.is-invalid]="(placeOfBirth?.errors && (lecturerUpdateForm.touched || lecturerUpdateForm.dirty))"
+              class="form-control form-control-lg" formControlName="placeOfBirth" id="place-of-birth"
+              placeholder="Place Of Birth"
+              required type="text">
+            <div *ngIf="placeOfBirth?.invalid && (placeOfBirth?.dirty || placeOfBirth?.touched)"
+                 class="invalid-feedback">
+              <div *ngIf="placeOfBirth?.errors?.['required']">
+                Place Of Birth is required.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group mb-3">
+            <label for="address">Địa chỉ</label>
+            <input
+              [class.is-invalid]="(address?.errors && (lecturerUpdateForm.touched || lecturerUpdateForm.dirty))"
+              class="form-control form-control-lg" formControlName="address" id="address"
+              placeholder="Address"
+              required type="text">
+            <div *ngIf="address?.invalid && (address?.dirty || address?.touched)"
+                 class="invalid-feedback">
+              <div *ngIf="address?.errors?.['required']">
+                Address is required.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group mb-3">
+            <label for="address-tmp">Tạm trú</label>
+            <input [class.is-invalid]="(addressTmp?.errors && (lecturerUpdateForm.touched || lecturerUpdateForm.dirty))"
+                   class="form-control form-control-lg" formControlName="addressTmp" id="address-tmp"
+                   placeholder="Address Tmp"
+                   required type="text">
+            <div *ngIf="addressTmp?.invalid && (addressTmp?.dirty || addressTmp?.touched)"
+                 class="invalid-feedback">
+              <div *ngIf="addressTmp?.errors?.['required']">
+                Address Tmp is required.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <div class="form-group mb-3">
+            <label for="phone">Điện thoại</label>
+            <input [class.is-invalid]="(phone?.errors && (lecturerUpdateForm.touched || lecturerUpdateForm.dirty))"
+                   class="form-control form-control-lg" formControlName="phone" id="phone"
+                   placeholder="Phone"
+                   required type="text">
+            <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)"
+                 class="invalid-feedback">
+              <div *ngIf="phone?.errors?.['required']">
+                Phone is required.
+              </div>
+              <div *ngIf="phone?.errors?.['pattern']">
+                Phone format is wrong.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group mb-3">
+            <label for="email">Email</label>
+            <input [class.is-invalid]="(email?.errors && (lecturerUpdateForm.touched || lecturerUpdateForm.dirty))"
+                   class="form-control form-control-lg" formControlName="email" id="email"
+                   placeholder="Email"
+                   required type="text">
+            <div *ngIf="email?.invalid && (email?.dirty || email?.touched)"
+                 class="invalid-feedback">
+              <div *ngIf="email?.errors?.['required']">
+                Email is required.
+              </div>
+              <div *ngIf="email?.errors?.['pattern']">
+                Email format is wrong.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group mb-3">
+            <label for="email-tdtu">Email TDTU</label>
+            <input [class.is-invalid]="(emailTdtu?.errors && (lecturerUpdateForm.touched || lecturerUpdateForm.dirty))"
+                   class="form-control form-control-lg" formControlName="emailTdtu" id="email-tdtu"
+                   placeholder="Email TDTU"
+                   required type="text">
+            <div *ngIf="emailTdtu?.invalid && (emailTdtu?.dirty || emailTdtu?.touched)"
+                 class="invalid-feedback">
+              <div *ngIf="emailTdtu?.errors?.['required']">
+                Email TDTU is required.
+              </div>
+              <div *ngIf="emailTdtu?.errors?.['pattern']">
+                Email format is wrong.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group mb-3">
+            <label for="workplace">Nơi làm việc</label>
+            <input [class.is-invalid]="(workplace?.errors && (lecturerUpdateForm.touched || lecturerUpdateForm.dirty))"
+                   class="form-control form-control-lg" formControlName="workplace" id="workplace"
+                   placeholder="Workplace"
+                   required type="text">
+            <div *ngIf="workplace?.invalid && (workplace?.dirty || workplace?.touched)"
+                 class="invalid-feedback">
+              <div *ngIf="workplace?.errors?.['required']">
+                Workplace is required.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-content-end flex-wrap ">
+        <button (click)="onCancel()" class="btn btn-outline-dark mr-2" type="button">Cancel</button>
+        <button [disabled]="!lecturerUpdateForm.valid" class="btn btn-primary"
+                type="submit">Save
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
