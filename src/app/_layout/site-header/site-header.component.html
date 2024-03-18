@@ -160,16 +160,35 @@
           </div>
         </li>
 
-        <!--        Phân công giờ giảng-->
-        <li class="nav-item">
+        <!--        Khối lượng Giảng dạy-->
+        <li class="nav-item dropdown">
           <a
-            ariaCurrentWhenActive="page"
-            class="nav-link"
-            routerLink="/assign-lecture-hours"
-            routerLinkActive="active"
+            aria-expanded="false"
+            aria-haspopup="true"
+            class="dropdown-toggle nav-link"
+            data-toggle="dropdown"
+            href="#"
+            id="ui-teaching-Load"
+            role="button"
           >
-            <span class="ml-lg-2">Phân công giờ giảng</span>
+            <span class="ml-lg-2">Khối lượng Giảng dạy</span>
           </a>
+          <div aria-labelledby="ui-teaching-Load" class="dropdown-menu">
+            <a
+              ariaCurrentWhenActive="page"
+              class="nav-link pl-lg-2"
+              routerLink="/assign-lecture-hours"
+              routerLinkActive="active"
+              ><span class="ml-1">Phân công Giảng viên</span></a
+            >
+            <a
+              ariaCurrentWhenActive="page"
+              class="nav-link pl-lg-2"
+              routerLink="/upload-lecture-time"
+              routerLinkActive="active"
+              ><span class="ml-1">Upload Giờ giảng</span></a
+            >
+          </div>
         </li>
       </ul>
     </div>

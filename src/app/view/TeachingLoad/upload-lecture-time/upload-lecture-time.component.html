@@ -1,0 +1,225 @@
+<div class="row justify-content-center align-items-center my-3">
+  <div class="col">
+    <h2 class="page-title">Upload Giờ giảng</h2>
+  </div>
+</div>
+<div class="row justify-content-center align-items-center mb-3">
+  <div class="col-md-12">
+    <div class="card shadow">
+      <div class="card-body">
+        <div class="row justify-content-between align-items-center mb-3">
+          <div class="col-md-4 col-lg-4">
+            <p-dropdown
+              (onChange)="onChangeSemester()"
+              [(ngModel)]="selectedSemester"
+              [class.ng-dirty]="checkValidSemester()"
+              [class.ng-invalid]="checkValidSemester()"
+              [class.is-invalid]="checkValidSemester()"
+              [group]="true"
+              [options]="groupedSemesters"
+              class="select-semester mr-2 "
+              placeholder="Select Semester"
+            >
+              <ng-template let-group pTemplate="group">
+                <div class="flex align-items-center">
+                  <span>{{ group.label }}</span>
+                </div>
+              </ng-template>
+            </p-dropdown>
+            <div
+              class="invalid-feedback">
+              Vui lòng chọn học kỳ hợp lệ!
+            </div>
+          </div>
+          <div class="col-md-4 col-lg-4">
+            <div class="form-group mb-auto row">
+              <label for="validatedCustomFile" class="col-sm-3 col-form-label">Chọn file: </label>
+              <div class="custom-file col-sm-9">
+                <input
+                  [class.ng-dirty]="dataObjects.length<=0"
+                  [class.ng-invalid]="dataObjects.length<=0"
+                  [class.is-invalid]="dataObjects.length<=0"
+                  #fileInput
+                  type="file"
+                  class=" custom-file-input form-control form-control-lg"
+                  id="validatedCustomFile"
+                  required
+                  (change)="onFileChange($event)">
+                <label (click)="onClear()" class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                <div
+                  class="invalid-feedback">
+                  Vui lòng tải file lên!
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-lg-4"> </div>
+        </div>
+
+        <div *ngIf="dataObjects.length<=0 " class=" justify-content-between align-items-center mt-5">
+          <div><strong>*Lưu ý:</strong>
+            <section>
+              <ul class="mb-auto">
+                <li>Vui lòng sử dụng <strong>file template</strong> để Nhập dữ liệu.</li>
+                <li>Vui lòng <u>chọn</u> và <u>kiểm tra</u> <strong> Học kỳ</strong> và <strong>Dữ liệu phân
+                  công</strong> một cách cẩn thận.</li>
+                <li>Hệ thống sẽ tự động kiểm tra file 1 cách <strong>tự động</strong>.</li>
+                <li>Nếu <strong>Dữ liệu phân công </strong> <u>đã tồn tại</u> trong hệ thống sẽ được <u>cập nhật</u> mới.</li>
+                <li>Record bị đánh dấu là <strong>không hợp lệ</strong> có thể vì:
+                  <ul style="list-style-type: decimal;">
+                    <li>Dữ liệu phân công <strong><u>bị trùng lặp</u></strong>.</li>
+                    <li>Giảng viên <strong><u>không tồn tại</u></strong> trong hệ thống.</li>
+                    <li>Môn học <strong><u>không tồn tại</u></strong> trong hệ thống.</li>
+                    <li>Hệ đạo tạo <strong><u>không hợp lệ</u></strong>.</li>
+                  </ul>
+                </li>
+                <li>Khi xác nhận “<strong>Nhập dữ liệu</strong>” tất cả Record hợp lệ sẽ được lưu và hệ thống.</li>
+              </ul>
+            </section>
+          </div>
+        </div>
+        <ng-template *ngIf="dataObjects.length>0 && !checkValidSemester();then fileUploaded;"></ng-template>
+      </div>
+    </div>
+  </div>
+  <ng-template #fileUploaded>
+    <form (ngSubmit)="onSubmit()">
+      <div class="row justify-content-between mb-3">
+        <div class="col-md-12 col-lg-12">
+          <div class="card shadow">
+            <div class="card-header">
+              <strong class="card-title">Dữ liệu phân công</strong>
+            </div>
+            <div class="card-body my-n2">
+              <p-table
+                #dtSubject
+                [globalFilterFields]="[
+                    'SubjectName',
+                    'SubSystem',
+                    'FullName',
+                    'LecturerType',
+                    'EmailTDTU',
+                    'Phone'
+                  ]"
+                [loading]="false"
+                [paginator]="true"
+                [rowHover]="true"
+                [rows]="20"
+                [scrollable]="true"
+                [showCurrentPageReport]="true"
+                [value]="dataObjects"
+                currentPageReportTemplate="{first} - {last} of {totalRecords}"
+                dataKey="SubjectId"
+                styleClass="p-datatable-sm"
+              >
+                <ng-template pTemplate="caption">
+                  <div class="flex">
+                    <button
+                      (click)="clear(dtSubject)"
+                      class="p-button-outlined mr-2"
+                      icon="pi pi-filter-slash"
+                      label="Xóa chọn lọc"
+                      pButton
+                      size="small"
+                    ></button>
+                    <div class="ml-auto">
+                        <span class="p-input-icon-left mr-2">
+                          <i class="pi pi-search"></i>
+                          <input
+                            (input)="
+                              dtSubject.filterGlobal(
+                                $any($event.target).value,
+                                'contains'
+                              )
+                            "
+                            pInputText
+                            placeholder="Tìm từ khóa"
+                            type="text"
+                          />
+                        </span>
+                    </div>
+                  </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                  <tr  class="text-nowrap text-center">
+                    <th class="text-nowrap text-center">Trạng thái
+                      <p-columnFilter type="boolean" field="isValid" display="menu"></p-columnFilter>
+                    </th>
+                    <th class="text-nowrap text-center">Giảng viên</th>
+                    <th class="text-nowrap text-center">Hệ ĐT</th>
+                    <th class="text-nowrap text-center">Môn học</th>
+                  </tr>
+                </ng-template>
+                <ng-template let-subject pTemplate="body">
+                  <tr
+                    [ngClass]="{ 'is-invalid' : !subject.isValid}"
+                  class=" text-nowrap text-left">
+
+                    <td class="text-nowrap text-center">
+                      <i class="pi" [ngClass]="{ 'text-green-500 pi-check-circle': subject.isValid, 'text-red-500 pi-times-circle': !subject.isValid }"></i>
+                    </td>
+                    <td class="text-nowrap text-left">
+                      <div class=" small">
+                      <section>
+                        <ul>
+                          <li>Mã Giảng viên: <strong>{{ subject.LecturerId }}</strong></li>
+                          <li>Giảng viên: <strong>{{ subject.FullName }}</strong></li>
+                          <li>Loại GV: <strong>{{ subject.LecturerType }}</strong> </li>
+                          <li>Email TDTU: <strong>{{ subject.EmailTDTU }}</strong></li>
+                        </ul>
+                      </section>
+                    </div>
+                    </td>
+                    <td class="text-nowrap text-left">
+                      <div class=" small">
+                        <section>
+                          <ul>
+                            <li>Mã Hệ ĐT: <strong>{{ subject.SystemId }}</strong></li>
+                            <li>Hệ ĐT: <strong>{{ subject.SubSystem }}</strong> </li>
+                          </ul>
+                        </section>
+                      </div>
+                    </td>
+                    <td class="text-nowrap text-left">
+                      <div class=" small">
+                        <section>
+                          <ul>
+                            <li>Mã MH: <strong>{{ subject.SubjectId }}</strong></li>
+                            <li>Tên môn: <strong>{{ subject.SubjectName }}</strong> </li>
+                            <li>Tổng tiết: <strong>{{ subject.TotalShift }}</strong> </li>
+                          </ul>
+                        </section>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                  <tr>
+                    <td colspan="3">Không tìm thấy Phân công nào.</td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-content-end flex-wrap">
+        <button
+          (click)="onClear()"
+          class="btn btn-outline-dark mr-2"
+          type="button"
+        >
+          Hủy
+        </button>
+        <p-toast></p-toast>
+        <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+        <button
+          [disabled]="checkValidSubmit() || checkValidSemester()"
+          class="btn btn-primary"
+          type="submit"
+        >
+          Nhập dữ liệu
+        </button>
+      </div>
+    </form>
+  </ng-template>
