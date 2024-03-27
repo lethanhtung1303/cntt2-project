@@ -1,0 +1,433 @@
+<div class="row justify-content-center align-items-center my-3">
+  <div class="col">
+    <h2 class="page-title">Phân công Giảng dạy</h2>
+  </div>
+</div>
+<div class="row justify-content-center align-items-center mb-4">
+  <div class="col-md-12">
+    <div class="card shadow">
+      <div class="card-body">
+        <div class="row justify-content-start align-items-center mb-3">
+          <div class="col-md-12 col-lg-12">
+            <p-dropdown
+              (onChange)="onChangeSemester()"
+              [(ngModel)]="selectedSemester"
+              [class.ng-dirty]="checkValidSemester()"
+              [class.ng-invalid]="checkValidSemester()"
+              [group]="true"
+              [options]="groupedSemesters"
+              class="select-semester mr-2"
+              placeholder="Select Semester"
+            >
+              <ng-template let-group pTemplate="group">
+                <div class="flex align-items-center">
+                  <span>{{ group.label }}</span>
+                </div>
+              </ng-template>
+            </p-dropdown>
+          </div>
+        </div>
+        <form (ngSubmit)="onSubmit()">
+          <div class="row justify-content-between mb-3">
+            <div class="col-md-4">
+              <div class="form-group mb-3">
+                <label for="training-sys-code">Hệ đào tạo</label>
+                <select
+                  (change)="onTrainingSysChange()"
+                  [(ngModel)]="trainingSysForAssign"
+                  class="form-control form-control-lg"
+                  id="training-sys-code"
+                  name="trainingSysForAssign"
+                >
+                  <option
+                    *ngFor="let item of trainingSys"
+                    [value]="item.trainingSysCode"
+                  >
+                    {{ item.nameTrainingSys }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group mb-3">
+                <label for="subject-code">Môn học</label>
+                <select
+                  (change)="onSubjectChange()"
+                  [(ngModel)]="subjectForAssign"
+                  class="form-control form-control-lg"
+                  id="subject-code"
+                  name="subjectForAssign"
+                >
+                  <option *ngFor="let item of subjects" [value]="item.maMon">
+                    [{{ item.maMon }}] {{ item.tenMon }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-4">
+              <div class="form-group mb-3">
+                <label for="lecturer-id">Giảng viên</label>
+                <select
+                  (change)="onLecturerChange()"
+                  [(ngModel)]="lecturerForAssign"
+                  [class.is-invalid]="
+                    checkLecturerAssign() &&
+                    !this.globalErrorService.getGlobalError().errorCode
+                  "
+                  class="form-control form-control-lg"
+                  id="lecturer-id"
+                  name="lecturerForAssign"
+                >
+                  <option *ngFor="let item of lecturers" [value]="item.id">
+                    {{ item.fullName }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div
+              *ngIf="
+                checkValidSemester() ||
+                (checkLecturerAssign() &&
+                  !this.globalErrorService.getGlobalError().errorCode)
+              "
+              class="mx-auto text-center"
+            >
+              <b *ngIf="checkValidSemester()" class="text-danger">
+                Vui lòng chọn học kỳ hợp lệ!
+              </b>
+              <b *ngIf="checkLecturerAssign()" class="text-warning">
+                Bạn đang phân vượt quá giờ giảng cho <u>Giảng viên cơ hữu</u>!
+              </b>
+            </div>
+            <div
+              *ngIf="this.globalErrorService.getGlobalError().errorCode"
+              class="mx-auto text-center"
+            >
+              <b class="text-danger">
+                {{ this.globalErrorService.getGlobalError().errMessage }}
+                <a
+                  [queryParams]="{ tab: 'teaching-history' }"
+                  ariaCurrentWhenActive="page"
+                  class="ml-1 vertical-align-middle"
+                  queryParamsHandling="merge"
+                  routerLink="/lecturers/{{ lecturerForAssign }}"
+                  routerLinkActive="active"
+                >
+                  Vui lòng ở đây!
+                </a>
+              </b>
+            </div>
+          </div>
+
+          <div class="row justify-content-between mb-3">
+            <div class="col-md-12">
+              <div class="card shadow">
+                <div class="card-header">
+                  <strong class="card-title">Thông tin phân công</strong>
+                </div>
+                <div class="card-body">
+                  <dl class="row align-items-center mb-0">
+                    <dt class="col-sm-2 mb-3 text-muted">Giảng viên</dt>
+                    <dd class="col-sm-4 mb-3">
+                      <strong>{{
+                        getLecturers(this.lecturerForAssign)?.fullName
+                      }}</strong>
+                    </dd>
+                    <dt class="col-sm-1 mb-3 text-muted">Giảng viên</dt>
+                    <dd class="col-sm-5 mb-3">
+                      <strong>{{
+                        getLecturers(this.lecturerForAssign)?.classification
+                      }}</strong>
+                    </dd>
+                  </dl>
+                  <dl class="row mb-0">
+                    <dt class="col-sm-2 mb-3 text-muted">Học kỳ</dt>
+                    <dd class="col-sm-10 mb-3">
+                      <strong>{{
+                        getSemester(this.semesterForAssign)?.label
+                      }}</strong>
+                    </dd>
+
+                    <dt class="col-sm-2 mb-3 text-muted">Hệ đào tạo</dt>
+                    <dd class="col-sm-10 mb-3">
+                      <strong>{{
+                        getTrainingSys(this.trainingSysForAssign)
+                          ?.nameTrainingSys
+                      }}</strong>
+                    </dd>
+
+                    <dt class="col-sm-2 mb-3 text-muted">Môn học</dt>
+                    <dd class="col-sm-4 mb-3">
+                      <strong>{{
+                        getSubject(this.subjectForAssign)?.tenMon
+                      }}</strong>
+                    </dd>
+                    <dt class="col-sm-1 mb-3 text-muted">Phân loại</dt>
+                    <dd class="col-sm-2 mb-3">
+                      <strong>{{
+                        getSubject(this.subjectForAssign)?.phanLoai
+                      }}</strong>
+                    </dd>
+                    <dt class="col-sm-1 mb-3 text-muted">Số tiết</dt>
+                    <dd class="col-sm-2 mb-3">
+                      <strong>{{
+                        getSubject(this.subjectForAssign)?.soTiet
+                      }}</strong>
+                    </dd>
+                  </dl>
+                </div>
+                <!-- .card-body -->
+              </div>
+              <!-- .card -->
+            </div>
+          </div>
+
+          <div class="flex justify-content-end flex-wrap mb-3">
+            <button
+              (click)="onClear()"
+              class="btn btn-outline-dark mr-2"
+              type="button"
+            >
+              Hủy
+            </button>
+            <button
+              [disabled]="checkValidSubmit() || checkValidSemester()"
+              class="btn btn-primary"
+              type="submit"
+            >
+              Lưu
+            </button>
+          </div>
+        </form>
+        <div class="row justify-content-between mb-3">
+          <div class="col-md-12 col-lg-6">
+            <div class="card shadow">
+              <div class="card-header">
+                <strong class="card-title">Môn học</strong>
+              </div>
+              <div class="card-body my-n2">
+                <p-table
+                  #dtSubject
+                  [globalFilterFields]="[
+                    'maMon',
+                    'phanLoai',
+                    'tenMon',
+                    'soTiet'
+                  ]"
+                  [loading]="loadingSubject"
+                  [paginator]="true"
+                  [rowHover]="true"
+                  [rows]="5"
+                  [scrollable]="true"
+                  [showCurrentPageReport]="true"
+                  [value]="subjects"
+                  currentPageReportTemplate="{first} - {last} of {totalRecords}"
+                  dataKey="id"
+                  styleClass="p-datatable-sm"
+                >
+                  <ng-template pTemplate="caption">
+                    <div class="flex">
+                      <button
+                        (click)="clear(dtSubject)"
+                        class="p-button-outlined mr-2"
+                        icon="pi pi-filter-slash"
+                        label="Xóa chọn lọc"
+                        pButton
+                        size="small"
+                      ></button>
+                      <div class="ml-auto">
+                        <span class="p-input-icon-left mr-2">
+                          <i class="pi pi-search"></i>
+                          <input
+                            (input)="
+                              dtSubject.filterGlobal(
+                                $any($event.target).value,
+                                'contains'
+                              )
+                            "
+                            pInputText
+                            placeholder="Tìm từ khóa"
+                            type="text"
+                          />
+                        </span>
+                      </div>
+                    </div>
+                  </ng-template>
+                  <ng-template pTemplate="header">
+                    <tr class="text-nowrap">
+                      <th>Tên môn</th>
+                      <th>Phân loại</th>
+                      <th>Số tiết</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template let-subject pTemplate="body">
+                    <tr class="text-nowrap">
+                      <td>
+                        <div>
+                          <div>
+                            <span class="ml-1 vertical-align-middle">
+                              {{ subject.maMon }}</span
+                            >
+                          </div>
+                          <div>
+                            <span class="ml-1 vertical-align-middle">
+                              {{ subject.tenMon }}</span
+                            >
+                          </div>
+                        </div>
+                      </td>
+
+                      <td>
+                        <div>
+                          <div>
+                            <span class="ml-1 vertical-align-middle">
+                              {{ subject.subjectGroup.tenNhom }}</span
+                            >
+                          </div>
+                          <div>
+                            <span class="ml-1 vertical-align-middle">
+                              {{ subject.phanLoai }}</span
+                            >
+                          </div>
+                        </div>
+                      </td>
+
+                      <td>
+                        <span class="ml-1 vertical-align-middle">
+                          {{ subject.soTiet }}</span
+                        >
+                      </td>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage">
+                    <tr>
+                      <td colspan="3">Không tìm thấy môn học.</td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 col-lg-6">
+            <div class="card timeline shadow">
+              <div class="card-header">
+                <strong class="card-title">Giảng viên</strong>
+              </div>
+              <div class="card-body my-n2">
+                <p-table
+                  #dtLecturer
+                  [globalFilterFields]="[
+                    'fullName',
+                    'emailTdtu',
+                    'classificationLecturers',
+                    'lecturerLevel',
+                    'status'
+                  ]"
+                  [loading]="loadingLecturer"
+                  [paginator]="true"
+                  [rowHover]="true"
+                  [rows]="5"
+                  [scrollable]="true"
+                  [showCurrentPageReport]="true"
+                  [value]="normsLecturers"
+                  currentPageReportTemplate="{first} - {last} of {totalRecords}"
+                  dataKey="id"
+                  styleClass="p-datatable-sm"
+                >
+                  <ng-template pTemplate="caption">
+                    <div class="flex">
+                      <button
+                        (click)="clear(dtLecturer)"
+                        class="p-button-outlined"
+                        icon="pi pi-filter-slash"
+                        label="Xóa chọn lọc"
+                        pButton
+                        size="small"
+                      ></button>
+                      <div class="ml-auto">
+                        <span class="p-input-icon-left mr-2">
+                          <i class="pi pi-search"></i>
+                          <input
+                            (input)="
+                              dtLecturer.filterGlobal(
+                                $any($event.target).value,
+                                'contains'
+                              )
+                            "
+                            pInputText
+                            placeholder="Tìm từ khóa"
+                            type="text"
+                          />
+                        </span>
+                      </div>
+                    </div>
+                  </ng-template>
+                  <ng-template pTemplate="header">
+                    <tr class="text-nowrap">
+                      <th>Giảng viên</th>
+                      <th>Thông tin</th>
+                      <th>Tổng số tiết</th>
+                      <th>Trang thái</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template let-lecturer pTemplate="body">
+                    <tr class="text-nowrap">
+                      <td>
+                        <div>
+                          <a
+                            [queryParams]="{ tab: 'teaching-history' }"
+                            ariaCurrentWhenActive="page"
+                            class="ml-1 vertical-align-middle"
+                            queryParamsHandling="merge"
+                            routerLink="/lecturers/{{ lecturer.id }}"
+                            routerLinkActive="active"
+                          >
+                            {{ lecturer.fullName }}
+                          </a>
+                        </div>
+                        <div>
+                          <span class="ml-1 vertical-align-middle">{{
+                            lecturer.emailTdtu
+                          }}</span>
+                        </div>
+                      </td>
+                      <td>
+                        <div>
+                          <span class="ml-1 vertical-align-middle">{{
+                            lecturer.classificationLecturers
+                          }}</span>
+                        </div>
+                        <div>
+                          <span class="ml-1 vertical-align-middle">{{
+                            lecturer.lecturerLevel
+                          }}</span>
+                        </div>
+                      </td>
+                      <td class="text-center">
+                        {{ lecturer.totalNumberLessons }}
+                      </td>
+                      <td class="text-center">
+                        <p-tag
+                          [severity]="getSeverity(lecturer.status)"
+                          [value]="getStatus(lecturer.status)"
+                        ></p-tag>
+                      </td>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage">
+                    <tr>
+                      <td colspan="4">Không tìm thấy giảng viên.</td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
