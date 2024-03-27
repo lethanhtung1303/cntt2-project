@@ -7,6 +7,7 @@ import {UniversityStandard} from "../../../domain/lecturer";
 import {LecturerStandardService, UniversityStandardsResponse} from "../../../service/lecturer-standards.service";
 import {getCurrentSemester} from "../../../helper/semesters";
 
+
 @Component({
   selector: 'app-university-lecturer-list',
   templateUrl: './university-lecturer-list.component.html',
@@ -14,6 +15,7 @@ import {getCurrentSemester} from "../../../helper/semesters";
 })
 export class UniversityLecturerListComponent {
   lecturers: UniversityStandard[] = [];
+
   loading: boolean = true;
 
   groupedSemesters: SelectItemGroup[] = [];
