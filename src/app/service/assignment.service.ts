@@ -11,22 +11,6 @@ export interface CreateResponse {
   message: string;
 }
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AssignmentService {
-
-  apiUrl: string = 'http://localhost:8080/v1/';
-  createEndPoint: string = 'teachingAssignment';
-
-  constructor(private httpClient: HttpClient) {
-  }
-
-  createAssignment(assignmentRequest: AssignmentRequest): Observable<CreateResponse> {
-    const body = JSON.stringify(assignmentRequest);
-    const headers = new HttpHeaders().append(
-      'content-type',
-      'application/json'
 export interface UploadResponse {
   status: number;
   message: string;
