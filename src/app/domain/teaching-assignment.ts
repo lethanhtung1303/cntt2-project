@@ -9,8 +9,14 @@ export interface UploadAssignmentRequest {
 }
 
 export interface Assignment {
-  giangVienId?: number;
-  hocKy?: number;
-  maMon?: string;
-  maHe?: number;
+  giangVienId?: number
+  hocKy?: number
+  maMon?: string
+  maHe?: number
+  createBy: string;
+}
+
+export interface UploadAssignmentRequest {
+  assignments: Assignment[];
+  createBy: string;
 }

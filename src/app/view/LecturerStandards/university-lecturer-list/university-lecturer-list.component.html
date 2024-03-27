@@ -144,6 +144,145 @@
               </td>
             </tr>
           </ng-template>
+          <ng-template let-lecturer pTemplate="rowexpansion">
+            <tr>
+              <td colspan="7">
+                <p-table [value]="lecturer.standardDetail" dataKey="id">
+                  <ng-template pTemplate="header">
+                    <tr class="text-nowrap">
+                      <th class="text-center">Trình độ</th>
+                      <th class="text-center">Số tiết đã dạy</th>
+                      <th class="text-center">
+                        Quá trình đào tạo sử dụng tiếng Anh
+                      </th>
+                      <th class="text-center">Chứng chỉ ngoại ngữ</th>
+                      <th class="text-center">Trung bình điểm hài lòng</th>
+                    </tr>
+                  </ng-template>
+                  <ng-template let-standardDetail pTemplate="body">
+                    <tr class="text-nowrap">
+                      <td class="text-left">
+                        <div *ngIf="standardDetail.highestLevel.level === null">
+                          Chưa có trình độ tốt nghiệp hợp lệ
+                        </div>
+                        <section
+                          *ngIf="standardDetail.highestLevel.level != null"
+                        >
+                          <ul>
+                            <li>
+                              Trình độ:
+                              <strong>{{
+                                standardDetail.highestLevel.level
+                              }}</strong>
+                            </li>
+                            <li>
+                              Năm tốt nghiệp:
+                              <strong>{{
+                                standardDetail.highestLevel.graduationYear
+                              }}</strong>
+                            </li>
+                            <li>
+                              Loại tốt nghiệp:
+                              <strong>{{
+                                standardDetail.highestLevel.graduationType
+                              }}</strong>
+                            </li>
+                          </ul>
+                        </section>
+                      </td>
+                      <td class="text-center">
+                        {{ standardDetail.totalNumberLessons }}
+                      </td>
+                      <td class="text-left">
+                        <div
+                          *ngIf="
+                            standardDetail.trainingProcessStandard.school ===
+                            null
+                          "
+                        >
+                          Quá trình đào tạo chưa đủ tiêu chuẩn
+                        </div>
+                        <section
+                          *ngIf="
+                            standardDetail.trainingProcessStandard.school !=
+                            null
+                          "
+                        >
+                          <ul>
+                            <li>
+                              Trường:
+                              <strong>{{
+                                standardDetail.trainingProcessStandard.school
+                              }}</strong>
+                            </li>
+                            <li>
+                              Ngành đào tạo:
+                              <strong>{{
+                                standardDetail.trainingProcessStandard.majors
+                              }}</strong>
+                            </li>
+                            <li>
+                              Năm tốt nghiệp:
+                              <strong>{{
+                                standardDetail.trainingProcessStandard
+                                  .graduationYear
+                              }}</strong>
+                            </li>
+                            <li>
+                              Loại tốt nghiệp:
+                              <strong>{{
+                                standardDetail.trainingProcessStandard
+                                  .graduationType
+                              }}</strong>
+                            </li>
+                            <li>
+                              Trình độ:
+                              <strong>{{
+                                standardDetail.trainingProcessStandard.level
+                              }}</strong>
+                            </li>
+                            <li>
+                              Ngôn ngữ:
+                              <strong>{{
+                                standardDetail.trainingProcessStandard.language
+                              }}</strong>
+                            </li>
+                          </ul>
+                        </section>
+                      </td>
+                      <td class="text-left">
+                        <div
+                          *ngIf="
+                            standardDetail.certificate.certificateName === null
+                          "
+                        >
+                          Chứng chỉ ngoại ngữ chưa đủ tiêu chuẩn
+                        </div>
+                        <div
+                          *ngIf="
+                            standardDetail.certificate.certificateName != null
+                          "
+                        >
+                          {{ standardDetail.certificate.certificateName }} :
+                          <strong>{{
+                            standardDetail.certificate.certificateScore
+                          }}</strong>
+                        </div>
+                      </td>
+                      <td class="text-center">
+                        {{ standardDetail.averageSatisfaction }}
+                      </td>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="emptymessage">
+                    <tr>
+                      <td colspan="7">
+                        Giảng viên chưa đủ tiêu chuẩn giảng dạy.
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+          </ng-template>
           <ng-template pTemplate="emptymessage">
             <tr>
               <td colspan="8">No lecturers found.</td>
