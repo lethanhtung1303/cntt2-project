@@ -14,8 +14,3 @@ export interface Assignment {
   maMon?: string;
   maHe?: number;
 }
-
-export interface UploadAssignmentRequest {
-  assignments: Assignment[];
-  createBy: string;
-}
