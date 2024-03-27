@@ -9,11 +9,10 @@ export interface UploadAssignmentRequest {
 }
 
 export interface Assignment {
-  giangVienId?: number
-  hocKy?: number
-  maMon?: string
-  maHe?: number
-  createBy: string;
+  giangVienId?: number;
+  hocKy?: number;
+  maMon?: string;
+  maHe?: number;
 }
 
 export interface UploadAssignmentRequest {
