@@ -134,6 +134,35 @@ export interface UniversityStandard {
   isTeachingVietnamese?: boolean;
   isTeachingEnglish?: boolean;
   isEnglishInternational?: boolean;
+  standardDetail: StandardDetail[];
+}
+
+export interface StandardDetail {
+  highestLevel: HighestLevel;
+  trainingProcessStandard?: TrainingProcessStandard;
+  totalNumberLessons?: number;
+  certificate?: CertificateStandard;
+  averageSatisfaction?: number;
+}
+
+export interface TrainingProcessStandard {
+  school?: string;
+  majors?: string;
+  graduationYear?: number;
+  graduationType?: string;
+  level?: string;
+  language?: string;
+}
+
+export interface CertificateStandard {
+  certificateName?: string;
+  certificateScore?: string;
+}
+
+export interface HighestLevel {
+  level?: string;
+  graduationYear?: number;
+  graduationType?: string;
 }
 
 export interface MasterStandards {
