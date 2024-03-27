@@ -14,8 +14,8 @@ import {getCurrentSemester} from "../../../helper/semesters";
   styleUrls: ['./university-lecturer-list.component.css']
 })
 export class UniversityLecturerListComponent {
-  lecturers: UniversityStandard[] = [];
 
+  lecturers: UniversityStandard[] = [];
   loading: boolean = true;
 
   groupedSemesters: SelectItemGroup[] = [];
