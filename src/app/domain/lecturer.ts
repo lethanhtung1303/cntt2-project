@@ -134,7 +134,6 @@ export interface UniversityStandard {
   isTeachingVietnamese?: boolean;
   isTeachingEnglish?: boolean;
   isEnglishInternational?: boolean;
-<<<<<<< develop
   standardDetail: StandardDetail[];
 }
 
@@ -164,8 +163,6 @@ export interface HighestLevel {
   level?: string;
   graduationYear?: number;
   graduationType?: string;
-=======
->>>>>>> master
 }
 
 export interface MasterStandards {
